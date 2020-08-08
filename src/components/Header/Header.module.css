@@ -1,0 +1,67 @@
+header{
+	width: 100%;
+	height: 100px;
+	background-color: black;
+	opacity: 82%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.menu{
+	max-width: 960px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.menu nav{
+	width: 550px;
+	display: flex;
+	justify-content: space-between;
+	margin-right: 80px;
+	color: white;
+}
+.menuItem{
+	font-family: Intro;
+	font-weight: 300;
+	font-size: 15px;
+	color: white;	
+	text-decoration: none;	
+	text-transform: uppercase;
+}
+.active{
+	font-weight: 400;
+	color: rgb(255, 200, 0);
+}
+.authBlock{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 230px;
+}
+.avatar{
+	width: 55px;
+	height: 55px;
+	border-radius: 50%;
+	background-image: url("../../assets/photos/avatar-auth.jpg");
+	background-size: cover;
+}
+.name{
+	font-family: Intro;
+	font-weight: 400;
+	color: rgb(255, 200, 0);
+}
+.exit{
+	background-color: transparent;
+    height: 31px;
+    border-style: none;
+    outline: none;
+    cursor: pointer;
+    fill: #fff;
+}
+.exitIcon{
+	opacity: 0.5;
+}
+.exitIcon:hover{
+	opacity: 1;
+	fill: rgb(255, 200, 0);
+}

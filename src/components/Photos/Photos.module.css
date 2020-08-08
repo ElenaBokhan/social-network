@@ -1,0 +1,92 @@
+.container{
+	width: 860px;
+	min-height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	margin: 20px auto 0;
+	padding: 20px;
+}
+
+.photoWrapper{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-column-gap: 15px;
+	grid-row-gap: 15px;
+	padding: 0 0 15px;
+	width: 100%;
+}
+.item{
+	/* width: 180px; */
+	height: 170px;
+	border: 5px solid white;
+	background-size: cover;
+    background-position: center;
+}
+.sliderContainer{	
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px 50px;
+}
+.slidePhoto{
+	height: 500px;
+	width: 50%;
+	/* border: 5px solid white; */
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.underSlidePhoto{
+	height: 170px;
+	border: 5px solid white;
+	background-size: cover;
+    background-position: center;
+}
+.arrow{
+	background-color: transparent;
+    height: 31px;
+    border-style: none;
+    outline: none;
+    cursor: pointer;
+    
+}
+.arrowIcon{	
+    cursor: pointer;
+    fill:rgba(255, 255, 255, 0.5);
+}
+.arrowIcon:hover{   
+    fill:rgba(255, 255, 255, 1);
+}
+.arrowIcon:active{   
+    fill:rgba(255, 200, 0, 1);
+}
+.nav{
+	font-family: Intro;
+	font-weight: 300;
+	font-size: 15px;	
+	color: white;
+	margin-bottom: 20px;
+}
+.nav a{
+	padding: 3px 15px;	
+	text-decoration: none;
+	color: white;
+}
+.active{
+	font-weight: 400;
+	border-bottom: 3px solid rgb(255, 200, 0);
+}
+.albomHead{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 20px 0 0;
+}
+.albomName{
+	margin: 0 20px;
+}
+.line {	
+	flex-basis: 100%;	
+	border: 1px solid white;
+	margin: 20px 0 ;
+}
