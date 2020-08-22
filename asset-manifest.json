@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/social-network/static/css/main.c0dba720.chunk.css",
-    "main.js": "/social-network/static/js/main.573c4662.chunk.js",
-    "main.js.map": "/social-network/static/js/main.573c4662.chunk.js.map",
+    "main.css": "/social-network/static/css/main.1de54bae.chunk.css",
+    "main.js": "/social-network/static/js/main.50ddb231.chunk.js",
+    "main.js.map": "/social-network/static/js/main.50ddb231.chunk.js.map",
     "runtime-main.js": "/social-network/static/js/runtime-main.c37dcda3.js",
     "runtime-main.js.map": "/social-network/static/js/runtime-main.c37dcda3.js.map",
-    "static/js/2.073d20aa.chunk.js": "/social-network/static/js/2.073d20aa.chunk.js",
-    "static/js/2.073d20aa.chunk.js.map": "/social-network/static/js/2.073d20aa.chunk.js.map",
+    "static/js/2.51c20717.chunk.js": "/social-network/static/js/2.51c20717.chunk.js",
+    "static/js/2.51c20717.chunk.js.map": "/social-network/static/js/2.51c20717.chunk.js.map",
     "index.html": "/social-network/index.html",
-    "precache-manifest.dd50f05ad83268815b03995d71dce55d.js": "/social-network/precache-manifest.dd50f05ad83268815b03995d71dce55d.js",
+    "precache-manifest.f1a924ac078d7259eccafcae8d2e4997.js": "/social-network/precache-manifest.f1a924ac078d7259eccafcae8d2e4997.js",
     "service-worker.js": "/social-network/service-worker.js",
-    "static/css/main.c0dba720.chunk.css.map": "/social-network/static/css/main.c0dba720.chunk.css.map",
-    "static/js/2.073d20aa.chunk.js.LICENSE.txt": "/social-network/static/js/2.073d20aa.chunk.js.LICENSE.txt",
+    "static/css/main.1de54bae.chunk.css.map": "/social-network/static/css/main.1de54bae.chunk.css.map",
+    "static/js/2.51c20717.chunk.js.LICENSE.txt": "/social-network/static/js/2.51c20717.chunk.js.LICENSE.txt",
     "static/media/Main.module.css": "/social-network/static/media/4.f596c1fc.jpg",
     "static/media/index.css": "/social-network/static/media/Intro-Regular.2f11cb83.otf",
     "static/media/Header.module.css": "/social-network/static/media/avatar-auth.81c06279.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.c37dcda3.js",
-    "static/js/2.073d20aa.chunk.js",
-    "static/css/main.c0dba720.chunk.css",
-    "static/js/main.573c4662.chunk.js"
+    "static/js/2.51c20717.chunk.js",
+    "static/css/main.1de54bae.chunk.css",
+    "static/js/main.50ddb231.chunk.js"
   ]
 }
