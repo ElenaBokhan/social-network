@@ -1,0 +1,12 @@
+.search{
+	background-color: transparent;   
+    border-style: none;
+    outline: none;
+    cursor: pointer;	
+	margin: 0 20px;
+}
+.searchIcon{
+	fill: rgb(255, 200, 0);
+	cursor: pointer;
+}
+

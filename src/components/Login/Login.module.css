@@ -1,0 +1,52 @@
+.container{
+	width: 100vw;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	display: flex;
+	justify-content: center;
+	/* position: absolute; */
+}
+.loginBlock{
+	margin: auto;
+	background-color: rgba(0, 0, 0, 0.3);
+	padding: 50px 70px;
+	text-align: center;
+}
+.loginBlock input{
+	margin: 10px auto;
+	padding: 5px 0;
+	outline: none;
+	text-align: center;
+}
+.checkbox{
+	display: inline-block;
+}
+.title{
+	font-family: Intro;
+	font-weight: 300;
+	font-size: 15px;
+	padding: 10px 25px 0;
+}
+.exitIcon{
+	opacity: 1;
+	margin: 0 0 0 10px;
+	transform:  scale(-1, 1);
+	fill: #fff;
+}
+.errorMsg{
+	color: rgb(255, 200, 0);
+	
+}
+.error input{
+border: 2px solid rgb(255, 200, 0);
+color: rgb(255, 200, 0);
+}
+.error span{	
+	color: rgb(255, 200, 0);
+	display: block;
+}
+.addition{
+	max-width: 250px;
+	color: rgb(175, 175, 175);
+	margin-top: 20px;
+}

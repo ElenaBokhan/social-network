@@ -19,3 +19,16 @@ export const getUnderSlidePhotos = (state) => {
 	const UnderSlidePhotos = getAllPhotos(state).filter((item,index) => index >= num && index < num+4 )
 return UnderSlidePhotos;
 }
+
+//--------------------------------------------------------------------------------------
+
+export const isAuthUser = (state) => {
+	return state.AuthReducer.isAuth;
+}
+
+export const isLoading = (state) => {
+	return state.AuthReducer.isLoading;
+}
+export const authUserId = (state) => {
+	return state.AuthReducer.authUserId;
+}

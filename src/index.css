@@ -9,9 +9,19 @@ body {
   height: 100%;
   color: white;
   font-family: Intro;
+  font-weight: 300;
+  font-size: 14px;
   overflow-y:scroll;
 }
-
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+#root{
+  height: 100%;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -40,4 +50,16 @@ code {
   font-family: Intro;
   src: url("./assets/fonts/Intro-Black.otf");
   font-weight: 900;
+}
+::-webkit-scrollbar {
+  position: absolute;
+  right: -5px;
+  width: 5px; 
+  /* height: 8px; высота для горизонтального скролла */
+  background-color: rgba(0,0,0,.5)
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 200, 0,0.8);
+  border-radius: 9em;
+  /* box-shadow: inset 1px 1px 10px #f3faf7; */
 }

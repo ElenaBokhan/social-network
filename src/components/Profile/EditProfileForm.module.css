@@ -1,0 +1,61 @@
+.container{
+	width:800px;
+	height: 100%;
+	background-color:rgba(0, 0, 0, 0.8);
+	padding: 100px 0;	
+	position: absolute;
+	z-index: 1;
+}
+.editBlock{
+	width: 60%;
+	margin: auto;
+	background-color: rgba(0, 0, 0, 0.9);	
+	border: 8px solid rgb(255, 200, 0);
+	padding: 50px 70px;
+	text-align: center;
+}
+.editProfileForm{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	line-height: 40px;
+}
+.title{
+	color: rgb(255, 200, 0);
+	margin: 0 0 30px;
+	font-weight: 400;
+}
+.input, .textarea{	
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+	border-style: none;
+	display: inline;
+	text-align: left;
+	border-bottom: 1px solid rgb(255, 200, 0);
+	outline: none;
+	margin: 10px auto;
+}
+.error{
+	flex-basis: 100%;
+	color: rgb(255, 200, 0);
+	line-height: 15px;
+}
+.checkbox{
+	display: inline-block;
+	margin: 10px 40px 0 40px;
+}
+.titleField{
+	font-family: Intro;
+	font-weight: 300;
+	font-size: 15px;
+	padding:0  25px 0 0;
+}
+.titleAboutMe{
+	color: rgb(255, 200, 0);
+	flex-basis: 100%;
+}
+.textarea{
+	flex-basis: 100%;
+	margin: 0 0 20px;
+	height: 80px;
+}

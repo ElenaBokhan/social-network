@@ -1,0 +1,233 @@
+.container{
+	width: 860px;	
+	background-color: rgba(0, 0, 0, 0.8);
+	margin: 110px 0 0 -430px;
+	padding: 30px;
+	line-height: 22px;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: baseline;
+	position: absolute;
+	left:50%;
+	z-index: 1;
+}
+.avatarBlock{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 50%;
+	padding: 0 20px 0;
+	
+}
+.avatarBlock h3{
+	flex-basis: 100%;
+}
+.avatar{
+	width: 200px;
+	height: 200px;
+	margin: 50px 0;
+	border-radius: 50%;
+	background-size: contain;
+	position: relative;
+}
+.options{
+	flex-basis:100%;
+	display:flex;
+	justify-content: center;
+}
+.options button{
+	margin: 10px;
+}
+.options a{
+	text-decoration: none;
+}
+.avatarSmall{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background-size: contain;	
+}
+.changePhoto{
+	display: none;
+}
+.changePhoto + label{
+	flex-basis: 100%;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: underline;
+	margin: 0 0 15px;
+}
+.changePhoto + label:hover{
+	color: rgb(255, 200, 0);
+	
+}
+.hr{
+	/* flex-basis: 100%; */
+	margin: 10px 0;
+	border: 2px solid rgb(255, 200, 0);
+}
+.titleFriends{
+	padding: 3px 10px;
+	margin: 0 0 10px;
+	background-color: rgb(255, 200, 0);
+	color: #000;
+}
+.avatarFriendWrapper{
+	display: flex;
+	justify-content: space-between;
+}
+.avatarFriend{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background-size: contain;
+	display: inline-block;
+}
+.info{
+	width: 50%;
+	background-color: rgba(0, 0, 0, 0.6);
+	padding: 20px;
+	display: inline-block;
+	position: relative;
+}
+.info h3{
+	margin: 20px 0 10px;
+}
+.name{
+	text-transform: uppercase;
+	font-size: 22px;
+	letter-spacing: 3px;
+	margin: 0 0 3px;
+}
+.status{
+	font-weight: 400;
+	font-size: 16px;
+	color: rgb(255, 200, 0);
+	cursor: pointer;
+}
+.statusInput{
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+	border-style: none;
+	display: inline;
+	text-align: left;
+	outline: none;
+}
+.contact{
+	font-weight: 400;
+	color: rgb(255, 200, 0);
+}
+.info hr{
+	margin: 10px 0;
+	width: 60%;
+	border: 0.2px solid rgb(46, 46, 46);
+}
+.radio {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	margin: 10px 0 0 7px;
+}
+.radio + label {
+	position: relative;
+	padding: 0 0 0 35px;
+	cursor: pointer;
+}
+.radio + label:before {
+	content: '';
+	position: absolute;
+	top: -2px;
+	left: -1px;
+	width: 19px;
+	height: 19px;
+	border: 3px solid #CDD1DA;
+	border-radius: 50%;
+	background: rgb(0, 0, 0);
+	box-sizing: border-box;
+}
+.radio + label:after {
+	content: '';
+	position: absolute;
+	top: 3px;
+	left: 4px;
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background:  rgb(255, 200, 0);
+	box-shadow: 0 0 0 3px rgba(0,0,0,1);
+	opacity: 0;
+	transition: .2s;
+}
+.radio:checked + label:after {
+	opacity: 1;
+}
+.star{
+	background-color: transparent;    
+    border-style: none;
+    outline: none;
+    cursor: pointer;
+	fill: rgb(255, 200, 0);
+	margin: 10px;
+}
+.starIcon{
+	opacity: 0.5;
+}
+.starIcon:hover{
+	opacity: 1;
+	fill: rgb(255, 200, 0);
+}
+.addPost{
+	flex-basis: 100%;
+	padding: 10px 20px ;
+	background-color: rgba(0, 0, 0, 0.6);
+	margin: 20px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.input{
+	width: 70%;
+	padding: 20px;
+}
+.post{
+	flex-basis: 100%;
+	padding: 10px 20px ;
+	background-color: rgba(0, 0, 0, 0.6);
+	margin: 0 0 20px;
+	display: flex;
+	position: relative;
+}
+.editBlock{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+.postInfo{
+	width: 90%;
+	padding: 20px;
+}
+.namePost{
+	text-transform: uppercase;
+	color: rgb(255, 200, 0);
+	font-size: 16px;
+	letter-spacing: 3px;
+}
+.text{
+	margin: 20px 0 10px;
+}
+.starScore{
+	vertical-align: super;
+}
+.editButton{
+	text-decoration: underline;
+	margin: 10px auto;
+	cursor: pointer;
+	flex-basis: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+}
+.editButton:hover{
+	color: rgb(255, 200, 0);
+	/* cursor: pointer; */
+}

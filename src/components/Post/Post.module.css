@@ -1,0 +1,76 @@
+.addPost{
+	flex-basis: 100%;
+	padding: 10px 20px ;
+	background-color: rgba(0, 0, 0, 0.6);
+	margin: 20px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.avatarSmall{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background-size: contain;	
+}
+.input{
+	width: 70%;
+	padding: 20px 20px 0;
+	background-color: rgba(0, 0, 0, 0);
+	color: white;
+	font-family: Intro;
+	font-weight: 300;
+	text-align: left;
+	border-style: none ;
+	resize:none;
+	outline:none
+}
+.star{
+	background-color: transparent;    
+    border-style: none;
+    outline: none;
+    cursor: pointer;
+	fill: rgb(255, 200, 0);
+	margin: 10px;
+}
+.starIcon{
+	opacity: 0.5;
+}
+.starIcon:hover{
+	opacity: 1;
+	fill: rgb(255, 200, 0);
+}
+.active{
+	opacity: 1;
+	fill: rgb(255, 200, 0);
+}
+.post{
+	flex-basis: 100%;
+	padding: 10px 20px ;
+	background-color: rgba(0, 0, 0, 0.6);
+	margin: 0 0 20px;
+	display: flex;
+	position: relative;
+}
+.editBlock{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+.postInfo{
+	width: 90%;
+	padding: 20px;
+}
+.namePost{
+	text-transform: uppercase;
+	color: rgb(255, 200, 0);
+	font-size: 16px;
+	letter-spacing: 3px;
+}
+.text{
+	margin: 20px 0 10px;
+}
+.starScore{
+	vertical-align: super;
+}

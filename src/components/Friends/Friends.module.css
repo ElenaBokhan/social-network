@@ -1,0 +1,140 @@
+.container{
+	width: 860px;
+	min-height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	margin: 0 auto;
+	padding: 20px;
+	position: absolute;
+	left:50%;
+	margin-left: -430px;
+	margin-top: 110px;
+	z-index: 1;
+	text-align: center;
+}
+.showMore{
+	position: fixed;
+    right: 40px;
+    top: 80%;
+}
+.search{
+	float: right;
+}
+.nav{
+	font-family: Intro;
+	font-weight: 300;
+	font-size: 15px;	
+	color: white;
+	margin-bottom: 20px;
+	float: left;
+}
+.nav a{
+	padding: 3px 15px;	
+	text-decoration: none;
+	color: white;
+}
+.active{
+	font-weight: 400;
+	border-bottom: 3px solid rgb(255, 200, 0);
+}
+.friendsWrapper{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 15px;
+	grid-row-gap: 15px;
+	/* padding: 0 0 15px; */
+	width: 100%;
+}
+.item{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: space-between ;
+	border: 1px solid rgb(255, 200, 0);
+	padding: 20px 0 10px;
+	overflow: hidden;
+}
+.item img{
+	cursor: pointer;
+}
+.item:hover .avatarImg{
+	animation: widthAvatar infinite 500ms ease;	
+	animation-direction:alternate;
+}
+
+.avatarImg{
+	animation: widthAvatar infinite 500ms ease;
+	/* animation-iteration-count: 2; */
+	animation-direction:alternate;
+}
+@keyframes widthAvatar {
+	from {
+		width: 150px;
+	}
+	to { 
+		width: 5px;
+	}
+  }
+  .nameFriend{
+	text-transform: uppercase;
+	color: rgb(255, 200, 0);
+	font-size: 16px;
+	letter-spacing: 3px;
+	flex-basis: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+.status{
+	flex-basis: 100%;
+	text-align: center;
+	margin:0 0 10px;
+}
+.statusInput{
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+	border-style: none;
+	display: inline;
+	text-align: left;
+	outline: none;
+	padding: 0 0 0 20px;
+}
+.searchForm{
+	display: flex;
+	justify-content: space-between;
+}
+.notFound{
+	font-size: 30px;
+    color: rgb(255, 200, 0);
+    width: 70%;
+    margin: 100px auto;
+    display: block;
+	font-weight: 400;	
+}
+.notFound img{
+	display: block;
+	margin: 30px auto;
+}
+.showMoreButton{
+	display: flex;	
+	padding: 10px 20px;
+    border: none;
+	background-color:  rgb(255, 200, 0);
+	outline: none;
+    cursor: pointer;
+	color: rgb(0, 0, 0);
+	font-family: Intro;
+	font-weight: 400;
+	font-size: 15px;
+	margin: 10px auto;
+	align-items: center;
+	position: fixed;
+    right:60px;
+    top: 50%;
+	cursor: pointer;
+}
+.showMoreButton img{
+	filter: brightness(0);
+	margin: 6px 0;
+}
+.showMoreButton:hover{
+	background-color:  rgb(221, 185, 24);
+}

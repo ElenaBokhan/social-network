@@ -1,0 +1,236 @@
+.back{
+	width: 100%;
+	/* height: 100vh; */
+	padding-top: 180px;
+	position: absolute;
+	z-index: 1;
+}
+
+.wrp{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	z-index: -10;
+	overflow: hidden;
+}
+.one{
+	width: 20%;
+	height: 60%;
+	animation: moveOne 2s ;
+}	
+.two{
+	width: 35%;
+	height: 100%;
+	animation: moveTwo 2s ;
+}	
+.three{
+	width: 20%;
+	height: 40%;
+	animation: moveThree 2s ;	
+}
+.rect{
+	background-color: rgb(255, 200, 0);
+	position: absolute;	
+	transform:skewX(-45deg);
+	animation-fill-mode:forwards;	
+}
+@keyframes moveOne {
+	from {
+		left: 60%;
+		top: -60%; 
+	}
+	to { 
+		left: -10%;
+		top:35%;
+	}  
+  }
+@keyframes moveTwo {
+from {
+	left: -20%;
+	bottom: -60%; 
+}
+to { 
+	left: 25%;
+	bottom:0;
+}  
+}
+@keyframes moveThree {
+	from {
+		right: -50%;
+		top: -60%; 
+	}
+	to { 
+		right: -5%;
+		top:0;
+	}
+}
+.patternBack{
+	width: 100%;
+	height: 500px;
+	background:
+	-webkit-radial-gradient(black 50%, transparent 20%),rgba(255,255,255,0);
+	background-size:5px 5px;
+	display: flex;
+	align-items: center;
+}
+.darkBack{
+	width: 100%;
+	height: 400px;	
+	background-color: rgba(0, 0, 0, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+
+}
+.peopleWrapper{
+	position: absolute;
+	width: 100%;
+	height:100%;
+	padding: 15px 0;
+	z-index: 0;
+}
+.people{
+	margin: 4px;
+	opacity:0.3;
+	fill: rgb(255, 255, 255);
+	transition: opacity 1500ms ease;
+}
+.peopleAnimate{
+	margin: 4px;
+	opacity:1;
+	fill: rgb(255, 200, 0);
+	/* transition: fill 1500ms ease; */
+}
+.mainDarkBack{
+	width: 860px;
+	height: 300px;
+	background:radial-gradient(transparent 20%, black 100%, transparent 20%),rgba(255,255,255,0);
+	text-align: center;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+}
+.nameSocial{
+	font-family: Intro;
+	font-weight: 900;
+	color: white;
+	text-transform: uppercase;
+	font-size: 140px;
+}
+.nameNetwork{
+	font-family: Intro;
+	font-weight: 400;
+	color: rgb(255, 200, 0);
+	text-transform: uppercase;
+	font-size: 85px;
+}
+.oneB{
+	width: 10px;
+	height: 300px;
+	animation: borderOne 1.5s ease;
+	/* animation-delay: 3s; */
+}
+.twoB{
+	width: 860px;
+	height: 10px;
+	animation: borderTwo 800ms ease;
+}
+.threeB{
+	width: 10px;
+	height: 300px;
+	animation: borderThree 1.5s ease;
+}
+.fourB{
+	width: 860px;
+	height: 10px;
+	animation: borderFour 800ms ease;
+}
+.borderAnimate{	
+	position: absolute;
+	background-color: white;	
+	animation-fill-mode:forwards;	
+}
+@keyframes borderOne {
+	from {
+		left: 0;
+		top: -300px; 
+	}
+	to { 
+		left: 0;
+		top: 0; 
+	}
+}
+@keyframes borderTwo {
+	from {
+		right: -860px;
+		bottom: 0; 
+	}
+	to { 
+		right: 0;
+		bottom: 0;  
+	}
+}
+@keyframes borderThree {
+	from {
+		right: 0;
+		top: -300px; 
+	}
+	to { 
+		right: 0;
+		top: 0; 
+	}
+}
+@keyframes borderFour {
+	from {
+		left:-860px;
+		top: 0; 
+	}
+	to { 
+		left: 0;
+		top: 0; 
+	}
+}
+.friendsWrapper{
+	/* padding: 20px 190px; */
+	width: 860px;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.friend{
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+}
+.onePhoto{
+	background-image: url(../../assets/photos/1.jpg);
+	background-size: contain;
+}
+.twoPhoto{
+	background-image: url(../../assets/photos/2.jpg);
+	background-size: contain;
+}
+.threePhoto{
+	background-image: url(../../assets/photos/3.jpg);
+	background-size: contain;
+}
+.fourPhoto{
+	background-image: url(../../assets/photos/4.jpg);
+	background-size: contain;
+}
+/* .aaa{
+	width: 1200px;
+	height: 50px;
+	margin: auto;
+	background-color: tomato;
+}
+.bbb{
+	width: 30px;
+	height: 30px;
+	margin: auto;
+
+	background-color: rgb(102, 255, 71);
+} */

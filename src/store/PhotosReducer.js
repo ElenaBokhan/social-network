@@ -1,6 +1,8 @@
-const VIEW_PHOTOS = "VIEW-PHOTOS";
+// const VIEW_PHOTOS = "VIEW-PHOTOS";
 const SHOW_NEXT_SLIDE = "SHOW-NEXT-SLIDE";
 const SHOW_PREV_SLIDE = "SHOW-PREV-SLIDE";
+const SHOW_SLIDE = "SHOW-SLIDE";
+
 
 const initialState = {
 	images:{
@@ -33,32 +35,34 @@ const initialState = {
 					]
 			},			
 		}},
-		// photosArray:["/images/julia2.jpg",
-		// "/images/julia3.jpg",
-		// "/images/julia4.jpg",
-		// "/images/julia5.jpg",],
-	view:"all",
-	// albomMainSlidePhoto: "Julia Birthday",
-	numberSlidePhoto:1,
+	// view:"all",
+	
+	numberSlidePhoto:null,
+	// showSlideNumber: null,
 };
 
 export const PhotosReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case "VIEW-PHOTOS":
-			return {...state,
-					view: action.view};
+		// case "VIEW-PHOTOS":
+		// 	return {...state,
+		// 			view: action.view};
 		case "SHOW-NEXT-SLIDE":
 			return {...state,
 					numberSlidePhoto: ++state.numberSlidePhoto};
 		case "SHOW-PREV-SLIDE":
 			return {...state,
 					numberSlidePhoto: --state.numberSlidePhoto};
+		case "SHOW-SLIDE":
+			return {...state,
+				numberSlidePhoto:action.num
+				};	
 		default:
 			return state;
 	}
 }
 
-export const viewPhotos = (view) => ({type: VIEW_PHOTOS, view});
+// export const viewPhotos = (view) => ({type: VIEW_PHOTOS, view});
 export const nextSlide = () => ({type: SHOW_NEXT_SLIDE});
 export const prevSlide = () => ({type: SHOW_PREV_SLIDE});
+export const showSlide = (num) => ({type: SHOW_SLIDE, num});
 

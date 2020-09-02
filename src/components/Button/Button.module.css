@@ -1,0 +1,37 @@
+.button{
+	display: flex;
+	background-color: transparent;
+	padding: 7px 20px;
+    border: 2px solid rgb(255, 200, 0);
+    outline: none;
+    cursor: pointer;
+	color: #fff;
+	font-family: Intro;
+	font-weight: 400;
+	font-size: 15px;
+	margin: 10px auto;
+	align-items: center;
+	
+}
+.button img{
+	margin: 6px 0;
+}
+.button:hover{
+	background-color:  rgb(255, 200, 0);
+	color: #000;
+	cursor: pointer;
+	fill: rgb(0, 0, 0);
+}
+.exitIcon{
+	opacity: 1;
+	margin: 0 0 0 10px;
+	transform:  scale(-1, 1);
+	fill: #fff;
+}
+.sendIcon{
+	fill: rgb(255, 200, 0);
+	margin-left: 15px;
+}
+.button:hover .sendIcon{
+	fill: rgb(0, 0, 0);
+}

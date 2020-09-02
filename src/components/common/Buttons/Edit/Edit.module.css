@@ -1,0 +1,16 @@
+.edit{
+	background-color: transparent;   
+    border-style: none;
+    outline: none;
+    cursor: pointer;
+	fill: #fff;
+	margin-left: 15px;
+}
+.editIcon{
+	opacity: 0.3;
+}
+
+.editIcon:hover{
+	opacity: 1;
+	fill: rgb(255, 200, 0);
+}
