@@ -17,6 +17,7 @@
 	width: 30%;
 	height: 100%;
 	overflow: hidden;
+	
 }
 .friendsList p{
 	font-family: Intro;
@@ -25,7 +26,7 @@
 	color: white;
 	text-transform: uppercase;
 	padding: 15px 10px;
-	border-bottom: 2px solid rgb(255, 200, 0);	
+	border-bottom: 2px solid rgb(255, 200, 0);
 }
 .dialogWpapper{
 	height: 100%;
@@ -35,17 +36,23 @@
 	width: 70%;
 	background-color: rgba(0, 0, 0, 0.6);
 	padding: 20px;
+	display: flex;
+	flex-direction: column;	
 }
 .MessagesField{
 	border: 1px solid rgb(255, 200, 0);
-    border-radius: 10px;
-    height: 87%;
-    padding: 20px;	
+	border-radius: 10px;
+	padding: 20px;
+	flex: 11;
+	position: relative;
 }
-.MessagesField p:first-child{
-	line-height: 40;
+
+.MessagesField p:first-child{	
 	text-align: center;
 	color: rgb(255, 200, 0);
+	position: absolute;
+	top: 50%;
+	left: 30%;
 }
 .friendItem{
 	padding: 10px;
@@ -99,6 +106,12 @@
 	display: flex;	
 	justify-content: space-between;
 }
+.messageItem:hover .buttonWrapper{
+	opacity: 1;
+}
+.buttonWrapper {
+	opacity: 0;
+}
 .messageItem span{
 	color: rgb(255, 200, 0);
     font-size: 12px;
@@ -117,7 +130,8 @@
     margin: 20px 0;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+	align-items: flex-start;	
+	flex: 1;
 }
 .input{
 	width: 70%;

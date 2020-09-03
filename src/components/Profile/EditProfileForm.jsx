@@ -26,6 +26,7 @@ let EditForm = props => {
 							<p className = {editForm.titleAboutMe}>About me:</p>
 							<Field className = {editForm.textarea} component = {Textarea} validate = {[maxLength200]} current = {props.aboutMe} type="text" name="aboutMe"/>
 							<Button name = "Edit" isLoading = {props.isLoading} />
+							<Button name = "Cansel" onclick = {props.showEditForm} />
 						</form>
 					</div>
 				</div>	

@@ -23,7 +23,10 @@ export const MessagesList = (props) => {
 																								<span >{item.senderName}</span>
 																								<p>{item.body}</p>
 																							</div>
-																							<Bucket onclick = {()=>props.deleteMessage(item.id, props.id)}/>
+																							<div className = {dialog.buttonWrapper}>
+																								<Bucket onclick = {()=>props.deleteMessage(item.id, props.id)}/>
+																							</div>
+																							
 																						</div> )}
 			</div>			
 		)	

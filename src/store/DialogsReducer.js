@@ -86,7 +86,8 @@ export const getMessages = (userId) => async dispatch => {
 	dispatch(isLoadingDialog(true));
 	try {const response = await dialogsAPI.getMessages(userId);
 			if(response.items){
-				dispatch(setMessages(response.items))
+				dispatch(setMessages(response.items));
+				dispatch(getAllDialogs());
 		}
 	} catch(err) {
 		console.error()
