@@ -8,7 +8,7 @@ import { emptyField  } from '../../utils/validatators';
 const Input = ({input, meta, ...props}) => {	
 	return (
 		<div className = {meta.error && meta.touched ? loginStyles.error : null}>
-			<input {...input} value = { props.current } {...props}/>
+			<input {...input} {...props}/>
 			<span>{meta.touched && meta.error}</span>
 		</div>
 	)
@@ -20,9 +20,9 @@ let AuthForm = props => {
 						<form  onSubmit={handleSubmit}>
 							{props.error && <span className = {loginStyles.errorMsg}>{props.error}</span>}
 							<p className = {loginStyles.title}>LOGIN</p>
-							<Field component = {Input} type="text" name="login"  current = {"free@socialnet.com"} validate = {[emptyField ]}/>
+							<Field component = {Input} type="text" name="login" validate = {[emptyField ]}/>
 							<p className = {loginStyles.title}>PASSWORD</p>
-							<Field component = {Input} type="password" name="password" current = "free" validate = {[emptyField ]}/>
+							<Field component = {Input} type="password" name="password" validate = {[emptyField ]}/>
 							<Field component = "input" type="checkbox" name="rememberMe" className = {loginStyles.checkbox}/>
 							<span className = {loginStyles.title}>Remember me</span>
 							<Button name = "log in" isLoading = {props.isLoading}>
