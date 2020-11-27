@@ -1,8 +1,9 @@
 import { authAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
+import { setProfileDataThunkCreator, setStatusThunkCreator } from "./ProfileReducer";
+import { getUsersThunkCreator } from "./FriendsReducer";
 
 const AUTH_USER = "AUTH-USER";
-const SET_USER_ID = "SET-USER-ID";
 const REMOVE_USER_DATA = "REMOVE-USER-DATA";
 const SET_LOADING_DATA = "SET-LOADING-DATA";
 
@@ -23,11 +24,7 @@ export const AuthReducer = (state = initialState, action) => {
 				email:action.email,	
 				login: action.login,
 				isAuth: true,
-				};
-		case "SET-USER-ID":
-			return {...state,
-				authUserId:action.id,
-				};
+				};		
 		case "REMOVE-USER-DATA":
 			return {...state,
 				authUserId: null,
@@ -43,23 +40,24 @@ export const AuthReducer = (state = initialState, action) => {
 }
 
 export const authUser = (email, id, login) => ({type: AUTH_USER, email, id, login});
-export const setUserId = id => ({type: SET_USER_ID, id});
 export const removeUserData = () => ({type: REMOVE_USER_DATA});
 export const isLoading = (boolean) => ({type: SET_LOADING_DATA, boolean});
 
 export const authUserThunkCreator = () => async dispatch => {
 	const response = await authAPI.isAuthUser();
 	if (response.resultCode === 0){
-		 const {email, id, login} = response.data;
-		 dispatch(authUser(email, id, login));
-	}	
+		const {email, id, login} = response.data;
+		dispatch(authUser(email, id, login));		
+		dispatch(setProfileDataThunkCreator(id))
+		dispatch(setStatusThunkCreator(id))
+		dispatch(getUsersThunkCreator(1))
+	}		
 };
 
 export const loginUserThunkCreator = (dataUser) => async dispatch => {
 	dispatch(isLoading(true));
 	try { const response = await authAPI.loginUser(dataUser);
-		if (response.resultCode === 0){
-			dispatch(setUserId(response.data.userId));
+		if (response.resultCode === 0){			
 			dispatch(authUserThunkCreator());
 			}
 		else if (response.resultCode !== 0){

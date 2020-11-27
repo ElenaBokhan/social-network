@@ -1,7 +1,6 @@
 import React from 'react';
 import profile from './Profile.module.css';
 import { Edit } from '../common/Buttons/Edit/Edit';
-import { useEffect } from 'react';
 import { PostContainer } from '../Post/PostContainer';
 import { useState } from 'react';
 import StatusForm from './StatusForm';
@@ -11,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 import preloader from '../common/Preloader/preloader3.gif';
 
 export const Profile = (props) => {
-	const {userId, setStatusThunkCreator, editMode, isLoading} = props;
+	const {userId, editMode, isLoading} = props;
 	
 	const [inputStatus, setInputStatus] = useState(true);
 
@@ -22,11 +21,6 @@ export const Profile = (props) => {
 		const photoFile = event.target.files[0];
 		photoFile && props.uploadPhotoThunkCreator(photoFile);		
 	}
-	useEffect(() => {
-		// props && userId && props.setProfileDataThunkCreator(userId);
-		userId && setStatusThunkCreator(userId);		
-	}, [userId, setStatusThunkCreator]);
-
 	return (
 		<div className = {profile.container}>
 			{props.isShowEditForm && <EditProfileForm {...props}/>}			

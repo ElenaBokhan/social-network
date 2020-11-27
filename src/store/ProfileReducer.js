@@ -6,6 +6,8 @@ const SET_STATUS = "SET-STATUS";
 const REMOVE_STATUS = "REMOVE-STATUS";
 const SHOW_EDIT_FORM = "SHOW-EDIT-FORM";
 const SET_USER_PHOTO = "SET-USER-PHOTO";
+const SET_USER_ID = "SET-USER-ID";
+const SET_AUTH_INFO = "SET-AUTH-INFO";
 
 
 
@@ -32,7 +34,10 @@ const initialState = {
 		photos: {
 			large:null,
 			small:null
-		}
+		},
+		authName: null,
+		authPhoto:null
+		
 };
 
 export const ProfileReducer = (state = initialState, action) => {
@@ -54,10 +59,19 @@ export const ProfileReducer = (state = initialState, action) => {
 						small: action.data.photos.small
 						}
 					};
+		case "SET-AUTH-INFO":
+			return {...state,
+					authName:action.name,
+					authPhoto: action.photo
+				};	
 		case "SET-STATUS":
 			return {...state,
 					status:action.text
 				};	
+		case "SET-USER-ID":
+			return {...state,
+					id:action.id
+				};
 		case "REMOVE-STATUS":
 			return {...state,
 					status:null
@@ -79,6 +93,8 @@ export const ProfileReducer = (state = initialState, action) => {
 export const setUserProfileData = (data, id, editMode) => ({type: SET_USER_DATA, data, id, editMode});
 export const setUserStatus = (text) => ({type: SET_STATUS, text});
 export const setUserPhoto = (data) => ({type: SET_USER_PHOTO, data});
+export const setUserId = (id) => ({type: SET_USER_ID, id});
+export const setAuthInfo= (name, photo) => ({type: SET_AUTH_INFO, name, photo});
 
 export const removeUserStatus = () => ({type: REMOVE_STATUS});
 export const showEditForm = () => ({type: SHOW_EDIT_FORM});
@@ -101,6 +117,8 @@ export const setProfileDataThunkCreator = id => async dispatch => {
 				}
 		}
 		dispatch(setUserProfileData(data,response.userId,true));
+		dispatch(setAuthInfo(response.fullName, response.photos.small))
+		
 	}catch(error){
 		console.error(error)
 }

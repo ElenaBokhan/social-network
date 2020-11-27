@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
 import { Header } from './Header';
 import { isAuthUser } from '../../store/selectors/selectors';
-import { authUserThunkCreator, logoutUserThunkCreator } from '../../store/AuthReducer';
-import { getAllDialogs } from '../../store/DialogsReducer';
-import { setProfileDataThunkCreator } from '../../store/ProfileReducer';
+import { logoutUserThunkCreator } from '../../store/AuthReducer';
+import { setProfileDataThunkCreator, setStatusThunkCreator } from '../../store/ProfileReducer';
 
 const mapStateToProps = (state) => ({
 	isAuth: isAuthUser(state),
 	authId: state.AuthReducer.authUserId,
 	userId: state.ProfileReducer.id,
-	name: state.ProfileReducer.name,
-	smallPhoto: state.ProfileReducer.photos.small,	
+	name: state.ProfileReducer.authName,
+	smallPhoto: state.ProfileReducer.authPhoto,	
 })
-export const HeaderContainer = connect(mapStateToProps,{ authUserThunkCreator, logoutUserThunkCreator, setProfileDataThunkCreator, getAllDialogs })(Header);
+export const HeaderContainer = connect(mapStateToProps,{ logoutUserThunkCreator,
+														 setProfileDataThunkCreator, 
+														 setStatusThunkCreator })(Header);

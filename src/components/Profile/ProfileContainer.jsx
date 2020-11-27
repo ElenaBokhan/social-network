@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Profile } from './Profile';
-import { setProfileDataThunkCreator,updateProfileDataThunkCreator, uploadPhotoThunkCreator, setStatusThunkCreator, updateStatusThunkCreator, showEditForm } from '../../store/ProfileReducer';
+import { updateProfileDataThunkCreator, uploadPhotoThunkCreator, updateStatusThunkCreator, showEditForm } from '../../store/ProfileReducer';
 import { compose } from 'redux';
 import { withoutAuthRedirect } from '../../hoc/withAuthRedirect';
 import { startDialog } from '../../store/DialogsReducer';
@@ -26,10 +26,8 @@ const mapStateToProps = (state) => ({
 	isShowEditForm: state.ProfileReducer.isShowEditForm
 })
 
-export const ProfileContainer = compose(connect(mapStateToProps, { setProfileDataThunkCreator,
-																	updateProfileDataThunkCreator,
+export const ProfileContainer = compose(connect(mapStateToProps, {  updateProfileDataThunkCreator,
 																	uploadPhotoThunkCreator,
-																	setStatusThunkCreator, 
 																	updateStatusThunkCreator,
 																	showEditForm,
 																	startDialog }),

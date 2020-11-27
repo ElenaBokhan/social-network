@@ -13,57 +13,6 @@
 	z-index: -10;
 	overflow: hidden;
 }
-.one{
-	width: 20%;
-	height: 60%;
-	animation: moveOne 2s ;
-}	
-.two{
-	width: 35%;
-	height: 100%;
-	animation: moveTwo 2s ;
-}	
-.three{
-	width: 20%;
-	height: 40%;
-	animation: moveThree 2s ;	
-}
-.rect{
-	background-color: rgb(255, 200, 0);
-	position: absolute;	
-	transform:skewX(-45deg);
-	animation-fill-mode:forwards;	
-}
-@keyframes moveOne {
-	from {
-		left: 60%;
-		top: -60%; 
-	}
-	to { 
-		left: -10%;
-		top:35%;
-	}  
-  }
-@keyframes moveTwo {
-from {
-	left: -20%;
-	bottom: -60%; 
-}
-to { 
-	left: 25%;
-	bottom:0;
-}  
-}
-@keyframes moveThree {
-	from {
-		right: -50%;
-		top: -60%; 
-	}
-	to { 
-		right: -5%;
-		top:0;
-	}
-}
 .patternBack{
 	width: 100%;
 	height: 500px;

@@ -3,19 +3,9 @@ import headStyles from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 
 export class Header extends React.Component {
-
-	componentDidMount(){
-		this.props.authUserThunkCreator();
-		
-	}
-	shouldComponentUpdate(nextProps, nextState){		
-		if (this.props.authId === nextProps.userId) {
-			return true
-		} else { return false }
-	}
-	componentDidUpdate(){
-		this.props.authId && this.props.setProfileDataThunkCreator(this.props.authId);
-		this.props&& this.props.getAllDialogs()
+	showAuthUserData(){
+		this.props.setProfileDataThunkCreator(this.props.authId);
+		this.props.setStatusThunkCreator(this.props.authId)
 	}
 	render(){
 		return 	<div className = {headStyles.header}>
@@ -25,7 +15,8 @@ export class Header extends React.Component {
 													activeClassName={headStyles.active}>Home</NavLink>
 							<NavLink to = "/profile" 	className = {headStyles.menuItem} 
 														activeClassName={headStyles.active}
-														onClick = {()=> this.props.setProfileDataThunkCreator(this.props.authId)}>Profile</NavLink>
+														onClick = {()=> {this.showAuthUserData()}}
+														>Profile</NavLink>
 							<NavLink to = "/dialogs/ " className = {headStyles.menuItem} 
 														activeClassName={headStyles.active}>Dialogs</NavLink>					
 							<NavLink to = "/photos" 	className = {headStyles.menuItem} 

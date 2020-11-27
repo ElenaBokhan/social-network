@@ -7,8 +7,10 @@ import { PhotosReducer } from './PhotosReducer';
 import { FriendsReducer } from './FriendsReducer';
 import { AuthReducer } from './AuthReducer';
 import { DialogsReducer } from './DialogsReducer';
+import { AppReducer } from './AppReducer';
 
 const reducers = {
+	AppReducer: AppReducer,
 	PostReducer: PostReducer,
 	PhotosReducer: PhotosReducer,
 	ProfileReducer: ProfileReducer,

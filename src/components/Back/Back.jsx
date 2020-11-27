@@ -15,9 +15,8 @@ class Back extends Component {
 	componentDidMount(){
 		// const interval = Math.floor(Math.random() * 1000);
 		const interval = 400;
-
-		this.setState({timerId :setInterval(()=>{
-			this.setState({timerOutId: setTimeout(() =>{
+		this.setState({timerId: setInterval(() => {
+			this.setState({timerOutId: setTimeout(() => {
 				const randomNum = Math.floor(Math.random() * Math.floor(window.innerWidth/35*this.state.row));
 				this.setState({randomNumForAnimation: randomNum})
 				}, interval)})

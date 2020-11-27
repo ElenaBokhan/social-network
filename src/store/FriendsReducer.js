@@ -6,6 +6,7 @@ const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
 const SET_NOT_FOUND = "SET-NOT-FOUND";
 const SET_TOGGLE_USER = "SET-TOGGLE-USER";
 const SET_PAGE = "SET-PAGE";
+const RESET_PAGE = "RESET-PAGE";
 const ADD_USERS_TO_ARRAY = "ADD-USERS-TO-ARRAY";
 
 const initialState = {
@@ -43,6 +44,10 @@ export const FriendsReducer = (state = initialState, action) => {
 		case "SET-PAGE":
 			return {...state,				
 				page: ++state.page
+				};
+		case "RESET-PAGE":
+			return {...state,				
+				page: 1
 				};	
 		default:
 			return state;
@@ -54,6 +59,7 @@ export const setNotFound = (boolean) => ({type: SET_NOT_FOUND, boolean});
 export const setTotalUsersCount = (count) => ({type: SET_TOTAL_USERS_COUNT, count});
 export const setToggleUser = (id) => ({type: SET_TOGGLE_USER, id});
 export const setNextPage = () => ({type: SET_PAGE});
+export const resetPage = () => ({type: RESET_PAGE});
 export const addUsersToAllUsersArray = (usersArray) => ({type: ADD_USERS_TO_ARRAY, usersArray});
 
 
@@ -64,6 +70,7 @@ export const getUsersThunkCreator = (pageNum) => async dispatch => {
 		dispatch(setTotalUsersCount(response.totalCount));
 	}
  };
+
  export const getMoreUsersThunkCreator = (pageNum) => async dispatch => {
 	dispatch(isLoading(true));
 	try {
@@ -75,22 +82,25 @@ export const getUsersThunkCreator = (pageNum) => async dispatch => {
 		console.log(error);		
 	} finally {
 		dispatch(isLoading(false));
-	}
-	
+	}	
  };
+
  export const getFriendsThunkCreator = (boolean, pageNum) => async dispatch => {
+	dispatch(resetPage());
 	const response = await usersAPI.getFriends(boolean, pageNum);
 	if(response){
 		dispatch(setUsers(response.items));
 		dispatch(setTotalUsersCount(response.totalCount));
 	}
  };
+
  export const getMoreFriendsThunkCreator = (boolean,pageNum) => async dispatch => {
 	const response = await usersAPI.getFriends(boolean, pageNum);
 	if(response){
 		dispatch(addUsersToAllUsersArray(response.items));
 	}
  };
+ 
 export const followThunkCreator = (id,page) => async dispatch => {
 	dispatch(isLoading(true));
 	dispatch(setToggleUser(id));
