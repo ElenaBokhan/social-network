@@ -12,8 +12,7 @@ class Back extends Component {
 		}
 	}	
 	
-	componentDidMount(){
-		// const interval = Math.floor(Math.random() * 1000);
+	componentDidMount(){		
 		const interval = 400;
 		this.setState({timerId: setInterval(() => {
 			this.setState({timerOutId: setTimeout(() => {
