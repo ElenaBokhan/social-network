@@ -1,46 +1,51 @@
+import { ThunkAction } from 'redux-thunk';
+import { AppStateType } from './redux-store';
+import { photosType } from './../types/types';
 import { profileAPI } from "../api/api";
-import { isLoading } from "./AuthReducer";
+import { isLoading, isLoadingActionType } from "./AuthReducer";
 
 const SET_USER_DATA = "SET-USER-DATA";
 const SET_STATUS = "SET-STATUS";
 const REMOVE_STATUS = "REMOVE-STATUS";
 const SHOW_EDIT_FORM = "SHOW-EDIT-FORM";
 const SET_USER_PHOTO = "SET-USER-PHOTO";
-const SET_USER_ID = "SET-USER-ID";
 const SET_AUTH_INFO = "SET-AUTH-INFO";
 
 
-
+type contactsType = {
+	facebook: string | null
+	instagram: string | null
+	vk: string | null
+}
 const initialState = {
-		id: null,
+		id: null as number | null,
 		isEditMode:false,
-		avatar: "/images/noAvatar.jpg",
+		avatar: "/images/noAvatar.jpg" as string,
 		avatarFriends:["/images/1.jpg",
 						"/images/2.jpg",
 						"/images/3.jpg",
 						"/images/4.jpg",
-						"/images/4.jpg",],
-		status: null,
-		test:false,
-		name:null,
+						"/images/4.jpg",] as Array<string>,
+		status: null as string | null,
+		test: false,
+		name: null as string | null,
 		contacts:{
 			facebook: null,
 			instagram: null,
 			vk: null
-		},
+		} as contactsType,
 		lookingForAJob: false,
-		aboutMe:null,
+		aboutMe: null as string | null,
 		isShowEditForm: false,
 		photos: {
-			large:null,
-			small:null
-		},
-		authName: null,
-		authPhoto:null
-		
+			large: null,
+			small: null
+		} as photosType,
+		authName: null as string | null,
+		authPhoto: null as string | null,
 };
-
-export const ProfileReducer = (state = initialState, action) => {
+type initialStateType = typeof initialState
+export const ProfileReducer = (state = initialState, action: ActionType): initialStateType => {
 	switch (action.type) {		
 		case "SET-USER-DATA":
 			return {...state,
@@ -68,10 +73,6 @@ export const ProfileReducer = (state = initialState, action) => {
 			return {...state,
 					status:action.text
 				};	
-		case "SET-USER-ID":
-			return {...state,
-					id:action.id
-				};
 		case "REMOVE-STATUS":
 			return {...state,
 					status:null
@@ -79,8 +80,8 @@ export const ProfileReducer = (state = initialState, action) => {
 		case "SET-USER-PHOTO":
 			return {...state,
 					photos:{...state.photos,
-						large:action.data.data.photos.large,
-						small:action.data.data.photos.small}
+						large:action.data.large,
+						small:action.data.small}
 				};	
 		case "SHOW-EDIT-FORM":
 			return {...state,
@@ -90,16 +91,48 @@ export const ProfileReducer = (state = initialState, action) => {
 			return state;
 	}
 }
-export const setUserProfileData = (data, id, editMode) => ({type: SET_USER_DATA, data, id, editMode});
-export const setUserStatus = (text) => ({type: SET_STATUS, text});
-export const setUserPhoto = (data) => ({type: SET_USER_PHOTO, data});
-export const setUserId = (id) => ({type: SET_USER_ID, id});
-export const setAuthInfo= (name, photo) => ({type: SET_AUTH_INFO, name, photo});
+type ActionType = setUserProfileDataActionType | setUserStatusActionType | setUserPhotoActionType|
+				  setAuthInfoActionType | removeUserStatusActionType | showEditFormActionType
+type dataType = {
+	aboutMe: string | null
+	contacts: contactsType
+	lookingForAJob: boolean
+	name: string
+	photos: photosType
+}
+type setUserProfileDataActionType = {
+	type: typeof SET_USER_DATA
+	data: dataType
+	id: number
+	editMode: boolean
+}
+export const setUserProfileData = (data: dataType, id: number, editMode: boolean): setUserProfileDataActionType => ({type: SET_USER_DATA, data, id, editMode});
+type setUserStatusActionType = {
+	type: typeof SET_STATUS
+	text: string
+}
+export const setUserStatus = (text: string): setUserStatusActionType => ({type: SET_STATUS, text});
+type setUserPhotoActionType = {
+	type: typeof SET_USER_PHOTO
+	data: photosType
+}
+export const setUserPhoto = (data: photosType): setUserPhotoActionType => ({type: SET_USER_PHOTO, data});
+type setAuthInfoActionType = {
+	type: typeof SET_AUTH_INFO
+	name: string
+	photo: string
+}
+export const setAuthInfo= (name: string, photo: string): setAuthInfoActionType => ({type: SET_AUTH_INFO, name, photo});
+type removeUserStatusActionType = {
+	type: typeof REMOVE_STATUS
+}
+export const removeUserStatus = (): removeUserStatusActionType => ({type: REMOVE_STATUS});
+type showEditFormActionType = {
+	type: typeof SHOW_EDIT_FORM
+}
+export const showEditForm = (): showEditFormActionType => ({type: SHOW_EDIT_FORM});
 
-export const removeUserStatus = () => ({type: REMOVE_STATUS});
-export const showEditForm = () => ({type: SHOW_EDIT_FORM});
-
-export const setProfileDataThunkCreator = id => async dispatch => {
+export const setProfileDataThunkCreator = (id: number): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
 	try{const response = await profileAPI.getUserProfile(id);
 		const regexp = /(?<=\/)[-_@.\w\s\d|А-Яа-я]+$/gi;
 		const data = {
@@ -123,7 +156,7 @@ export const setProfileDataThunkCreator = id => async dispatch => {
 		console.error(error)
 }
 }
-export const setProfileUserThunkCreator = id => async dispatch => {
+export const setProfileUserThunkCreator = (id: number): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
 	const response = await profileAPI.getUserProfile(id);
 	
 	const data = {
@@ -142,7 +175,16 @@ export const setProfileUserThunkCreator = id => async dispatch => {
 	}
 	dispatch(setUserProfileData(data,response.userId, false));
 }
-export const updateProfileDataThunkCreator = data => async dispatch => {
+type updateDataType = {
+	id: number
+	fullName: string,
+	facebook: string,
+	instagram: string,
+	vk: string,
+	lookingForAJob: boolean,
+	aboutMe: string
+}
+export const updateProfileDataThunkCreator = (data: updateDataType): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
 	dispatch(isLoading(true));
 	const dataObj = {
 		userId: data.id,
@@ -169,7 +211,7 @@ export const updateProfileDataThunkCreator = data => async dispatch => {
 	dispatch(isLoading(false));
 }
 
-export const setStatusThunkCreator = id => async dispatch => {
+export const setStatusThunkCreator = (id: number): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
 	dispatch(isLoading(true));
 	try {
 		const response = await profileAPI.getUserStatus(id);	
@@ -180,7 +222,10 @@ export const setStatusThunkCreator = id => async dispatch => {
 		dispatch(isLoading(false));
 	}	
 }
-export const updateStatusThunkCreator = ({status}) => async dispatch => {
+export type statusType = {
+	status: string
+}
+export const updateStatusThunkCreator = ({status}: statusType): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
 	dispatch(isLoading(true));
 	dispatch(removeUserStatus());
 	try {
@@ -194,9 +239,17 @@ export const updateStatusThunkCreator = ({status}) => async dispatch => {
 		dispatch(isLoading(false));
 	}		
 }
-export const uploadPhotoThunkCreator = photo => async dispatch => {
+type uploadPhotoType = {
+	lastModified: number
+	lastModifiedDate: Date
+	name: string
+	size: number
+	type: string
+	webkitRelativePath: string
+}
+export const uploadPhotoThunkCreator = (photo: uploadPhotoType): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
 	const response = await profileAPI.updateUserPhoto(photo);
 	if(response.resultCode===0){
-		dispatch(setUserPhoto(response));
+		dispatch(setUserPhoto(response.data.photos));
 	}
 }

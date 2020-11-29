@@ -22,7 +22,15 @@ export type messagesArrayType = {
 	translatedBody: null
 	viewed: boolean
 }
-export type photosType = {
-    small: null | string
-    large: null | string   
+export type photosType = {    
+	large: string | null
+	small: string | null
+}
+export type allUsersItemType = {
+	followed: boolean
+	id: number
+	name: string
+	photos: photosType
+	status: null | string
+	uniqueUrlName: null | string
 }
