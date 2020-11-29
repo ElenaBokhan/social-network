@@ -4,7 +4,7 @@ import preloader from '../common/Preloader/preloader3.gif';
 type propsType = {
 	onclick?: () => void
 	disabled?: boolean
-	isLoading?: boolean
+	isLoading?: boolean | null
 	name: string
 	children?: React.ReactNode
 }

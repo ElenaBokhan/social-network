@@ -6,9 +6,28 @@ import { Button } from '../Button/Button';
 import avatar from '../../assets/img/avatar.png';
 import SearchUserForm from './SearchUserForm';
 import preloader from '../common/Preloader/preloader3.gif';
+import { allUsersItemType } from '../../types/types';
 
-
-export const Friends = (props) => {
+type propsType = {
+	viewParams: string
+	authId: number | null
+	allUsers: Array<allUsersItemType>
+	isLoading: boolean
+	isNotFound: boolean
+	toggleUsersId: number | null
+	page: number
+	getUsersThunkCreator: (pageNum?: number) => void																
+	getMoreUsersThunkCreator: (pageNum: number) => void	
+	followThunkCreator: (id: number, page: number) => void
+	unfollowThunkCreator: (id: number, page: number) => void
+	searchUserThunkCreator: (name: string) => void
+	getFriendsThunkCreator: (flag: boolean, pageNum: number) => void
+	getMoreFriendsThunkCreator: (flag: boolean, pageNum: number) => void
+	setProfileUserThunkCreator: (id: number) => void
+	setStatusThunkCreator: (id: number | null) => void
+	setNextPage: () => void
+}
+export const Friends = (props: propsType) => {
 	const { getUsersThunkCreator, page,	getFriendsThunkCreator,	getMoreFriendsThunkCreator, 
 			getMoreUsersThunkCreator, setProfileUserThunkCreator, followThunkCreator,
 			unfollowThunkCreator, setStatusThunkCreator, isNotFound, allUsers,	toggleUsersId, 
@@ -24,14 +43,14 @@ export const Friends = (props) => {
 			getMoreUsersThunkCreator(page);	
 		}	
 	}
-	const showUserProfile = (id) => {		
+	const showUserProfile = (id: number) => {		
 		setProfileUserThunkCreator(id);	
 		setStatusThunkCreator(id)		
 	}
-	const follow = (id) => {
+	const follow = (id: number) => {
 		followThunkCreator(id, page);		
 	}
-	const unfollow = (id) => {
+	const unfollow = (id: number) => {
 		unfollowThunkCreator(id, page);		
 	}
 	return (
@@ -61,8 +80,8 @@ export const Friends = (props) => {
 													 onClick = { () => showUserProfile(item.id) }>
 													<NavLink to = {`/profile`} >
 													<img 	src = { item.photos.large ? item.photos.large : avatar } 
-															className = { toggleUsersId === item.id ? friends.avatarImg : null }
-															style = { item.followed === false ? {filter: "opacity(0.4)"} : null }
+															className = { toggleUsersId === item.id ? friends.avatarImg : undefined }
+															style = { item.followed === false ? {filter: "opacity(0.4)"} : undefined }
 															alt = "avatar" width = "150px" height = "150px"
 															/>
 															</NavLink>
