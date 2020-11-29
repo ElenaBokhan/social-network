@@ -1,7 +1,6 @@
 import React from 'react';
 import postStyle from './Post.module.css';
 import { Bucket } from '../common/Buttons/Bucket/Bucket';
-import { Edit } from '../common/Buttons/Edit/Edit';
 import AddPostForm from './AddPostForm';
 import { postType } from '../../types/types';
 

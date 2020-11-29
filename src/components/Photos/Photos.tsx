@@ -3,12 +3,21 @@ import photos from './Photos.module.css';
 import { NavLink } from 'react-router-dom';
 import folder from '../../assets/img/folder.png';
 import { Slide } from './Slide/Slide';
+import { albomType } from '../../types/types';
 
-export const Photos = (props) => {
-
-	// const changeView = (event) => {
-	// 	props.viewPhotos(event.currentTarget.text);		
-	// }
+type propsType = {
+	viewParams: string | undefined	
+	authId: number | null
+	photos: Array<albomType>
+	numberSlidePhoto: number
+	allPhotos: Array<string>
+	slide: Array<string>
+	underSlidePhotos: Array<string>
+	nextSlide: () => void
+	prevSlide: () => void
+	showSlide: (num: number) => void
+}
+export const Photos = (props: propsType) => {
 
 	return (
 		<div className = {photos.container}>
@@ -17,8 +26,8 @@ export const Photos = (props) => {
 			<nav className = {photos.nav}>
 				<span>Show as: </span>
 				<NavLink 	to = {`/photos/all`} 
-							activeClassName={photos.active} className = { props.viewParams === undefined ? photos.active : null}
-							onClick = {() => props.showSlide(null) }>all</NavLink>
+							activeClassName={photos.active} className = { props.viewParams === undefined ? photos.active : undefined}
+							onClick = {() => props.showSlide(-1) }>all</NavLink>
 				<NavLink 	to = {`/photos/slide`} 
 							activeClassName={photos.active}
 							onClick = {() => props.showSlide(0) }>slide</NavLink>
@@ -42,8 +51,8 @@ export const Photos = (props) => {
 																	key = {item}></div>)}
 					</div>
 				</section>}
-			{props.viewParams === "albom" && props.photos.map(item => 	<>
-										<div className = {photos.albomHead} key = {item}>
+			{props.viewParams === "albom" && props.photos.map((item, index) => 	<>
+										<div className = {photos.albomHead} key = { index }>
 																		<img src = {folder} alt="folder" width = "50px" />
 																		<span  className = {photos.albomName}>{item.name}</span>
 																		<hr className = {photos.line}/>

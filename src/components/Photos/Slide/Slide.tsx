@@ -1,24 +1,34 @@
 import React from 'react';
 import slide from './Slide.module.css';
 import photos from '../Photos.module.css';
+import { albomType } from '../../../types/types';
 
+type propsType = {	
+	photos: Array<albomType>
+	numberSlidePhoto: number
+	allPhotos: Array<string>	
+	slide: Array<string>
+	nextSlide: () => void
+	prevSlide: () => void
+	showSlide: (num: number) => void
+}
 
-export const Slide = props => {	
+export const Slide = (props: propsType) => {	
 
-	const nextSlide = (event) => {
+	const nextSlide = (event: any) => {
 		event.stopPropagation();
 		if (props.numberSlidePhoto<props.allPhotos.length-1){
 		props.nextSlide();
 		}
 	}
-	const prevSlide = (event) => {
+	const prevSlide = (event: any) => {
 		event.stopPropagation();
 		if (props.numberSlidePhoto>0){
 			props.prevSlide();
 		}		
 	}
 
-	return 	<div className = {slide.container} onClick = {() => props.showSlide(null)}>
+	return 	<div className = {slide.container} onClick = {() => props.showSlide(-1)}>
 				<button className = {slide.arrowLeft} onClick = {prevSlide} >
 					<svg className = {photos.arrowIcon} xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve"  height="30px" version="1.1" viewBox="0 0 9.34 15.06" xmlnsXlink="http://www.w3.org/1999/xlink"><path d="M0 7.26c0,0.53 -0.05,0.75 0.26,1.2 0.09,0.13 0.31,0.33 0.44,0.45l4.57 4.57c0.22,0.22 1.17,1.22 1.39,1.35 0.63,0.4 1.28,0.25 1.79,-0.23 0.04,-0.04 0.02,-0.02 0.06,-0.05 0.56,-0.5 0.83,-0.78 0.83,-1.53 0,-0.41 -0.19,-0.68 -0.41,-0.89 -0.45,-0.45 -4.46,-4.42 -4.57,-4.6 0.11,-0.17 4.11,-4.14 4.55,-4.58 0.36,-0.35 0.43,-0.6 0.43,-1.1 0,-0.57 -0.56,-1.15 -0.92,-1.44 -0.52,-0.4 -1.08,-0.58 -1.71,-0.21 -0.31,0.18 -2.93,2.87 -3.25,3.18l-3.19 3.2c-0.11,0.14 -0.27,0.44 -0.27,0.68z"/></svg>
 				</button>

@@ -60,8 +60,9 @@ export const Profile = (props: propsType) => {
 								</div>}
 					<h3  className = {profile.titleFriends}>Friends</h3>
 					{ randomFriends.map((item, index) => <div 	style = {{ backgroundImage: `url(${process.env.PUBLIC_URL+item})` }}
-																	className = {profile.avatarFriend}
-																	key = { index }></div>)}
+																className = {profile.avatarFriend}
+																key = { index }>																	
+														 </div>)}
 			</section>
 			<section className = {profile.info}>
 				<p className = {profile.name}>{ name }</p>

@@ -62,3 +62,10 @@ export type postType = {
 	starsScore: number
 	isClickedStar: boolean
 }
+export type albomType = {
+	name: string
+	data: Array<string>
+}
+export type albomsType = {
+	[key: number]: albomType
+}

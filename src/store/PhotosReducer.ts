@@ -1,14 +1,9 @@
+import { albomsType } from './../types/types';
 const SHOW_NEXT_SLIDE = "SHOW-NEXT-SLIDE";
 const SHOW_PREV_SLIDE = "SHOW-PREV-SLIDE";
 const SHOW_SLIDE = "SHOW-SLIDE";
 
-type albomType = {
-	name: string
-	data: Array<string>
-}
-type albomsType = {
-	[key: number]: albomType
-}
+
 type imagesType = {
 	albom: albomsType
 }
