@@ -1,3 +1,5 @@
+import { AppStateType } from './redux-store';
+import { ThunkAction } from 'redux-thunk';
 import { authAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
 import { setProfileDataThunkCreator, setStatusThunkCreator } from "./ProfileReducer";
@@ -9,14 +11,14 @@ const SET_LOADING_DATA = "SET-LOADING-DATA";
 
 
 const initialState = {
-		authUserId: null,
-		email:null,	
-		login: null,
+		authUserId: null as number | null,
+		email:null as string | null,	
+		login: null as string | null,
 		isAuth: false,
 		isLoading:false,
 };
-
-export const AuthReducer = (state = initialState, action) => {
+type initialStateType = typeof initialState
+export const AuthReducer = (state = initialState, action: ActionType): initialStateType => {
 	switch (action.type) {
 		case "AUTH-USER":
 			return {...state,
@@ -33,17 +35,31 @@ export const AuthReducer = (state = initialState, action) => {
 				isAuth: false};
 		case "SET-LOADING-DATA":
 			return {...state,
-				isLoading: action.boolean};
+				isLoading: action.flag};
 		default:
 			return state;
 	}
 }
+type ActionType = authUserActionType | removeUserDataActionType | isLoadingActionType
 
-export const authUser = (email, id, login) => ({type: AUTH_USER, email, id, login});
-export const removeUserData = () => ({type: REMOVE_USER_DATA});
-export const isLoading = (boolean) => ({type: SET_LOADING_DATA, boolean});
+type authUserActionType = {
+	type: typeof AUTH_USER
+	email: string
+	id: number
+	login: string
+}
+export const authUser = (email: string, id: number, login: string): authUserActionType => ({type: AUTH_USER, email, id, login});
+type removeUserDataActionType = {
+	type: typeof REMOVE_USER_DATA
+}
+export const removeUserData = (): removeUserDataActionType => ({type: REMOVE_USER_DATA});
+export type isLoadingActionType = {
+	type: typeof SET_LOADING_DATA
+	flag: boolean
+}
+export const isLoading = (flag: boolean): isLoadingActionType => ({type: SET_LOADING_DATA, flag});
 
-export const authUserThunkCreator = () => async dispatch => {
+export const authUserThunkCreator = (): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
 	const response = await authAPI.isAuthUser();
 	if (response.resultCode === 0){
 		const {email, id, login} = response.data;
@@ -53,8 +69,13 @@ export const authUserThunkCreator = () => async dispatch => {
 		dispatch(getUsersThunkCreator(1))
 	}		
 };
-
-export const loginUserThunkCreator = (dataUser) => async dispatch => {
+type dataUserType = {
+	captcha: boolean
+	email: string
+	password: string
+	rememberMe: boolean
+}
+export const loginUserThunkCreator = (dataUser: dataUserType): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
 	dispatch(isLoading(true));
 	try { const response = await authAPI.loginUser(dataUser);
 		if (response.resultCode === 0){			
@@ -70,7 +91,7 @@ export const loginUserThunkCreator = (dataUser) => async dispatch => {
 	dispatch(isLoading(false));
 };
 
-export const logoutUserThunkCreator = () => async dispatch => {	
+export const logoutUserThunkCreator = (): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {	
 	const response = await authAPI.logoutUser();
 	if (response.resultCode === 0){
 		dispatch(removeUserData());

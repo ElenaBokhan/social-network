@@ -1,20 +1,28 @@
+import { type } from "os";
+
 const ADD_NEW_POST = "ADD-NEW-POST";
 const ADD_STAR = "ADD-STAR";
 const REMOVE_STAR = "REMOVE-STAR";
 const REMOVE_POST = "REMOVE-POST";
 const INCREASE_TEXTAREA = "INCREASE-TEXTAREA";
 
+type postType = {
+	text: string
+	date: string
+	starsScore: number
+	isClickedStar: boolean
+}
 const initialState = {		
 		posts: [
 			{text:"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima rerum quibusdam molestiae, nulla ut corrupti! Placeat modi vel dignissimos atque.",
 			date: "31 октября 2020",
 			starsScore: 36,
 			isClickedStar: false}
-		],
+		] as Array<postType>,
 		isActiveTextarea: false
 };
-
-export const PostReducer = (state = initialState, action) => {
+type initialStateType = typeof initialState
+export const PostReducer = (state = initialState, action: ActionType): initialStateType => {
 	switch (action.type) {
 		case "ADD-NEW-POST":
 			const date = new Date();
@@ -57,14 +65,36 @@ export const PostReducer = (state = initialState, action) => {
 				};
 		case "INCREASE-TEXTAREA":
 			return {...state,
-				isActiveTextarea: action.boolean
+				isActiveTextarea: action.flag
 				};
 		default:
 			return state;
 	}
 }
-export const removeStar = (index) => ({type: REMOVE_STAR, index});
-export const addStar = (index) => ({type: ADD_STAR, index});
-export const addPost = (text) => ({type: ADD_NEW_POST, text});
-export const removePost = (index) => ({type: REMOVE_POST, index});
-export const increaseTextarea = (boolean) => ({type: INCREASE_TEXTAREA, boolean})
+type ActionType = removeStarActionType | addStarActionType | addPostActionType | 
+				  removePostActionType | increaseTextareaActionType
+type removeStarActionType = {
+	type: typeof REMOVE_STAR
+	index: number
+}
+export const removeStar = (index: number): removeStarActionType => ({type: REMOVE_STAR, index});
+type addStarActionType = {
+	type: typeof ADD_STAR
+	index: number
+}
+export const addStar = (index: number): addStarActionType => ({type: ADD_STAR, index});
+type addPostActionType = {
+	type: typeof ADD_NEW_POST
+	text: string
+}
+export const addPost = (text: string): addPostActionType => ({type: ADD_NEW_POST, text});
+type removePostActionType = {
+	type: typeof REMOVE_POST
+	index: number
+}
+export const removePost = (index: number): removePostActionType => ({type: REMOVE_POST, index});
+type increaseTextareaActionType = {
+	type: typeof INCREASE_TEXTAREA
+	flag: boolean
+}
+export const increaseTextarea = (flag: boolean): increaseTextareaActionType => ({type: INCREASE_TEXTAREA, flag})
