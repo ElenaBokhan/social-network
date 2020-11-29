@@ -3,9 +3,18 @@ import dialog from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
 import SendMessageForm from './SendMessageForm';
 import { MessagesListContainer } from '../MessagesList/MessagesListContainer';
+import { dialogsArrayType, messagesArrayType } from '../../types/types';
 
-
-export const Dialogs = (props) => {
+type propsType = {
+	id: number
+	authId: number | null
+	avatar: string
+	dialogs: Array<dialogsArrayType>
+	messages: Array<messagesArrayType>
+	isLoading: boolean
+	sendMessage: (userId: number, msg: string) => void
+}
+export const Dialogs = (props: propsType) => {
 	const { dialogs, avatar, id } = props;
 	const regexp = /[-\d]+(?=T)/gi;
 
