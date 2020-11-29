@@ -8,7 +8,7 @@ import { Input, Textarea } from '../common/formFields/formFields';
 
 let EditForm = props => {
 	
-	const { handleSubmit } = props;
+	const { handleSubmit, contacts } = props;
 	return 	<div className = {editForm.container} onClick = {props.showEditForm}>
 					<div className = {editForm.editBlock} onClick = {(event) => event.stopPropagation()}>
 						<h1 className = {editForm.title}>Update Your Profile</h1>
@@ -16,11 +16,11 @@ let EditForm = props => {
 							<p className = {editForm.titleField}>Your name:</p>
 							<Field className = {editForm.input} component = {Input} current = {props.name} type="text" name="fullName"/>
 							<p className = {editForm.titleField}>Facebook:</p>
-							<Field className = {editForm.input} component = {Input} current = {props.facebook} type="text" name="facebook"/>
+							<Field className = {editForm.input} component = {Input} current = {contacts.facebook} type="text" name="facebook"/>
 							<p className = {editForm.titleField}>Instagram:</p>
-							<Field className = {editForm.input} component = {Input} current = {props.instagram} type="text" name="instagram"/>
+							<Field className = {editForm.input} component = {Input} current = {contacts.instagram} type="text" name="instagram"/>
 							<p className = {editForm.titleField}>Vkontakte:</p>
-							<Field className = {editForm.input} component = {Input} current = {props.vk} type="text" name="vk"/>
+							<Field className = {editForm.input} component = {Input} current = {contacts.vk} type="text" name="vk"/>
 							<Field component = "input" type="checkbox" name="lookingForAJob" className = {editForm.checkbox}/>
 							<span className = {editForm.titleField}>looking for a job</span>							
 							<p className = {editForm.titleAboutMe}>About me:</p>

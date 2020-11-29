@@ -1,8 +1,14 @@
 import React from 'react';
 import buttonStyle from './Button.module.css';
 import preloader from '../common/Preloader/preloader3.gif';
-
-export const Button = ({ onclick, disabled, isLoading, name, children }) => {
+type propsType = {
+	onclick?: () => void
+	disabled?: boolean
+	isLoading?: boolean
+	name: string
+	children?: React.ReactNode
+}
+export const Button: React.FC<propsType> = ({ onclick, disabled, isLoading, name, children }) => {
 	
 	return <button 	onClick = {onclick} 
 					className = {buttonStyle.button}

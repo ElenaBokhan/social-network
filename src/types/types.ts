@@ -26,6 +26,11 @@ export type photosType = {
 	large: string | null
 	small: string | null
 }
+export type contactsType = {
+	facebook: string | null
+	instagram: string | null
+	vk: string | null
+}
 export type allUsersItemType = {
 	followed: boolean
 	id: number
@@ -33,4 +38,21 @@ export type allUsersItemType = {
 	photos: photosType
 	status: null | string
 	uniqueUrlName: null | string
+}
+export type updateDataType = {
+	id: number
+	fullName: string,
+	facebook: string,
+	instagram: string,
+	vk: string,
+	lookingForAJob: boolean,
+	aboutMe: string
+}
+export type uploadPhotoType = {
+	lastModified: number
+	lastModifiedDate: Date
+	name: string
+	size: number
+	type: string
+	webkitRelativePath: string
 }

@@ -1,5 +1,3 @@
-import { type } from "os";
-
 const ADD_NEW_POST = "ADD-NEW-POST";
 const ADD_STAR = "ADD-STAR";
 const REMOVE_STAR = "REMOVE-STAR";

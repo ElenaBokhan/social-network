@@ -12,7 +12,7 @@ export const Photos = (props) => {
 
 	return (
 		<div className = {photos.container}>
-			{props.numberSlidePhoto !==null && (props.viewParams === "all" || props.viewParams === undefined) && <Slide {...props}/>}
+			{props.numberSlidePhoto >=0 && (props.viewParams === "all" || props.viewParams === undefined) && <Slide {...props}/>}
 			
 			<nav className = {photos.nav}>
 				<span>Show as: </span>

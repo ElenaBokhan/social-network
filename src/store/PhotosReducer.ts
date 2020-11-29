@@ -42,13 +42,11 @@ const initialState = {
 						"/images/zavolga5.jpg",
 					]
 			},			
-		}},		
-	numberSlidePhoto: 0,
+		}} as imagesType,		
+	numberSlidePhoto: -1,
 };
-type initialStateType = {
-	images: imagesType
-	numberSlidePhoto: number,
-}
+
+type initialStateType = typeof initialState
 export const PhotosReducer = (state = initialState, action: ActionType): initialStateType => {
 	switch (action.type) {		
 		case "SHOW-NEXT-SLIDE":

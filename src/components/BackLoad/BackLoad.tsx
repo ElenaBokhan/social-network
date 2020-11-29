@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import main from './Back.module.css';
 
-class BackLoad extends Component {
-	constructor(props){
+type stateType = {
+	randomNumForAnimation: number | null
+	row: number
+	timerId:any
+	timerOutId: any
+}
+class BackLoad extends Component<{}, stateType> {
+	constructor(props: any){
 		super(props)
 		this.state = {
 		randomNumForAnimation: null,

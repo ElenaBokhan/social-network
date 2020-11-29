@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import { AppStateType } from './redux-store';
-import { photosType } from './../types/types';
+import { photosType, contactsType, updateDataType, uploadPhotoType } from './../types/types';
 import { profileAPI } from "../api/api";
 import { isLoading, isLoadingActionType } from "./AuthReducer";
 
@@ -12,11 +12,6 @@ const SET_USER_PHOTO = "SET-USER-PHOTO";
 const SET_AUTH_INFO = "SET-AUTH-INFO";
 
 
-type contactsType = {
-	facebook: string | null
-	instagram: string | null
-	vk: string | null
-}
 const initialState = {
 		id: null as number | null,
 		isEditMode:false,
@@ -175,15 +170,7 @@ export const setProfileUserThunkCreator = (id: number): ThunkAction<void, AppSta
 	}
 	dispatch(setUserProfileData(data,response.userId, false));
 }
-type updateDataType = {
-	id: number
-	fullName: string,
-	facebook: string,
-	instagram: string,
-	vk: string,
-	lookingForAJob: boolean,
-	aboutMe: string
-}
+
 export const updateProfileDataThunkCreator = (data: updateDataType): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
 	dispatch(isLoading(true));
 	const dataObj = {
@@ -239,14 +226,7 @@ export const updateStatusThunkCreator = ({status}: statusType): ThunkAction<void
 		dispatch(isLoading(false));
 	}		
 }
-type uploadPhotoType = {
-	lastModified: number
-	lastModifiedDate: Date
-	name: string
-	size: number
-	type: string
-	webkitRelativePath: string
-}
+
 export const uploadPhotoThunkCreator = (photo: uploadPhotoType): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
 	const response = await profileAPI.updateUserPhoto(photo);
 	if(response.resultCode===0){
