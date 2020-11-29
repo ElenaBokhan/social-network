@@ -4,6 +4,7 @@ import { authAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
 import { setProfileDataThunkCreator, setStatusThunkCreator } from "./ProfileReducer";
 import { getUsersThunkCreator } from "./FriendsReducer";
+import { dataUserType } from '../types/types';
 
 const AUTH_USER = "AUTH-USER";
 const REMOVE_USER_DATA = "REMOVE-USER-DATA";
@@ -69,12 +70,7 @@ export const authUserThunkCreator = (): ThunkAction<void, AppStateType, unknown,
 		dispatch(getUsersThunkCreator(1))
 	}		
 };
-type dataUserType = {
-	captcha: boolean
-	email: string
-	password: string
-	rememberMe: boolean
-}
+
 export const loginUserThunkCreator = (dataUser: dataUserType): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
 	dispatch(isLoading(true));
 	try { const response = await authAPI.loginUser(dataUser);

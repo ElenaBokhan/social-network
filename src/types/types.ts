@@ -69,3 +69,9 @@ export type albomType = {
 export type albomsType = {
 	[key: number]: albomType
 }
+export type dataUserType = {
+	captcha: boolean
+	email: string
+	password: string
+	rememberMe: boolean
+}

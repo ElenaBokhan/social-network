@@ -2,7 +2,17 @@ import React from 'react';
 import headStyles from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 
-export class Header extends React.Component {
+type propsType = {
+	isAuth: boolean
+	authId: number | null
+	userId: number | null
+	name: string | null
+	smallPhoto: string | null
+	logoutUserThunkCreator: () => void
+	setProfileDataThunkCreator: (id: number | null) => void 
+	setStatusThunkCreator: (id: number | null) => void 
+}
+export class Header extends React.Component<propsType> {
 	showAuthUserData(){
 		this.props.setProfileDataThunkCreator(this.props.authId);
 		this.props.setStatusThunkCreator(this.props.authId)

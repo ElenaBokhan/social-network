@@ -127,7 +127,7 @@ type showEditFormActionType = {
 }
 export const showEditForm = (): showEditFormActionType => ({type: SHOW_EDIT_FORM});
 
-export const setProfileDataThunkCreator = (id: number): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
+export const setProfileDataThunkCreator = (id: number | null): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
 	try{const response = await profileAPI.getUserProfile(id);
 		const regexp = /(?<=\/)[-_@.\w\s\d|А-Яа-я]+$/gi;
 		const data = {
@@ -198,7 +198,7 @@ export const updateProfileDataThunkCreator = (data: updateDataType): ThunkAction
 	dispatch(isLoading(false));
 }
 
-export const setStatusThunkCreator = (id: number): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
+export const setStatusThunkCreator = (id: number | null): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
 	dispatch(isLoading(true));
 	try {
 		const response = await profileAPI.getUserStatus(id);	
