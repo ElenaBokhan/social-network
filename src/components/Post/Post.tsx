@@ -3,9 +3,22 @@ import postStyle from './Post.module.css';
 import { Bucket } from '../common/Buttons/Bucket/Bucket';
 import { Edit } from '../common/Buttons/Edit/Edit';
 import AddPostForm from './AddPostForm';
+import { postType } from '../../types/types';
 
-export const Post = (props) => {
-	const changeStar = (indexPost, isCliked) =>{
+type propsType = {
+	name: string | null
+	avatar: string
+	posts: Array<postType>
+	isActiveTextarea: boolean
+	smallPhoto: string | null
+	addStar: (index: number) => void
+	removeStar: (index: number) => void
+	addPost: (text: string) => void
+	removePost: (index: number) => void
+	increaseTextarea: (flag: boolean) => void
+}
+export const Post = (props: propsType) => {
+	const changeStar = (indexPost: number, isCliked: boolean) =>{
 		isCliked ? props.removeStar(indexPost) : props.addStar(indexPost)
 	}	
 	return 	<>			
@@ -23,10 +36,10 @@ export const Post = (props) => {
 								</button>
 								<span  className = {postStyle.starScore}>{item.starsScore}</span>
 							</div>
-							{(props.authId === props.userId)&&	<div className = {postStyle.editBlock}>
-																	<Edit />
-																	<Bucket onclick = {() => props.removePost(index)}/>
-																</div>}
+								<div className = {postStyle.editBlock}>
+									{/* <Edit /> */}
+									<Bucket onclick = {() => props.removePost(index)}/>
+								</div>
 						</section>
 	})}
 	</>

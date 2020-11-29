@@ -8,7 +8,7 @@ import { Input, Textarea } from '../common/formFields/formFields';
 
 let EditForm = props => {
 	
-	const { handleSubmit, contacts } = props;
+	const { handleSubmit } = props;
 	return 	<div className = {editForm.container} onClick = {props.showEditForm}>
 					<div className = {editForm.editBlock} onClick = {(event) => event.stopPropagation()}>
 						<h1 className = {editForm.title}>Update Your Profile</h1>
@@ -16,11 +16,11 @@ let EditForm = props => {
 							<p className = {editForm.titleField}>Your name:</p>
 							<Field className = {editForm.input} component = {Input} current = {props.name} type="text" name="fullName"/>
 							<p className = {editForm.titleField}>Facebook:</p>
-							<Field className = {editForm.input} component = {Input} current = {contacts.facebook} type="text" name="facebook"/>
+							<Field className = {editForm.input} component = {Input} current = {props.contacts.facebook} type="text" name="facebook"/>
 							<p className = {editForm.titleField}>Instagram:</p>
-							<Field className = {editForm.input} component = {Input} current = {contacts.instagram} type="text" name="instagram"/>
+							<Field className = {editForm.input} component = {Input} current = {props.contacts.instagram} type="text" name="instagram"/>
 							<p className = {editForm.titleField}>Vkontakte:</p>
-							<Field className = {editForm.input} component = {Input} current = {contacts.vk} type="text" name="vk"/>
+							<Field className = {editForm.input} component = {Input} current = {props.contacts.vk} type="text" name="vk"/>
 							<Field component = "input" type="checkbox" name="lookingForAJob" className = {editForm.checkbox}/>
 							<span className = {editForm.titleField}>looking for a job</span>							
 							<p className = {editForm.titleAboutMe}>About me:</p>
@@ -39,9 +39,9 @@ export default class EditProfileForm extends React.Component {
 		const dataValid = {
 			id:this.props.userId,
 			fullName: fullName || this.props.name,
-			facebook: facebook || this.props.facebook,
-			instagram: instagram || this.props.instagram,
-			vk: vk || this.props.vk,
+			facebook: facebook || this.props.contacts.facebook,
+			instagram: instagram || this.props.contacts.instagram,
+			vk: vk || this.props.contacts.vk,
 			lookingForAJob: lookingForAJob || this.props.lookingForAJob,
 			aboutMe: aboutMe || this.props.aboutMe
 		}

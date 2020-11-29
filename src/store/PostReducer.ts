@@ -1,15 +1,12 @@
+import { postType } from "../types/types";
+
 const ADD_NEW_POST = "ADD-NEW-POST";
 const ADD_STAR = "ADD-STAR";
 const REMOVE_STAR = "REMOVE-STAR";
 const REMOVE_POST = "REMOVE-POST";
 const INCREASE_TEXTAREA = "INCREASE-TEXTAREA";
 
-type postType = {
-	text: string
-	date: string
-	starsScore: number
-	isClickedStar: boolean
-}
+
 const initialState = {		
 		posts: [
 			{text:"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima rerum quibusdam molestiae, nulla ut corrupti! Placeat modi vel dignissimos atque.",

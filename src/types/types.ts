@@ -56,3 +56,9 @@ export type uploadPhotoType = {
 	type: string
 	webkitRelativePath: string
 }
+export type postType = {
+	text: string
+	date: string
+	starsScore: number
+	isClickedStar: boolean
+}
