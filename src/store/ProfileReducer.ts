@@ -115,9 +115,9 @@ export const setUserPhoto = (data: photosType): setUserPhotoActionType => ({type
 type setAuthInfoActionType = {
 	type: typeof SET_AUTH_INFO
 	name: string
-	photo: string
+	photo: string | null
 }
-export const setAuthInfo= (name: string, photo: string): setAuthInfoActionType => ({type: SET_AUTH_INFO, name, photo});
+export const setAuthInfo= (name: string, photo: string | null): setAuthInfoActionType => ({type: SET_AUTH_INFO, name, photo});
 type removeUserStatusActionType = {
 	type: typeof REMOVE_STATUS
 }
@@ -133,9 +133,9 @@ export const setProfileDataThunkCreator = (id: number | null): ThunkAction<void,
 		const data = {
 			name: response.fullName,
 			contacts:{
-				facebook: response.contacts.facebook.match(regexp),
-				instagram: response.contacts.instagram.match(regexp),
-				vk: response.contacts.vk.match(regexp),
+				facebook: response.contacts.facebook.match(regexp) as string | null,
+				instagram: response.contacts.instagram.match(regexp) as string | null,
+				vk: response.contacts.vk.match(regexp) as string | null,
 			},			
 			lookingForAJob: response.lookingForAJob,
 			aboutMe: response.aboutMe,
@@ -144,7 +144,7 @@ export const setProfileDataThunkCreator = (id: number | null): ThunkAction<void,
 				small: response.photos.small
 				}
 		}
-		dispatch(setUserProfileData(data,response.userId,true));
+		dispatch(setUserProfileData(data, response.userId,true));
 		dispatch(setAuthInfo(response.fullName, response.photos.small))
 		
 	}catch(error){
@@ -171,6 +171,23 @@ export const setProfileUserThunkCreator = (id: number): ThunkAction<void, AppSta
 	dispatch(setUserProfileData(data,response.userId, false));
 }
 
+export type dataObjType = {
+	userId: number
+		aboutMe: string | null
+		lookingForAJob: boolean
+		lookingForAJobDescription: string | null
+		fullName: string
+		contacts: {
+			facebook: string
+			instagram: string
+			vk: string
+			github: string | null          
+			mainLink: string | null
+			twitter: string | null
+			website: string | null
+			youtube: string | null
+		}
+}
 export const updateProfileDataThunkCreator = (data: updateDataType): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
 	dispatch(isLoading(true));
 	const dataObj = {

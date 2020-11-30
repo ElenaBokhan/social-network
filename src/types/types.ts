@@ -10,17 +10,17 @@ export type dialogsArrayType = {
 export type messagesArrayType = {
 	addedAt: string
     body: string
-    deletedByRecipient: boolean
-    deletedBySender: boolean
-    distributionId: number | null
+    deletedByRecipient?: boolean
+    deletedBySender?: boolean
+    distributionId?: number | null
     id: string
-    isSpam: boolean
+    isSpam?: boolean
     recipientId: number
-    recipientName: string
+    recipientName?: string
 	senderId: number
 	senderName: string
 	translatedBody: null
-	viewed: boolean
+	viewed?: boolean
 }
 export type photosType = {    
 	large: string | null

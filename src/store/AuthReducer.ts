@@ -1,6 +1,6 @@
 import { AppStateType } from './redux-store';
 import { ThunkAction } from 'redux-thunk';
-import { authAPI } from "../api/api";
+import { authAPI, resoultCodeEnum } from "../api/api";
 import { stopSubmit } from "redux-form";
 import { setProfileDataThunkCreator, setStatusThunkCreator } from "./ProfileReducer";
 import { getUsersThunkCreator } from "./FriendsReducer";
@@ -74,10 +74,10 @@ export const authUserThunkCreator = (): ThunkAction<void, AppStateType, unknown,
 export const loginUserThunkCreator = (dataUser: dataUserType): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
 	dispatch(isLoading(true));
 	try { const response = await authAPI.loginUser(dataUser);
-		if (response.resultCode === 0){			
+		if (response.resultCode === resoultCodeEnum.success){			
 			dispatch(authUserThunkCreator());
 			}
-		else if (response.resultCode !== 0){
+		else if (response.resultCode === resoultCodeEnum.error){
 			const errorMsg = response.messages;
 			dispatch(stopSubmit('login', {_error: errorMsg}));
 			}
@@ -89,7 +89,7 @@ export const loginUserThunkCreator = (dataUser: dataUserType): ThunkAction<void,
 
 export const logoutUserThunkCreator = (): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {	
 	const response = await authAPI.logoutUser();
-	if (response.resultCode === 0){
+	if (response.resultCode === resoultCodeEnum.success){
 		dispatch(removeUserData());
 	}	
 };
