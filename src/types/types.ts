@@ -40,13 +40,13 @@ export type allUsersItemType = {
 	uniqueUrlName: null | string
 }
 export type updateDataType = {
-	id: number
-	fullName: string,
-	facebook: string,
-	instagram: string,
-	vk: string,
+	id: number | null
+	fullName: string | null
+	facebook: string | null
+	instagram: string | null
+	vk: string | null
 	lookingForAJob: boolean,
-	aboutMe: string
+	aboutMe: string | null
 }
 export type uploadPhotoType = {
 	lastModified: number

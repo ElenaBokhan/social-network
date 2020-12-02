@@ -172,11 +172,11 @@ export const setProfileUserThunkCreator = (id: number): ThunkAction<void, AppSta
 }
 
 export type dataObjType = {
-	userId: number
+	userId: number | null
 		aboutMe: string | null
 		lookingForAJob: boolean
 		lookingForAJobDescription: string | null
-		fullName: string
+		fullName: string | null
 		contacts: {
 			facebook: string
 			instagram: string
@@ -226,14 +226,14 @@ export const setStatusThunkCreator = (id: number | null): ThunkAction<void, AppS
 		dispatch(isLoading(false));
 	}	
 }
-export type statusType = {
-	status: string
-}
-export const updateStatusThunkCreator = ({status}: statusType): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
+// export type statusType = {
+// 	status: string
+// }
+export const updateStatusThunkCreator = (status: string): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
 	dispatch(isLoading(true));
 	dispatch(removeUserStatus());
 	try {
-		const response = await profileAPI.updateUserStatus({status});
+		const response = await profileAPI.updateUserStatus(status);
 		if(response.resultCode===0){
 			dispatch(setUserStatus(status));
 	}

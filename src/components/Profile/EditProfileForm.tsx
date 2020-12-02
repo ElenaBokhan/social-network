@@ -1,12 +1,14 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import editForm from './EditProfileForm.module.css';
 import { Button } from '../Button/Button';
 import { maxLength200 } from '../../utils/validatators';
 import { Input, Textarea } from '../common/formFields/formFields';
+import { propsProfileType } from './Profile';
 
+type IProps = propsProfileType;
 
-let EditForm = props => {
+let EditForm: React.FC<InjectedFormProps<statusFormValuesType, IProps> & IProps> = props => {
 	
 	const { handleSubmit } = props;
 	return 	<div className = {editForm.container} onClick = {props.showEditForm}>
@@ -31,10 +33,18 @@ let EditForm = props => {
 					</div>
 				</div>	
 }
-EditForm = reduxForm({ form: "updateUserProfile"})(EditForm)
+const EditReduxForm = reduxForm<statusFormValuesType, IProps>({ form: "updateUserProfile"})(EditForm)
 
-export default class EditProfileForm extends React.Component {
-	submit = values => {		
+type statusFormValuesType = {
+	fullName: string
+	facebook: string
+	instagram: string
+	vk: string
+	lookingForAJob: boolean
+	aboutMe: string
+}
+export default class EditProfileForm extends React.Component<propsProfileType> {
+	submit = (values: statusFormValuesType) => {		
 		const {fullName, facebook, instagram, vk, lookingForAJob, aboutMe} = values;
 		const dataValid = {
 			id:this.props.userId,
@@ -42,13 +52,13 @@ export default class EditProfileForm extends React.Component {
 			facebook: facebook || this.props.contacts.facebook,
 			instagram: instagram || this.props.contacts.instagram,
 			vk: vk || this.props.contacts.vk,
-			lookingForAJob: lookingForAJob || this.props.lookingForAJob,
+			lookingForAJob: lookingForAJob,
 			aboutMe: aboutMe || this.props.aboutMe
 		}
 		this.props.updateProfileDataThunkCreator(dataValid)
 	}
 	render() {
-		return <EditForm onSubmit={this.submit} {...this.props}/>
+		return <EditReduxForm onSubmit={this.submit} {...this.props}/>
 	}
 }
 

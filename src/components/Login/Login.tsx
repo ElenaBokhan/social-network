@@ -1,19 +1,25 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import loginStyles from './Login.module.css';
 import { Button } from '../Button/Button';
 import { emptyField  } from '../../utils/validatators';
+import { dataUserType } from '../../types/types';
 
-
-const Input = ({input, meta, ...props}) => {	
+type InputPropsType = {
+	meta: {error : string, touched: boolean}
+	input: any
+}
+type InputType = (params: InputPropsType ) => React.ReactNode
+const Input: InputType = ({input, meta:{error, touched}, ...props}) => {	
 	return (
-		<div className = {meta.error && meta.touched ? loginStyles.error : null}>
+		<div className = {error && touched ? loginStyles.error : undefined}>
 			<input {...input} {...props}/>
-			<span>{meta.touched && meta.error}</span>
+			<span>{touched && error}</span>
 		</div>
 	)
 }
-let AuthForm = props => {
+// type IProps = 
+const AuthForm: React.FC<InjectedFormProps<loginFormValuesType, propsType> & propsType> = props => {
 	const { handleSubmit } = props;
 	return 	<div className = {loginStyles.container}>
 					<div className = {loginStyles.loginBlock}>
@@ -33,10 +39,20 @@ let AuthForm = props => {
 					</div>
 				</div>	
 }
-AuthForm = reduxForm({ form: 'login'})(AuthForm)
+const AuthReduxForm = reduxForm<loginFormValuesType, propsType>({ form: 'login'})(AuthForm)
 
-export default class Login extends React.Component {
-	submit = values => {
+type propsType = {
+	isLoading: boolean
+	authId: number | null
+	loginUserThunkCreator: (dataUser: dataUserType) => void
+}
+type loginFormValuesType = {
+	login: string
+	password: string
+	rememberMe: boolean
+}
+export default class Login extends React.Component<propsType> {
+	submit = (values: loginFormValuesType) => {
 		let {login, password, rememberMe} = values;
 		password = password.trim();
 		if(login === "free@socialnet.com" && password === "free") {
@@ -48,7 +64,7 @@ export default class Login extends React.Component {
 		
 	}
 	render() {
-		return <AuthForm onSubmit={this.submit} {...this.props}/>
+		return <AuthReduxForm onSubmit={this.submit} {...this.props}/>
 	}
 }
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import postStyle from './Post.module.css';
-import { Field, reduxForm, reset } from 'redux-form';
+import { Field, InjectedFormProps, reduxForm, reset } from 'redux-form';
 import { Button } from '../Button/Button';
-
-let PostForm = props => {
+import { propsPostType } from './Post';
+type IProps = propsPostType
+let PostForm: React.FC<InjectedFormProps<formValuesType, IProps> & IProps> = props => {
   const { handleSubmit } = props
   return <form onSubmit = { handleSubmit } className = { postStyle.addPost }>
 			<div className = {postStyle.avatarSmall} style = {{backgroundImage: `url(${props.smallPhoto || process.env.PUBLIC_URL+props.avatar})`}}></div>
@@ -18,20 +19,22 @@ let PostForm = props => {
 			<Button name = "Add post"/>
 		</form>
 }
-const afterSubmit = (result, dispatch) =>
+const afterSubmit = (result: any, dispatch: any) =>
 	dispatch(reset("addPost"));
 
-PostForm = reduxForm({ 
+const PostReduxForm = reduxForm<formValuesType, IProps>({ 
   form: "addPost",
   onSubmitSuccess: afterSubmit,
 })(PostForm)
-
-class AddPostForm extends React.Component {
-	submit = values => {
+type formValuesType = {
+	text: string | null
+}
+class AddPostForm extends React.Component<propsPostType> {
+	submit = (values: formValuesType) => {
 		values.text && this.props.addPost(values.text);
 	}
 	render() {
-		return <PostForm onSubmit={this.submit} {...this.props} />
+		return <PostReduxForm onSubmit={this.submit} {...this.props} />
 	}
   }
   export default AddPostForm;

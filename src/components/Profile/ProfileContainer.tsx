@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Profile } from './Profile';
-import { updateProfileDataThunkCreator, uploadPhotoThunkCreator, updateStatusThunkCreator, showEditForm, statusType } from '../../store/ProfileReducer';
+import { updateProfileDataThunkCreator, uploadPhotoThunkCreator, updateStatusThunkCreator, showEditForm } from '../../store/ProfileReducer';
 import { compose } from 'redux';
 import { withoutAuthRedirect } from '../../hoc/withAuthRedirect';
 import { startDialog } from '../../store/DialogsReducer';
@@ -26,7 +26,7 @@ type mapStatePropsType = {
 type mapDispatchPropsType = {
 	updateProfileDataThunkCreator: (data: updateDataType) => void
 	uploadPhotoThunkCreator: (data: uploadPhotoType) => void
-	updateStatusThunkCreator: (status: statusType) => void
+	updateStatusThunkCreator: (status: string) => void
 	showEditForm: () => void
 	startDialog: (userId: number) => void
 }

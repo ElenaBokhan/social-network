@@ -4,7 +4,7 @@ import { Bucket } from '../common/Buttons/Bucket/Bucket';
 import AddPostForm from './AddPostForm';
 import { postType } from '../../types/types';
 
-type propsType = {
+export type propsPostType = {
 	name: string | null
 	avatar: string
 	posts: Array<postType>
@@ -16,7 +16,7 @@ type propsType = {
 	removePost: (index: number) => void
 	increaseTextarea: (flag: boolean) => void
 }
-export const Post = (props: propsType) => {
+export const Post = (props: propsPostType) => {
 	const changeStar = (indexPost: number, isCliked: boolean) =>{
 		isCliked ? props.removeStar(indexPost) : props.addStar(indexPost)
 	}	

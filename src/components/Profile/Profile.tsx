@@ -9,9 +9,8 @@ import { Button } from '../Button/Button';
 import { NavLink } from 'react-router-dom';
 import preloader from '../common/Preloader/preloader3.gif';
 import { contactsType, photosType, updateDataType, uploadPhotoType } from '../../types/types';
-import { statusType } from '../../store/ProfileReducer';
 
-type propsType = {
+export type propsProfileType = {
 	editMode: boolean
 	avatar: string
 	photo: photosType,	
@@ -27,11 +26,11 @@ type propsType = {
 	isShowEditForm: boolean
 	updateProfileDataThunkCreator: (data: updateDataType) => void
 	uploadPhotoThunkCreator: (data: uploadPhotoType) => void
-	updateStatusThunkCreator: (status: statusType) => void
+	updateStatusThunkCreator: (status: string) => void
 	showEditForm: () => void
 	startDialog: (userId: number | null) => void
 }
-export const Profile = (props: propsType) => {
+export const Profile = (props: propsProfileType) => {
 	const { userId, editMode, isLoading, photo, contacts, isShowEditForm, status,
 		    uploadPhotoThunkCreator, randomFriends, name, showEditForm, aboutMe } = props;
 	
@@ -70,7 +69,7 @@ export const Profile = (props: propsType) => {
 											  : <>	<span className = {profile.status}>{ status }</span>
 													{editMode && <Edit onclick = {editTagStatus}/>}
 												</>
-								: <StatusForm editTag = { editTagStatus }{...props}/>}
+								: <StatusForm editTagStatus = { editTagStatus } {...props}/>}
 				<h3>Contacts:</h3>
 				<p>Facebook: <span className = { profile.contact }>{contacts.facebook}</span></p>
 				<p>Instagram: <span className = { profile.contact }>{contacts.instagram}</span></p>

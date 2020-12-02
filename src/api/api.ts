@@ -1,4 +1,4 @@
-import { statusType, dataObjType } from './../store/ProfileReducer';
+import { dataObjType } from './../store/ProfileReducer';
 import { dataUserType, photosType, allUsersItemType, dialogsArrayType, messagesArrayType } from './../types/types';
 import axios from 'axios';
 
@@ -89,8 +89,8 @@ export const profileAPI = {
 	getUserStatus(userId: number | null){
 		return 	instance.get<string>(`/profile/status/${userId}`).then(response => response.data)		
 	},
-	updateUserStatus(status: statusType){
-		return 	instance.put<responseResultObject>(`/profile/status`, status).then(response => response.data)		
+	updateUserStatus(status: string){
+		return 	instance.put<responseResultObject>(`/profile/status`, {status: status}).then(response => response.data)		
 	},
 	updateUserPhoto(photo: any){
 		const formData = new FormData();
