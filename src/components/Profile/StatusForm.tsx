@@ -5,9 +5,6 @@ import { Button } from '../Button/Button';
 import { contactsType, photosType, updateDataType, uploadPhotoType } from '../../types/types';
 
 
-// import { Input } from '../common/formFields/formFields';
-
-
 const StForm: React.FC<InjectedFormProps<statusFormValuesType>> = ({ handleSubmit }) => {
    return <form onSubmit = { handleSubmit } style = {{ display: "flex" }}>			
 			<Field	className = {profile.statusInput}
