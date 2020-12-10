@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import main from './Main.module.css';
 import cn from 'classnames';
 
-
-class Main extends Component {
-	constructor(props){
-		super(props)
-		this.state = {
-		randomNumForAnimation: null,
-		row: 6,
-		timerId:null,
-		timerOutId:null,
+type propsType = {}
+class Main extends Component<propsType> {
+	
+		state = {
+			randomNumForAnimation: null,
+			row: 6,
+			timerId: undefined as number | undefined,
+			timerOutId: undefined as number | undefined,
 		}
-	}	
+	
 	
 	componentDidMount(){
 		const interval = Math.floor(Math.random() * 1000);
