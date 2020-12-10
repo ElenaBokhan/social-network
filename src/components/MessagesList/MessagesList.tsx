@@ -3,9 +3,18 @@ import dialog from '../Dialogs/Dialogs.module.css';
 import { useEffect } from 'react';
 import { Bucket } from '../common/Buttons/Bucket/Bucket';
 import preloader from '../common/Preloader/preloader3.gif';
+import { messagesArrayType } from '../../types/types';
 
-export const MessagesList = (props) => {
-	const { id, getMessages, clearMessageField, messages, isLoadingDialog } = props;
+type propsType = {
+	id: number
+	messages: Array<messagesArrayType>,
+	isLoadingDialog: boolean
+	getMessages: (userId: number) => void
+	deleteMessage: (messageId: string, userId: number) => void
+	clearMessageField: () => void
+}
+export const MessagesList: React.FC<propsType> = (props) => {
+	const { id, getMessages, deleteMessage, clearMessageField, messages, isLoadingDialog } = props;
 
 	useEffect(()=>{
 		id===0 && clearMessageField();
@@ -20,14 +29,14 @@ export const MessagesList = (props) => {
 								 : 	messages.length===0 ? <p>No one dialog is not selected</p>
 								 :	messages.map((item,index) =>{
 								 		return 	<div className = {dialog.messageItem} 
-													style = { !item.viewed ? {backgroundColor: "rgba(255, 200, 0, .1)"}: null}
+													style = { !item.viewed ? {backgroundColor: "rgba(255, 200, 0, .1)"}: undefined}
 													key = {index}>															
 													<div className="messageBody">
 														<span >{item.senderName}</span>
 														<p>{item.body}</p>
 													</div>
 													<div className = {dialog.buttonWrapper}>
-														<Bucket onclick = {()=>props.deleteMessage(item.id, props.id)}/>
+														<Bucket onclick = {() => deleteMessage(item.id, id)}/>
 													</div>										
 												</div> })}
 			</div>			

@@ -82,7 +82,7 @@ export const sendMessage = (userId: number, msg: string): ThunkAction<void, AppS
 	}
 	dispatch(isLoading(false));
  };
-export const deleteMessage = (messageId: number, userId: number): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
+export const deleteMessage = (messageId: string, userId: number): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
 	const response = await dialogsAPI.deleteMessages(messageId);
 	if(response.resultCode===0){
 		dispatch(getMessages(userId))

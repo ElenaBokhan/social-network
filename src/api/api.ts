@@ -138,7 +138,7 @@ export const dialogsAPI = {
 	getMessages(userId: number){
 		return instance.get<responseGetMessages>(`/dialogs/${userId}/messages`).then(response => response.data)
 	},
-	deleteMessages(messageId: number){
+	deleteMessages(messageId: string){
 		return instance.delete<responseResultObject>(`/dialogs/messages/${messageId}`).then(response => response.data)
 	},
 	startDialog(userId: number){

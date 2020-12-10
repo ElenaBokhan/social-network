@@ -36,7 +36,7 @@ export const Dialogs = (props: propsType) => {
 				</div>
 			</div>
 			<div className = { dialog.MessagesList }>
-				{typeof id === "number" && <MessagesListContainer {...props}/>}
+				{typeof id === "number" && <MessagesListContainer id = { id }/>}
 				<SendMessageForm {...props}/>
 			</div>
 		</div>)	
