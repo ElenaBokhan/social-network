@@ -14,7 +14,7 @@ type propsType = {
 	isLoading: boolean
 	sendMessage: (userId: number, msg: string) => void
 }
-export const Dialogs = (props: propsType) => {
+export const Dialogs: React.FC<propsType> = (props: propsType) => {
 	const { dialogs, avatar, id } = props;
 	const regexp = /[-\d]+(?=T)/gi;
 

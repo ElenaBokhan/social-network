@@ -1,10 +1,6 @@
+import { ActionsType } from './redux-store';
 import { postType } from "../types/types";
-
-const ADD_NEW_POST = "ADD-NEW-POST";
-const ADD_STAR = "ADD-STAR";
-const REMOVE_STAR = "REMOVE-STAR";
-const REMOVE_POST = "REMOVE-POST";
-const INCREASE_TEXTAREA = "INCREASE-TEXTAREA";
+import { actions } from "./Actions";
 
 
 const initialState = {		
@@ -17,7 +13,7 @@ const initialState = {
 		isActiveTextarea: false
 };
 type initialStateType = typeof initialState
-export const PostReducer = (state = initialState, action: ActionType): initialStateType => {
+export const PostReducer = (state = initialState, action: PostActionsType): initialStateType => {
 	switch (action.type) {
 		case "ADD-NEW-POST":
 			const date = new Date();
@@ -66,30 +62,5 @@ export const PostReducer = (state = initialState, action: ActionType): initialSt
 			return state;
 	}
 }
-type ActionType = removeStarActionType | addStarActionType | addPostActionType | 
-				  removePostActionType | increaseTextareaActionType
-type removeStarActionType = {
-	type: typeof REMOVE_STAR
-	index: number
-}
-export const removeStar = (index: number): removeStarActionType => ({type: REMOVE_STAR, index});
-type addStarActionType = {
-	type: typeof ADD_STAR
-	index: number
-}
-export const addStar = (index: number): addStarActionType => ({type: ADD_STAR, index});
-type addPostActionType = {
-	type: typeof ADD_NEW_POST
-	text: string
-}
-export const addPost = (text: string): addPostActionType => ({type: ADD_NEW_POST, text});
-type removePostActionType = {
-	type: typeof REMOVE_POST
-	index: number
-}
-export const removePost = (index: number): removePostActionType => ({type: REMOVE_POST, index});
-type increaseTextareaActionType = {
-	type: typeof INCREASE_TEXTAREA
-	flag: boolean
-}
-export const increaseTextarea = (flag: boolean): increaseTextareaActionType => ({type: INCREASE_TEXTAREA, flag})
+
+type PostActionsType = ReturnType<ActionsType<typeof actions>>

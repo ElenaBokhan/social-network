@@ -1,16 +1,8 @@
 import { ThunkAction } from 'redux-thunk';
-import { AppStateType } from './redux-store';
-import { photosType, contactsType, updateDataType, uploadPhotoType } from './../types/types';
+import { AppStateType, ActionsType } from './redux-store';
+import { photosType, contactsType, updateDataType } from './../types/types';
 import { profileAPI } from "../api/api";
-import { isLoading, isLoadingActionType } from "./AuthReducer";
-
-const SET_USER_DATA = "SET-USER-DATA";
-const SET_STATUS = "SET-STATUS";
-const REMOVE_STATUS = "REMOVE-STATUS";
-const SHOW_EDIT_FORM = "SHOW-EDIT-FORM";
-const SET_USER_PHOTO = "SET-USER-PHOTO";
-const SET_AUTH_INFO = "SET-AUTH-INFO";
-
+import { actions } from './Actions';
 
 const initialState = {
 		id: null as number | null,
@@ -40,7 +32,7 @@ const initialState = {
 		authPhoto: null as string | null,
 };
 type initialStateType = typeof initialState
-export const ProfileReducer = (state = initialState, action: ActionType): initialStateType => {
+export const ProfileReducer = (state = initialState, action: PropfileActionsType): initialStateType => {
 	switch (action.type) {		
 		case "SET-USER-DATA":
 			return {...state,
@@ -86,48 +78,10 @@ export const ProfileReducer = (state = initialState, action: ActionType): initia
 			return state;
 	}
 }
-type ActionType = setUserProfileDataActionType | setUserStatusActionType | setUserPhotoActionType|
-				  setAuthInfoActionType | removeUserStatusActionType | showEditFormActionType
-type dataType = {
-	aboutMe: string | null
-	contacts: contactsType
-	lookingForAJob: boolean
-	name: string
-	photos: photosType
-}
-type setUserProfileDataActionType = {
-	type: typeof SET_USER_DATA
-	data: dataType
-	id: number
-	editMode: boolean
-}
-export const setUserProfileData = (data: dataType, id: number, editMode: boolean): setUserProfileDataActionType => ({type: SET_USER_DATA, data, id, editMode});
-type setUserStatusActionType = {
-	type: typeof SET_STATUS
-	text: string
-}
-export const setUserStatus = (text: string): setUserStatusActionType => ({type: SET_STATUS, text});
-type setUserPhotoActionType = {
-	type: typeof SET_USER_PHOTO
-	data: photosType
-}
-export const setUserPhoto = (data: photosType): setUserPhotoActionType => ({type: SET_USER_PHOTO, data});
-type setAuthInfoActionType = {
-	type: typeof SET_AUTH_INFO
-	name: string
-	photo: string | null
-}
-export const setAuthInfo= (name: string, photo: string | null): setAuthInfoActionType => ({type: SET_AUTH_INFO, name, photo});
-type removeUserStatusActionType = {
-	type: typeof REMOVE_STATUS
-}
-export const removeUserStatus = (): removeUserStatusActionType => ({type: REMOVE_STATUS});
-type showEditFormActionType = {
-	type: typeof SHOW_EDIT_FORM
-}
-export const showEditForm = (): showEditFormActionType => ({type: SHOW_EDIT_FORM});
 
-export const setProfileDataThunkCreator = (id: number | null): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
+type PropfileActionsType = ReturnType<ActionsType<typeof actions>>
+
+export const setProfileDataThunkCreator = (id: number | null): ThunkAction<void, AppStateType, unknown, PropfileActionsType> => async dispatch => {
 	try{const response = await profileAPI.getUserProfile(id);
 		const regexp = /(?<=\/)[-_@.\w\s\d|А-Яа-я]+$/gi;
 		const data = {
@@ -144,14 +98,14 @@ export const setProfileDataThunkCreator = (id: number | null): ThunkAction<void,
 				small: response.photos.small
 				}
 		}
-		dispatch(setUserProfileData(data, response.userId,true));
-		dispatch(setAuthInfo(response.fullName, response.photos.small))
+		dispatch(actions.setUserProfileData(data, response.userId,true));
+		dispatch(actions.setAuthInfo(response.fullName, response.photos.small))
 		
 	}catch(error){
 		console.error(error)
 }
 }
-export const setProfileUserThunkCreator = (id: number): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
+export const setProfileUserThunkCreator = (id: number): ThunkAction<void, AppStateType, unknown, PropfileActionsType> => async dispatch => {
 	const response = await profileAPI.getUserProfile(id);
 	
 	const data = {
@@ -168,7 +122,7 @@ export const setProfileUserThunkCreator = (id: number): ThunkAction<void, AppSta
 			small: response.photos.small
 			}
 	}
-	dispatch(setUserProfileData(data,response.userId, false));
+	dispatch(actions.setUserProfileData(data,response.userId, false));
 }
 
 export type dataObjType = {
@@ -188,8 +142,8 @@ export type dataObjType = {
 			youtube: string | null
 		}
 }
-export const updateProfileDataThunkCreator = (data: updateDataType): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
-	dispatch(isLoading(true));
+export const updateProfileDataThunkCreator = (data: updateDataType): ThunkAction<void, AppStateType, unknown, PropfileActionsType> => async dispatch => {
+	dispatch(actions.isLoading(true));
 	const dataObj = {
 		userId: data.id,
 		aboutMe: data.aboutMe,
@@ -210,43 +164,41 @@ export const updateProfileDataThunkCreator = (data: updateDataType): ThunkAction
 	const response = await profileAPI.updateUserProfile(dataObj);
 	if(response.resultCode===0){
 		dispatch(setProfileDataThunkCreator(dataObj.userId));		
-		dispatch(showEditForm());	
+		dispatch(actions.showEditForm());	
 	}
-	dispatch(isLoading(false));
+	dispatch(actions.isLoading(false));
 }
 
-export const setStatusThunkCreator = (id: number | null): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
-	dispatch(isLoading(true));
+export const setStatusThunkCreator = (id: number | null): ThunkAction<void, AppStateType, unknown, PropfileActionsType> => async dispatch => {
+	dispatch(actions.isLoading(true));
 	try {
 		const response = await profileAPI.getUserStatus(id);	
-		dispatch(setUserStatus(response));	
+		dispatch(actions.setUserStatus(response));	
 	} catch (error) {
 		console.error(error)
 	} finally {
-		dispatch(isLoading(false));
+		dispatch(actions.isLoading(false));
 	}	
 }
-// export type statusType = {
-// 	status: string
-// }
-export const updateStatusThunkCreator = (status: string): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
-	dispatch(isLoading(true));
-	dispatch(removeUserStatus());
+
+export const updateStatusThunkCreator = (status: string): ThunkAction<void, AppStateType, unknown, PropfileActionsType> => async dispatch => {
+	dispatch(actions.isLoading(true));
+	dispatch(actions.removeUserStatus());
 	try {
 		const response = await profileAPI.updateUserStatus(status);
 		if(response.resultCode===0){
-			dispatch(setUserStatus(status));
+			dispatch(actions.setUserStatus(status));
 	}
 	} catch (error) {
 		console.error(error)
 	} finally {
-		dispatch(isLoading(false));
+		dispatch(actions.isLoading(false));
 	}		
 }
 
-export const uploadPhotoThunkCreator = (photo: uploadPhotoType): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
+export const uploadPhotoThunkCreator = (photo: File): ThunkAction<void, AppStateType, unknown, PropfileActionsType> => async dispatch => {
 	const response = await profileAPI.updateUserPhoto(photo);
 	if(response.resultCode===0){
-		dispatch(setUserPhoto(response.data.photos));
+		dispatch(actions.setUserPhoto(response.data.photos));
 	}
 }

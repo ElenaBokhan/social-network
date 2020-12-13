@@ -7,6 +7,7 @@ import { withoutAuthRedirect } from '../../hoc/withAuthRedirect';
 import { isLoading } from '../../store/selectors/selectors';
 import { AppStateType } from '../../store/redux-store';
 import { dialogsArrayType, messagesArrayType } from '../../types/types';
+import { RouteComponentProps } from 'react-router-dom';
 
 type mapStatePropsType = {
 	id: number
@@ -31,6 +32,6 @@ const mapStateToProps = (state: AppStateType, ownProps: any): mapStatePropsType 
 	}
 }
 
-export const DialogsContainer = compose(connect<mapStatePropsType, 
+export const DialogsContainer = compose<React.ComponentType<RouteComponentProps>>(connect<mapStatePropsType, 
 												mapDispatchPropsType,
 												{}, AppStateType>(mapStateToProps, { sendMessage }), withoutAuthRedirect)(Dialogs)

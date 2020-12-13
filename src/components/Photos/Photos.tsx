@@ -17,7 +17,7 @@ type propsType = {
 	prevSlide: () => void
 	showSlide: (num: number) => void
 }
-export const Photos = (props: propsType) => {
+export const Photos: React.FC<propsType> = (props: propsType) => {
 
 	return (
 		<div className = {photos.container}>

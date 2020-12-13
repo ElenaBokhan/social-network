@@ -1,15 +1,11 @@
-import { AppStateType } from './redux-store';
+import { AppStateType, ActionsType } from './redux-store';
 import { ThunkAction } from 'redux-thunk';
-import { authAPI, resoultCodeEnum } from "../api/api";
 import { stopSubmit } from "redux-form";
 import { setProfileDataThunkCreator, setStatusThunkCreator } from "./ProfileReducer";
 import { getUsersThunkCreator } from "./FriendsReducer";
 import { dataUserType } from '../types/types';
-
-const AUTH_USER = "AUTH-USER";
-const REMOVE_USER_DATA = "REMOVE-USER-DATA";
-const SET_LOADING_DATA = "SET-LOADING-DATA";
-
+import { authAPI, resoultCodeEnum } from "../api/api";
+import { actions } from './Actions';
 
 const initialState = {
 		authUserId: null as number | null,
@@ -19,7 +15,7 @@ const initialState = {
 		isLoading:false,
 };
 type initialStateType = typeof initialState
-export const AuthReducer = (state = initialState, action: ActionType): initialStateType => {
+export const AuthReducer = (state = initialState, action: AuthActionType): initialStateType => {
 	switch (action.type) {
 		case "AUTH-USER":
 			return {...state,
@@ -41,38 +37,21 @@ export const AuthReducer = (state = initialState, action: ActionType): initialSt
 			return state;
 	}
 }
-type ActionType = authUserActionType | removeUserDataActionType | isLoadingActionType
+export type AuthActionType = ReturnType<ActionsType<typeof actions>>
 
-type authUserActionType = {
-	type: typeof AUTH_USER
-	email: string
-	id: number
-	login: string
-}
-export const authUser = (email: string, id: number, login: string): authUserActionType => ({type: AUTH_USER, email, id, login});
-type removeUserDataActionType = {
-	type: typeof REMOVE_USER_DATA
-}
-export const removeUserData = (): removeUserDataActionType => ({type: REMOVE_USER_DATA});
-export type isLoadingActionType = {
-	type: typeof SET_LOADING_DATA
-	flag: boolean
-}
-export const isLoading = (flag: boolean): isLoadingActionType => ({type: SET_LOADING_DATA, flag});
-
-export const authUserThunkCreator = (): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
+export const authUserThunkCreator = (): ThunkAction<void, AppStateType, unknown, AuthActionType> => async dispatch => {
 	const response = await authAPI.isAuthUser();
 	if (response.resultCode === 0){
 		const {email, id, login} = response.data;
-		dispatch(authUser(email, id, login));		
+		dispatch(actions.authUser(email, id, login));		
 		dispatch(setProfileDataThunkCreator(id))
 		dispatch(setStatusThunkCreator(id))
 		dispatch(getUsersThunkCreator(1))
 	}		
 };
 
-export const loginUserThunkCreator = (dataUser: dataUserType): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
-	dispatch(isLoading(true));
+export const loginUserThunkCreator = (dataUser: dataUserType): ThunkAction<void, AppStateType, unknown, AuthActionType> => async dispatch => {
+	dispatch(actions.isLoading(true));
 	try { const response = await authAPI.loginUser(dataUser);
 		if (response.resultCode === resoultCodeEnum.success){			
 			dispatch(authUserThunkCreator());
@@ -84,12 +63,12 @@ export const loginUserThunkCreator = (dataUser: dataUserType): ThunkAction<void,
 	} catch(error){
 		console.log(error);
 	}
-	dispatch(isLoading(false));
+	dispatch(actions.isLoading(false));
 };
 
-export const logoutUserThunkCreator = (): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {	
+export const logoutUserThunkCreator = (): ThunkAction<void, AppStateType, unknown, AuthActionType> => async dispatch => {	
 	const response = await authAPI.logoutUser();
 	if (response.resultCode === resoultCodeEnum.success){
-		dispatch(removeUserData());
+		dispatch(actions.removeUserData());
 	}	
 };

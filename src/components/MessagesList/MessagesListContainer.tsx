@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import { MessagesList } from './MessagesList';
-import { getMessages, deleteMessage, clearMessageField } from '../../store/DialogsReducer';
+import { getMessages, deleteMessage } from '../../store/DialogsReducer';
 import { compose } from 'redux';
 import { messagesArrayType } from '../../types/types';
 import { AppStateType } from '../../store/redux-store';
+import { actions } from '../../store/Actions';
 
+const { clearMessageField } = actions
 
 const mapStateToProps = (state: AppStateType, OwnProps: ownPropsType): mapStatePropsType => ({	
 	id: OwnProps.id,

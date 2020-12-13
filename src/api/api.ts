@@ -92,7 +92,7 @@ export const profileAPI = {
 	updateUserStatus(status: string){
 		return 	instance.put<responseResultObject>(`/profile/status`, {status: status}).then(response => response.data)		
 	},
-	updateUserPhoto(photo: any){
+	updateUserPhoto(photo: File){
 		const formData = new FormData();
 		formData.append('fileUpload', photo);
 		return 	instance.put<responseUpdatePhoto>(`/profile/photo`, formData, {

@@ -2,7 +2,7 @@ import React from 'react';
 import profile from './Profile.module.css';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { Button } from '../Button/Button';
-import { contactsType, photosType, updateDataType, uploadPhotoType } from '../../types/types';
+import { contactsType, photosType, updateDataType } from '../../types/types';
 
 
 const StForm: React.FC<InjectedFormProps<statusFormValuesType>> = ({ handleSubmit }) => {
@@ -39,7 +39,7 @@ type propsType = {
 	status: string | null
 	isShowEditForm: boolean
 	updateProfileDataThunkCreator: (data: updateDataType) => void
-	uploadPhotoThunkCreator: (data: uploadPhotoType) => void
+	uploadPhotoThunkCreator: (data: File) => void
 	updateStatusThunkCreator: (status: string) => void
 	showEditForm: () => void
 	startDialog: (userId: number | null) => void
@@ -48,7 +48,7 @@ type propsType = {
  const StatusForm  = (props: propsType) => {
 	const submit = (values: statusFormValuesType) => {
 		props.updateStatusThunkCreator(values.status)		
-		// props.editTagStatus()
+		props.editTagStatus()
 	}
 	
 		return <StReduxForm onSubmit = { submit } />		

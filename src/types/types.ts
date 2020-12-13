@@ -22,6 +22,13 @@ export type messagesArrayType = {
 	translatedBody: null
 	viewed?: boolean
 }
+export type dataType = {
+	aboutMe: string | null
+	contacts: contactsType
+	lookingForAJob: boolean
+	name: string
+	photos: photosType
+}
 export type photosType = {    
 	large: string | null
 	small: string | null
@@ -48,14 +55,14 @@ export type updateDataType = {
 	lookingForAJob: boolean,
 	aboutMe: string | null
 }
-export type uploadPhotoType = {
-	lastModified: number
-	lastModifiedDate: Date
-	name: string
-	size: number
-	type: string
-	webkitRelativePath: string
-}
+// export type uploadPhotoType = {
+// 	lastModified: number
+// 	lastModifiedDate: Date
+// 	name: string
+// 	size: number
+// 	type: string
+// 	webkitRelativePath: string
+// }
 export type postType = {
 	text: string
 	date: string

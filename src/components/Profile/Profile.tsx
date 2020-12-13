@@ -8,7 +8,7 @@ import EditProfileForm from './EditProfileForm';
 import { Button } from '../Button/Button';
 import { NavLink } from 'react-router-dom';
 import preloader from '../common/Preloader/preloader3.gif';
-import { contactsType, photosType, updateDataType, uploadPhotoType } from '../../types/types';
+import { contactsType, photosType, updateDataType } from '../../types/types';
 
 export type propsProfileType = {
 	editMode: boolean
@@ -25,7 +25,7 @@ export type propsProfileType = {
 	status: string | null
 	isShowEditForm: boolean
 	updateProfileDataThunkCreator: (data: updateDataType) => void
-	uploadPhotoThunkCreator: (data: uploadPhotoType) => void
+	uploadPhotoThunkCreator: (data: File) => void
 	updateStatusThunkCreator: (status: string) => void
 	showEditForm: () => void
 	startDialog: (userId: number | null) => void

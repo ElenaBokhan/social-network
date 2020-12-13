@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { Friends } from './Friends';
-import { getUsersThunkCreator, getMoreUsersThunkCreator, followThunkCreator, unfollowThunkCreator, searchUserThunkCreator, setNextPage, getFriendsThunkCreator, getMoreFriendsThunkCreator } from '../../store/FriendsReducer';
+import { getUsersThunkCreator, getMoreUsersThunkCreator, followThunkCreator, unfollowThunkCreator, searchUserThunkCreator, getFriendsThunkCreator, getMoreFriendsThunkCreator } from '../../store/FriendsReducer';
+import { actions } from '../../store/Actions';
 import { setProfileUserThunkCreator, setStatusThunkCreator } from '../../store/ProfileReducer';
 import { authUserId } from '../../store/selectors/selectors';
 import { compose } from 'redux';
@@ -8,6 +9,9 @@ import { withoutAuthRedirect } from '../../hoc/withAuthRedirect';
 import { isLoading } from '../../store/selectors/selectors';
 import { AppStateType } from '../../store/redux-store';
 import { allUsersItemType } from '../../types/types';
+import { RouteComponentProps } from 'react-router-dom';
+
+const { setNextPage } = actions;
 
 type mapStatePropsType = {
 	viewParams: string
@@ -43,7 +47,7 @@ const mapStateToProps = (state: AppStateType, ownProps: any): mapStatePropsType 
 	}
 }
 
-export const FriendsContainer = compose(connect<mapStatePropsType, 
+export const FriendsContainer = compose<React.ComponentType<RouteComponentProps>>(connect<mapStatePropsType, 
 	mapDispatchPropsType,
 	{}, AppStateType>(mapStateToProps, {	getUsersThunkCreator,																	
 											getMoreUsersThunkCreator,		

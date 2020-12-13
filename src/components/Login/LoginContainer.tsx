@@ -19,7 +19,7 @@ const mapStateToProps = (state: AppStateType): mapStatePropsType => ({
 	authId: authUserId(state)
 })
 
-export const LoginContainer = compose( connect<mapStatePropsType, 
+export const LoginContainer = compose<React.ComponentType>( connect<mapStatePropsType, 
 												mapDispatchPropsType,
 												{}, AppStateType>(mapStateToProps, { loginUserThunkCreator }),
 																					withAuthRedirect) (Login);

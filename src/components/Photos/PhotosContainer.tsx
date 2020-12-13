@@ -1,11 +1,14 @@
 import { connect } from 'react-redux';
 import { Photos } from './Photos';
-import { nextSlide, prevSlide, showSlide } from '../../store/PhotosReducer';
+import { actions } from '../../store/Actions';
 import { getPhotos, getAllPhotos, getSlide, getUnderSlidePhotos, authUserId } from '../../store/selectors/selectors';
 import { compose } from 'redux';
 import { withoutAuthRedirect } from '../../hoc/withAuthRedirect';
 import { albomType } from '../../types/types';
 import { AppStateType } from '../../store/redux-store';
+import { RouteComponentProps } from 'react-router-dom';
+
+const {nextSlide, prevSlide, showSlide} = actions;
 
 type mapStatePropsType = {
 	viewParams: string | undefined	
@@ -34,6 +37,6 @@ const mapStateToProps = (state: AppStateType, ownProps: any): mapStatePropsType 
 	}
 }
 
-export const PhotosContainer = compose(connect<mapStatePropsType,
+export const PhotosContainer = compose<React.ComponentType<RouteComponentProps>>(connect<mapStatePropsType,
 											   mapDispatchPropsType,
 											   {}, AppStateType>(mapStateToProps, { nextSlide, prevSlide, showSlide}), withoutAuthRedirect)(Photos)

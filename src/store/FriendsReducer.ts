@@ -1,18 +1,8 @@
-import { AppStateType } from './redux-store';
+import { AppStateType, ActionsType } from './redux-store';
 import { ThunkAction } from 'redux-thunk';
 import { allUsersItemType } from './../types/types';
 import { usersAPI } from "../api/api";
-import { isLoading, isLoadingActionType } from './AuthReducer';
-
-const SET_USERS = "SET-USERS";
-const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
-const SET_NOT_FOUND = "SET-NOT-FOUND";
-const SET_TOGGLE_USER = "SET-TOGGLE-USER";
-const SET_PAGE = "SET-PAGE";
-const RESET_PAGE = "RESET-PAGE";
-const ADD_USERS_TO_ARRAY = "ADD-USERS-TO-ARRAY";
-
-
+import { actions } from './Actions';
 
 const initialState = {
 	page:1,
@@ -23,7 +13,7 @@ const initialState = {
 	toggleUsersId:null as number | null
 };
 type initialStateType = typeof initialState
-export const FriendsReducer = (state = initialState, action: ActionType): initialStateType => {
+export const FriendsReducer = (state = initialState, action: FriendsActionsType): initialStateType => {
 	switch (action.type) {		
 		case "SET-USERS":
 			return {...state,
@@ -58,121 +48,86 @@ export const FriendsReducer = (state = initialState, action: ActionType): initia
 			return state;
 	}
 }
-type ActionType = setUsersActionType | setNotFoundActionType | setTotalUsersCountActionType | 
-				  setToggleUserActionType | setNextPageActionType | resetPageActionType | addUsersToAllUsersArrayActionType
-type setUsersActionType = {
-	type: typeof SET_USERS
-	usersArray: Array<allUsersItemType>
-}
-export const setUsers = (usersArray: Array<allUsersItemType>): setUsersActionType => ({type: SET_USERS, usersArray});
-type setNotFoundActionType = {
-	type: typeof SET_NOT_FOUND
-	flag: boolean
-}
-export const setNotFound = (flag: boolean): setNotFoundActionType => ({type: SET_NOT_FOUND, flag});
-type setTotalUsersCountActionType = {
-	type: typeof SET_TOTAL_USERS_COUNT
-	count: number
-}
-export const setTotalUsersCount = (count: number): setTotalUsersCountActionType => ({type: SET_TOTAL_USERS_COUNT, count});
-type setToggleUserActionType = {
-	type: typeof SET_TOGGLE_USER
-	id: number | null // ????????????????????????
-}
-export const setToggleUser = (id: number | null): setToggleUserActionType => ({type: SET_TOGGLE_USER, id});
-type setNextPageActionType = {
-	type: typeof SET_PAGE
-}
-export const setNextPage = (): setNextPageActionType => ({type: SET_PAGE});
-type resetPageActionType = {
-	type: typeof RESET_PAGE
-}
-export const resetPage = (): resetPageActionType => ({type: RESET_PAGE});
-type addUsersToAllUsersArrayActionType = {
-	type: typeof ADD_USERS_TO_ARRAY
-	usersArray: Array<allUsersItemType>
-}
-export const addUsersToAllUsersArray = (usersArray: Array<allUsersItemType>): addUsersToAllUsersArrayActionType => ({type: ADD_USERS_TO_ARRAY, usersArray});
+type FriendsActionsType = ReturnType<ActionsType<typeof actions>>
 
-
-export const getUsersThunkCreator = (pageNum: number): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
+export const getUsersThunkCreator = (pageNum: number): ThunkAction<void, AppStateType, unknown, FriendsActionsType> => async dispatch => {
 	const response = await usersAPI.getAllUsers(pageNum);
 	if(response){
-		dispatch(setUsers(response.items));
-		dispatch(setTotalUsersCount(response.totalCount));
+		dispatch(actions.setUsers(response.items));
+		dispatch(actions.setTotalUsersCount(response.totalCount));
 	}
  };
 
- export const getMoreUsersThunkCreator = (pageNum: number): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
-	dispatch(isLoading(true));
+ export const getMoreUsersThunkCreator = (pageNum: number): ThunkAction<void, AppStateType, unknown, FriendsActionsType> => async dispatch => {
+	dispatch(actions.isLoading(true));
 	try {
 		const response = await usersAPI.getAllUsers(pageNum);
 		if(response){
-			dispatch(addUsersToAllUsersArray(response.items));
+			dispatch(actions.addUsersToAllUsersArray(response.items));
 	}
 	} catch (error) {
 		console.log(error);		
 	} finally {
-		dispatch(isLoading(false));
+		dispatch(actions.isLoading(false));
 	}	
  };
 
- export const getFriendsThunkCreator = (flag: boolean, pageNum: number): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
-	dispatch(resetPage());
+ export const getFriendsThunkCreator = (flag: boolean, pageNum: number): ThunkAction<void, AppStateType, unknown, FriendsActionsType> => async dispatch => {
+	dispatch(actions.resetPage());
 	const response = await usersAPI.getFriends(flag, pageNum);
 	if(response){
-		dispatch(setUsers(response.items));
-		dispatch(setTotalUsersCount(response.totalCount));
+		dispatch(actions.setUsers(response.items));
+		dispatch(actions.setTotalUsersCount(response.totalCount));
 	}
  };
 
- export const getMoreFriendsThunkCreator = (flag: boolean, pageNum: number): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
+ export const getMoreFriendsThunkCreator = (flag: boolean, pageNum: number): ThunkAction<void, AppStateType, unknown, FriendsActionsType > => async dispatch => {
 	const response = await usersAPI.getFriends(flag, pageNum);
 	if(response){
-		dispatch(addUsersToAllUsersArray(response.items));
+		dispatch(actions.addUsersToAllUsersArray(response.items));
 	}
  };
  
-export const followThunkCreator = (id: number, page: number): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
-	dispatch(isLoading(true));
-	dispatch(setToggleUser(id));
+export const followThunkCreator = (id: number, page: number): ThunkAction<void, AppStateType, unknown, FriendsActionsType> => async dispatch => {
+	dispatch(actions.isLoading(true));
+	dispatch(actions.setToggleUser(id));
 	try { const response = await usersAPI.followUser(id);
 		if(response.resultCode === 0){			
-			dispatch(isLoading(true));
+			dispatch(actions.isLoading(true));
 			dispatch(getUsersThunkCreator(page));
-			dispatch(setToggleUser(null));
+			dispatch(actions.setToggleUser(null));
 		}
 	} catch(error){
 		console.log(error);		
 	} finally {
-		dispatch(isLoading(false));
+		dispatch(actions.isLoading(false));
 	}
 };
 
-export const unfollowThunkCreator = (id: number, page: number): ThunkAction<void, AppStateType, unknown, ActionType | isLoadingActionType> => async dispatch => {
-	dispatch(isLoading(true));
-	dispatch(setToggleUser(id));
+export const unfollowThunkCreator = (id: number, page: number): ThunkAction<void, AppStateType, unknown, FriendsActionsType> => async dispatch => {
+	dispatch(actions.isLoading(true));
+	dispatch(actions.setToggleUser(id));
 	try { const response = await usersAPI.unfollowUser(id);
 		if(response.resultCode === 0){			
-			dispatch(isLoading(true));
+			dispatch(actions.isLoading(true));
 			dispatch(getUsersThunkCreator(page));
-			dispatch(setToggleUser(null));
+			dispatch(actions.setToggleUser(null));
 		}
 	} catch(error){
 		console.log(error);
-		dispatch(isLoading(false));
+		dispatch(actions.isLoading(false));
 	}
-	dispatch(isLoading(false));
+	dispatch(actions.isLoading(false));
 };
 
-export const searchUserThunkCreator = (name: string): ThunkAction<void, AppStateType, unknown, ActionType> => async dispatch => {
+export const searchUserThunkCreator = (name: string): ThunkAction<void, AppStateType, unknown, FriendsActionsType> => async dispatch => {
 	const response = await usersAPI.searchUser(name);
 	if(response.items.length !==0){
-		dispatch(setUsers(response.items));
+		dispatch(actions.setUsers(response.items));
 	} else if (response.items.length === 0){
-		dispatch(setNotFound(true));
+		dispatch(actions.setNotFound(true));
 		setTimeout(() => {
-			dispatch(setNotFound(false));
+			dispatch(actions.setNotFound(false));
 		}, 5000)
 	}
  };

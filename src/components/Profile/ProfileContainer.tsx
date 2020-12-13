@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import { Profile } from './Profile';
-import { updateProfileDataThunkCreator, uploadPhotoThunkCreator, updateStatusThunkCreator, showEditForm } from '../../store/ProfileReducer';
+import { updateProfileDataThunkCreator, uploadPhotoThunkCreator, updateStatusThunkCreator } from '../../store/ProfileReducer';
 import { compose } from 'redux';
 import { withoutAuthRedirect } from '../../hoc/withAuthRedirect';
 import { startDialog } from '../../store/DialogsReducer';
 import { authUserId, isLoading } from '../../store/selectors/selectors';
 import { AppStateType } from '../../store/redux-store';
-import { contactsType, photosType, updateDataType, uploadPhotoType } from '../../types/types';
+import { contactsType, photosType, updateDataType } from '../../types/types';
+import { actions } from '../../store/Actions';
+
+const { showEditForm } = actions;
 
 type mapStatePropsType = {
 	editMode: boolean
@@ -25,7 +28,7 @@ type mapStatePropsType = {
 }
 type mapDispatchPropsType = {
 	updateProfileDataThunkCreator: (data: updateDataType) => void
-	uploadPhotoThunkCreator: (data: uploadPhotoType) => void
+	uploadPhotoThunkCreator: (data: File) => void
 	updateStatusThunkCreator: (status: string) => void
 	showEditForm: () => void
 	startDialog: (userId: number) => void
@@ -46,7 +49,7 @@ const mapStateToProps = (state: AppStateType): mapStatePropsType => ({
 	isShowEditForm: state.ProfileReducer.isShowEditForm
 })
 
-export const ProfileContainer = compose(connect<mapStatePropsType, 
+export const ProfileContainer = compose<React.ComponentType>(connect<mapStatePropsType, 
 												mapDispatchPropsType,
 												{}, AppStateType>(mapStateToProps, {updateProfileDataThunkCreator,
 																					uploadPhotoThunkCreator,

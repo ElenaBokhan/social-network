@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import { Post } from './Post';
-import { addStar, removeStar, addPost, removePost, increaseTextarea } from '../../store/PostReducer';
+import { actions } from '../../store/Actions';
 import { AppStateType } from '../../store/redux-store';
 import { postType } from '../../types/types';
+const { addStar, removeStar, addPost, removePost, increaseTextarea } = actions;
 
 type mapStatePropsType = {
 	name: string | null

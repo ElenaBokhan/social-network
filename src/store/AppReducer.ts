@@ -1,17 +1,17 @@
-import { AppStateType } from './redux-store';
+import { AppStateType, ActionsType } from './redux-store';
 import { ThunkAction } from "redux-thunk";
 import { authUserThunkCreator } from "./AuthReducer";
 import { getAllDialogs } from "./DialogsReducer";
 
-const INICIALIZED_SUCCESS = "INICIALIZED_SUCCESS";
+
 
 const initialState = {
 	initialization: false,		
 };
 type initialStateType = typeof initialState
-export const AppReducer = (state = initialState, action: ActionType): initialStateType => {
+export const AppReducer = (state = initialState, action: initialActionsType): initialStateType => {
 	switch (action.type) {
-		case "INICIALIZED_SUCCESS":
+		case "INICIALIZED-SUCCESS":
 			return {...state,
 				initialization: true
 				};		
@@ -19,14 +19,15 @@ export const AppReducer = (state = initialState, action: ActionType): initialSta
 			return state;
 	}
 }
-type ActionType = initActionType
-type initActionType = {
-	type: typeof INICIALIZED_SUCCESS
-}
-export const initAC = (): initActionType => ({type: INICIALIZED_SUCCESS});
+type initialActionsType = ReturnType<ActionsType<typeof actions>>
 
-export const initThunkCreator = (): ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => async dispatch => {
+const actions = {
+	initAC: () => ({type: "INICIALIZED-SUCCESS"} as const)
+}
+ 
+
+export const initThunkCreator = (): ThunkAction<Promise<void>, AppStateType, unknown, initialActionsType> => async dispatch => {
 	let promiseAuth = dispatch(authUserThunkCreator());
 	let promiseAllDialog = dispatch(getAllDialogs());
-	Promise.all([promiseAuth, promiseAllDialog]).then(()=> dispatch(initAC()))
+	Promise.all([promiseAuth, promiseAllDialog]).then(()=> dispatch(actions.initAC()))
 };

@@ -1,8 +1,6 @@
+import { ActionsType } from './redux-store';
 import { albomsType } from './../types/types';
-const SHOW_NEXT_SLIDE = "SHOW-NEXT-SLIDE";
-const SHOW_PREV_SLIDE = "SHOW-PREV-SLIDE";
-const SHOW_SLIDE = "SHOW-SLIDE";
-
+import { actions } from './Actions';
 
 type imagesType = {
 	albom: albomsType
@@ -42,7 +40,7 @@ const initialState = {
 };
 
 type initialStateType = typeof initialState
-export const PhotosReducer = (state = initialState, action: ActionType): initialStateType => {
+export const PhotosReducer = (state = initialState, action: PhotoActionsType): initialStateType => {
 	switch (action.type) {		
 		case "SHOW-NEXT-SLIDE":
 			return {...state,
@@ -58,18 +56,8 @@ export const PhotosReducer = (state = initialState, action: ActionType): initial
 			return state;
 	}
 }
-type ActionType = nextSlideActionType | prevSlideActionType | showSlideActionType
-type nextSlideActionType = {
-	type: typeof SHOW_NEXT_SLIDE
-}
-export const nextSlide = (): nextSlideActionType => ({type: SHOW_NEXT_SLIDE});
-type prevSlideActionType = {
-	type: typeof SHOW_PREV_SLIDE
-}
-export const prevSlide = (): prevSlideActionType => ({type: SHOW_PREV_SLIDE});
-type showSlideActionType = {
-	type: typeof SHOW_SLIDE
-	num: number
-}
-export const showSlide = (num: number): showSlideActionType => ({type: SHOW_SLIDE, num});
+
+type PhotoActionsType = ReturnType<ActionsType<typeof actions>>
+
+// type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : never
 
