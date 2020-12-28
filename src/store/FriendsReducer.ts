@@ -12,7 +12,7 @@ const initialState = {
 	isNotFound: false,
 	toggleUsersId:null as number | null
 };
-type initialStateType = typeof initialState
+export type initialStateType = typeof initialState
 export const FriendsReducer = (state = initialState, action: FriendsActionsType): initialStateType => {
 	switch (action.type) {		
 		case "SET-USERS":
