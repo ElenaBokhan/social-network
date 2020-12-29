@@ -23,7 +23,7 @@ export const MessagesList: React.FC<propsType> = (props) => {
 	useEffect(()=>{
 		id===0 && dispatch(clearMessageField());
 		id && dispatch(getMessages(id));
-	},[id, getMessages, clearMessageField])
+	},[id, dispatch])
 	return (
 			<div  className = {dialog.MessagesField}>
 				{isLoading ? 	<>  

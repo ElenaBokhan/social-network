@@ -22,7 +22,7 @@ export const getUnderSlidePhotos = (state: AppStateType) => {
 return UnderSlidePhotos;
 }
 
-//--------------------------------------------------------------------------------------
+//-----------------------------------------------------------------
 
 export const isAuthUser = (state: AppStateType) => {
 	return state.AuthReducer.isAuth;
@@ -33,6 +33,9 @@ export const isLoading = (state: AppStateType) => {
 export const authUserId = (state: AppStateType) => {
 	return state.AuthReducer.authUserId;
 }
+
+//-----------------------------------------------------------------
+
 export const getUserId = (state: AppStateType) => {
 	return state.ProfileReducer.id;
 }
@@ -42,6 +45,22 @@ export const getAuthName = (state: AppStateType) => {
 export const getAuthPhoto = (state: AppStateType) => {
 	return state.ProfileReducer.authPhoto;
 }
+export const getAvatar = (state: AppStateType) => {
+	return state.ProfileReducer.avatar;
+}
+export const getSmallPhoto = (state: AppStateType) => {
+	return state.ProfileReducer.photos.small;
+}
+
+//-----------------------------------------------------------------
+
+export const getPostData = (state: AppStateType) => {
+	return state.PostReducer.posts;
+}
+export const getIsActiveTextarea = (state: AppStateType) => {
+	return state.PostReducer.isActiveTextarea;
+}
+
 //-----------------------------------------------------------------
 export const isLoadingDialog = (state: AppStateType) => {
 	return state.DialogsReducer.isLoadingDialog;

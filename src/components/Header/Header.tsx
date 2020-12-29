@@ -2,7 +2,7 @@ import React from 'react';
 import headStyles from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { authUserId, getAuthName, getAuthPhoto, getUserId, isAuthUser } from '../../store/selectors/selectors';
+import { authUserId, getAuthName, getAuthPhoto, isAuthUser } from '../../store/selectors/selectors';
 import { setProfileDataThunkCreator, setStatusThunkCreator } from '../../store/ProfileReducer';
 import { logoutUserThunkCreator } from '../../store/AuthReducer';
 
@@ -10,7 +10,6 @@ export const Header: React.FC = () => {
 
 	const authId = useSelector(authUserId);
 	const isAuth = useSelector(isAuthUser);
-	const userId = useSelector(getUserId);
 	const name = useSelector(getAuthName);
 	const smallPhoto = useSelector(getAuthPhoto);
 	const dispatch = useDispatch();

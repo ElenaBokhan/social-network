@@ -1,7 +1,7 @@
 import React from 'react';
 import profile from './Profile.module.css';
 import { Edit } from '../common/Buttons/Edit/Edit';
-import { PostContainer } from '../Post/PostContainer';
+import { Post } from '../Post/Post';
 import { useState } from 'react';
 import StatusForm from './StatusForm';
 import EditProfileForm from './EditProfileForm';
@@ -82,7 +82,7 @@ export const Profile = (props: propsProfileType) => {
 				<p>{ aboutMe }</p>
 				{ editMode && <div onClick = { showEditForm } className = {profile.editButton}>Edit data</div>}
 			</section>			
-			<PostContainer />
+			<Post />
 		</div>
 	)
 }

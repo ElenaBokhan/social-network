@@ -2,39 +2,47 @@ import React from 'react';
 import postStyle from './Post.module.css';
 import { Field, InjectedFormProps, reduxForm, reset } from 'redux-form';
 import { Button } from '../Button/Button';
-import { propsPostType } from './Post';
-type IProps = propsPostType
-let PostForm: React.FC<InjectedFormProps<formValuesType, IProps> & IProps> = props => {
-  const { handleSubmit } = props
+import { useDispatch, useSelector } from 'react-redux';
+import { getIsActiveTextarea, getSmallPhoto, getAvatar } from '../../store/selectors/selectors';
+import { actions } from '../../store/Actions';
+
+const { increaseTextarea, addPost } = actions;
+
+let PostForm: React.FC<InjectedFormProps<formValuesType> > = props => {
+  	const { handleSubmit } = props
+	const isActiveTextarea = useSelector(getIsActiveTextarea);
+	const smallPhoto = useSelector(getSmallPhoto);
+	const avatar = useSelector(getAvatar);	
+	const dispatch = useDispatch();
+
   return <form onSubmit = { handleSubmit } className = { postStyle.addPost }>
-			<div className = {postStyle.avatarSmall} style = {{backgroundImage: `url(${props.smallPhoto || process.env.PUBLIC_URL+props.avatar})`}}></div>
+			<div className = {postStyle.avatarSmall} style = {{backgroundImage: `url(${smallPhoto || process.env.PUBLIC_URL+avatar})`}}></div>
 			<Field	component = "textarea" 
 					name = "text"
 					type = "text"
 					className = {postStyle.input} 
-					style = {{height: props.isActiveTextarea ? "100px": "inherit"}} 
+					style = {{height: isActiveTextarea ? "100px": "inherit"}} 
 					placeholder = "What's the News?"
-					onClick = {() => props.increaseTextarea(true)}
-					onBlur = {() => props.increaseTextarea(false)}/>
+					onClick = {() => dispatch(increaseTextarea(true))}
+					onBlur = {() => dispatch(increaseTextarea(false))}/>
 			<Button name = "Add post"/>
 		</form>
 }
 const afterSubmit = (result: any, dispatch: any) =>
 	dispatch(reset("addPost"));
 
-const PostReduxForm = reduxForm<formValuesType, IProps>({ 
-  form: "addPost",
-  onSubmitSuccess: afterSubmit,
+const PostReduxForm = reduxForm<formValuesType>({ 
+	form: "addPost",
+	onSubmitSuccess: afterSubmit,
 })(PostForm)
-type formValuesType = {
-	text: string | null
+
+type formValuesType = {	text: string | null }
+
+const AddPostForm: React.FC = () => {
+	const dispatch = useDispatch();
+	const submit = (values: formValuesType) => {
+		values.text && dispatch(addPost(values.text));
+	}
+	return <PostReduxForm onSubmit={ submit } />
 }
-class AddPostForm extends React.Component<propsPostType> {
-	submit = (values: formValuesType) => {
-		values.text && this.props.addPost(values.text);
-	}
-	render() {
-		return <PostReduxForm onSubmit={this.submit} {...this.props} />
-	}
-  }
   export default AddPostForm;
