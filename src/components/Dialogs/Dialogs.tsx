@@ -2,7 +2,7 @@ import React from 'react';
 import dialog from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
 import SendMessageForm from './SendMessageForm';
-import { MessagesListContainer } from '../MessagesList/MessagesListContainer';
+import { MessagesList } from '../MessagesList/MessagesList';
 import { dialogsArrayType, messagesArrayType } from '../../types/types';
 
 type propsType = {
@@ -36,7 +36,7 @@ export const Dialogs: React.FC<propsType> = (props: propsType) => {
 				</div>
 			</div>
 			<div className = { dialog.MessagesList }>
-				{typeof id === "number" && <MessagesListContainer id = { id }/>}
+				{typeof id === "number" && <MessagesList id = { id }/>}
 				<SendMessageForm {...props}/>
 			</div>
 		</div>)	
