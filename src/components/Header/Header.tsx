@@ -2,7 +2,7 @@ import React from 'react';
 import headStyles from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { authUserId, getAuthName, getAuthPhoto, isAuthUser } from '../../store/selectors/selectors';
+import { authUserId, getAuthName, getAuthPhoto,  isAuthUser } from '../../store/selectors/selectors';
 import { setProfileDataThunkCreator, setStatusThunkCreator } from '../../store/ProfileReducer';
 import { logoutUserThunkCreator } from '../../store/AuthReducer';
 
@@ -32,6 +32,8 @@ export const Header: React.FC = () => {
 														>Profile</NavLink>
 							<NavLink to = "/dialogs/ " className = {headStyles.menuItem} 
 														activeClassName={headStyles.active}>Dialogs</NavLink>					
+							<NavLink to = "/chat/ " className = {headStyles.menuItem} 
+														activeClassName={headStyles.active}>Chat</NavLink>
 							<NavLink to = "/photos" 	className = {headStyles.menuItem} 
 														activeClassName={headStyles.active}>Photos</NavLink>
 							<NavLink to = "/friends" 	className = {headStyles.menuItem} 

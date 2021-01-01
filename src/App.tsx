@@ -9,6 +9,7 @@ import { LoginContainer } from './components/Login/LoginContainer';
 import { FriendsContainer } from './components/Friends/FriendsContainer';
 import { ProfileContainer } from './components/Profile/ProfileContainer';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
+import { Chat } from './components/Chat/Chat';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { initThunkCreator } from './store/AppReducer';
@@ -32,9 +33,8 @@ class App extends Component<PropsType> {
 						<Route path = "/" exact render = {() => <Main />} />
 						<Route path = "/profile" render = {() => <ProfileContainer />} />
 						<Route path = "/dialogs/:id" render = {(props)=> <DialogsContainer {...props}/>}/>
-						{/* <Route path = "/photos" exact render = {(props) => <PhotosContainer {...props}/>} /> */}
+						<Route path = "/chat" render = {() => <Chat />}/>
 						<Route path = "/photos/:view?" render = {(props) => <PhotosContainer {...props}/>} />
-						{/* <Route path = "/friends" render = {(props) => <FriendsContainer {...props}/>} /> */}
 						<Route path = "/friends/:view?" render = {(props) => <FriendsContainer {...props}/>} />
 						<Route path = "/auth" render = {() => <LoginContainer />} />
 						<Back />

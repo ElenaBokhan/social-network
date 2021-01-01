@@ -5,6 +5,7 @@ import SendMessageForm from './SendMessageForm';
 import { MessagesList } from '../MessagesList/MessagesList';
 import { dialogsArrayType, messagesArrayType } from '../../types/types';
 
+
 type propsType = {
 	id: number
 	authId: number | null

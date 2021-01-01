@@ -2,7 +2,7 @@ import React from 'react';
 import editForm from './EditProfileForm.module.css';
 import { Button } from '../Button/Button';
 import { Formik, Form, Field } from 'formik';
-import { maxLength200 } from '../../utils/validatators';
+// import { maxLength200 } from '../../utils/validatators';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../store/Actions';
 import { isLoading, getAboutMe, getContacts, getAuthName, getUserId } from '../../store/selectors/selectors';
