@@ -51,6 +51,12 @@ export const getAvatar = (state: AppStateType) => {
 export const getSmallPhoto = (state: AppStateType) => {
 	return state.ProfileReducer.photos.small;
 }
+export const getContacts = (state: AppStateType) => {
+	return state.ProfileReducer.contacts;
+}
+export const getAboutMe = (state: AppStateType) => {
+	return state.ProfileReducer.aboutMe;
+}
 
 //-----------------------------------------------------------------
 

@@ -45,7 +45,7 @@ export const Profile = (props: propsProfileType) => {
 	}
 	return (
 		<div className = { profile.container }>
-			{ isShowEditForm && <EditProfileForm {...props}/> }			
+			{ isShowEditForm && <EditProfileForm /> }			
 			<section className = { profile.avatarBlock }>
 				<div className = { profile.avatar } style = {{ backgroundImage: `url(${photo.large || process.env.PUBLIC_URL+props.avatar})` }}></div>
 				{ editMode 	?	<>	<input className = { profile.changePhoto } type="file" id="fileElem" onChange = {uploadPhoto}/> 
@@ -69,7 +69,7 @@ export const Profile = (props: propsProfileType) => {
 											  : <>	<span className = {profile.status}>{ status }</span>
 													{editMode && <Edit onclick = {editTagStatus}/>}
 												</>
-								: <StatusForm editTagStatus = { editTagStatus } {...props}/>}
+								: <StatusForm editTagStatus = { editTagStatus } />}
 				<h3>Contacts:</h3>
 				<p>Facebook: <span className = { profile.contact }>{contacts.facebook}</span></p>
 				<p>Instagram: <span className = { profile.contact }>{contacts.instagram}</span></p>
