@@ -1,5 +1,5 @@
 import React from 'react';
-import dialog from './Dialogs.module.css';
+import dialog from './Chat.module.css';
 import { Formik, Form, Field } from 'formik';
 import { Button } from '../Button/Button';
 import  button from '../Button/Button.module.css';
@@ -8,7 +8,6 @@ const SendToChatForm: React.FC<{ws:WebSocket}> = ({ws}) => {
 	return	<Formik
 					initialValues={{ text: ''}}				
 					onSubmit={(values: {text:string}, { setSubmitting, resetForm }) => {
-						debugger
 						values.text && ws.send(values.text);
 						resetForm();						
 						setSubmitting(false);
