@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import chat from './Chat.module.css';
 import SendToChatForm from './SendToChatForm';
 import avatar from '../../assets/img/avatar.jpg';
+import useSound from 'use-sound';
+//@ts-ignore
+import soundNewMsg from '../../assets/sound/sound.mp3'
 
 export const Chat: React.FC = () => {
 	const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx');
@@ -23,9 +26,11 @@ export const MessagesList: React.FC<{ws:WebSocket}> = ({ws}) => {
 	
 	const [messages, setMessages] = useState<MessageType[]>([]);	
 	const messagesEndRef: any = useRef(null)
-	
+	const [play] = useSound(soundNewMsg);
+
 	const scrollToBottom = () => {
-		messagesEndRef.current.scrollIntoView(false)
+		messagesEndRef.current.scrollIntoView(false);
+		play();
 	  }
 	useEffect(scrollToBottom, [messages])
 	useEffect(()=>{	
