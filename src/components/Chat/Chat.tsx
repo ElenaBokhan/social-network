@@ -23,14 +23,15 @@ export const Chat: React.FC = () => {
 }
 
 export const MessagesList: React.FC<{ws:WebSocket}> = ({ws}) => {	
-	
+	const [counter, setCounter] = useState(0);
 	const [messages, setMessages] = useState<MessageType[]>([]);	
 	const messagesEndRef: any = useRef(null)
 	const [play] = useSound(soundNewMsg);
 
 	const scrollToBottom = () => {
 		messagesEndRef.current.scrollIntoView(false);
-		play();
+		counter > 1 && play();
+		setCounter(counter+1);
 	  }
 	useEffect(scrollToBottom, [messages])
 	useEffect(()=>{	
