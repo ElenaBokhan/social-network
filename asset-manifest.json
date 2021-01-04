@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/social-network/static/css/main.0e3a04a7.chunk.css",
-    "main.js": "/social-network/static/js/main.8749b8bf.chunk.js",
-    "main.js.map": "/social-network/static/js/main.8749b8bf.chunk.js.map",
+    "main.js": "/social-network/static/js/main.d9724203.chunk.js",
+    "main.js.map": "/social-network/static/js/main.d9724203.chunk.js.map",
     "runtime-main.js": "/social-network/static/js/runtime-main.643e8338.js",
     "runtime-main.js.map": "/social-network/static/js/runtime-main.643e8338.js.map",
-    "static/js/2.786060e0.chunk.js": "/social-network/static/js/2.786060e0.chunk.js",
-    "static/js/2.786060e0.chunk.js.map": "/social-network/static/js/2.786060e0.chunk.js.map",
+    "static/js/2.67e023a0.chunk.js": "/social-network/static/js/2.67e023a0.chunk.js",
+    "static/js/2.67e023a0.chunk.js.map": "/social-network/static/js/2.67e023a0.chunk.js.map",
     "static/js/3.0d7a3b96.chunk.js": "/social-network/static/js/3.0d7a3b96.chunk.js",
     "static/js/3.0d7a3b96.chunk.js.map": "/social-network/static/js/3.0d7a3b96.chunk.js.map",
     "index.html": "/social-network/index.html",
-    "precache-manifest.b00d154f4256ec1237bc20683a910637.js": "/social-network/precache-manifest.b00d154f4256ec1237bc20683a910637.js",
+    "precache-manifest.4743bfbac4dc9be0d43fa1944f04c017.js": "/social-network/precache-manifest.4743bfbac4dc9be0d43fa1944f04c017.js",
     "service-worker.js": "/social-network/service-worker.js",
     "static/css/main.0e3a04a7.chunk.css.map": "/social-network/static/css/main.0e3a04a7.chunk.css.map",
-    "static/js/2.786060e0.chunk.js.LICENSE.txt": "/social-network/static/js/2.786060e0.chunk.js.LICENSE.txt",
+    "static/js/2.67e023a0.chunk.js.LICENSE.txt": "/social-network/static/js/2.67e023a0.chunk.js.LICENSE.txt",
     "static/js/3.0d7a3b96.chunk.js.LICENSE.txt": "/social-network/static/js/3.0d7a3b96.chunk.js.LICENSE.txt",
     "static/media/Main.module.css": "/social-network/static/media/4.f596c1fc.jpg",
     "static/media/index.css": "/social-network/static/media/Intro-Regular.2f11cb83.otf",
@@ -24,8 +24,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.643e8338.js",
-    "static/js/2.786060e0.chunk.js",
+    "static/js/2.67e023a0.chunk.js",
     "static/css/main.0e3a04a7.chunk.css",
-    "static/js/main.8749b8bf.chunk.js"
+    "static/js/main.d9724203.chunk.js"
   ]
 }
