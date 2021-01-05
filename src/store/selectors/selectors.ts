@@ -11,6 +11,9 @@ export const getAllPhotos = (state: AppStateType) => {
 
 return newData;
 }
+export const getNumberOfSlide = (state: AppStateType) => {	
+	return state.PhotosReducer.numberSlidePhoto;
+}
 export const getSlide = (state: AppStateType) => {
 	const num = state.PhotosReducer.numberSlidePhoto;
 	const slide = getAllPhotos(state).filter((item,index) => index===num);

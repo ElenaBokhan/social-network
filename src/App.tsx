@@ -3,7 +3,7 @@ import { Route, HashRouter } from 'react-router-dom';
 import './App.css';
 import Main from './components/Main/Main';
 import Back from './components/Back/Back';
-import { PhotosContainer } from './components/Photos/PhotosContainer';
+import { PhotosContainer } from './components/Photos/Photos';
 import { Header } from './components/Header/Header';
 import { LoginContainer } from './components/Login/LoginContainer';
 import { FriendsContainer } from './components/Friends/FriendsContainer';
