@@ -8,7 +8,7 @@ import { actions } from '../../store/Actions';
 import { isLoading, getAboutMe, getContacts, getAuthName, getUserId } from '../../store/selectors/selectors';
 import { updateProfileDataThunkCreator } from '../../store/ProfileReducer';
 
-const { showEditForm } = actions;
+const { showEditFormAC } = actions;
 
 const EditProfileForm: React.FC = () => {
 	const loading = useSelector(isLoading);
@@ -27,7 +27,7 @@ const EditProfileForm: React.FC = () => {
 		lookingForAJob: boolean
 		aboutMe: string | null
 	}
-	return	<div className = {editForm.container} onClick = { () => dispatch(showEditForm())}>
+	return	<div className = {editForm.container} onClick = { () => dispatch(showEditFormAC())}>
  				<div className = {editForm.editBlock} onClick = {(event) => event.stopPropagation()}>
  					<h1 className = {editForm.title}>Update Your Profile</h1>
 					<Formik
@@ -68,7 +68,7 @@ const EditProfileForm: React.FC = () => {
 						<p className = {editForm.titleAboutMe}>About me:</p>
 						<Field className = {editForm.textarea} component = "textarea" type="text" name="aboutMe"/>
 						<Button name = "Edit" type="submit" disabled={isSubmitting} isLoading = {loading} />
-						<Button name = "Cansel" onclick = {() => dispatch(showEditForm())}  />
+						<Button name = "Cansel" onclick = {() => dispatch(showEditFormAC())}  />
 					</Form>
 					)}
 					</Formik>

@@ -51,8 +51,14 @@ export const getAuthPhoto = (state: AppStateType) => {
 export const getAvatar = (state: AppStateType) => {
 	return state.ProfileReducer.avatar;
 }
+export const getPhoto = (state: AppStateType) => {
+	return state.ProfileReducer.photos;
+}
 export const getSmallPhoto = (state: AppStateType) => {
 	return state.ProfileReducer.photos.small;
+}
+export const getAvatarFriends = (state: AppStateType) => {
+	return state.ProfileReducer.avatarFriends;
 }
 export const getContacts = (state: AppStateType) => {
 	return state.ProfileReducer.contacts;
@@ -60,7 +66,18 @@ export const getContacts = (state: AppStateType) => {
 export const getAboutMe = (state: AppStateType) => {
 	return state.ProfileReducer.aboutMe;
 }
-
+export const getEditMode = (state: AppStateType) => {
+	return state.ProfileReducer.isEditMode;
+}
+export const getStatus = (state: AppStateType) => {
+	return state.ProfileReducer.status;
+}
+export const isLookingForAJob = (state: AppStateType) => {
+	return state.ProfileReducer.lookingForAJob;
+}
+export const isShowEditForm = (state: AppStateType) => {
+	return state.ProfileReducer.isShowEditForm;
+}
 //-----------------------------------------------------------------
 
 export const getPostData = (state: AppStateType) => {

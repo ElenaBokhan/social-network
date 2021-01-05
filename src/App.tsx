@@ -7,7 +7,7 @@ import { PhotosContainer } from './components/Photos/Photos';
 import { Header } from './components/Header/Header';
 import { LoginContainer } from './components/Login/LoginContainer';
 import { FriendsContainer } from './components/Friends/FriendsContainer';
-import { ProfileContainer } from './components/Profile/ProfileContainer';
+import { ProfileContainer } from './components/Profile/Profile';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 import { Chat } from './components/Chat/Chat';
 import { connect } from 'react-redux';
