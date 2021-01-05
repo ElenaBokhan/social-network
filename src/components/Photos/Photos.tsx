@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom';
 import folder from '../../assets/img/folder.png';
 import { Slide } from './Slide/Slide';
 import { withoutAuthRedirect } from '../../hoc/withAuthRedirect';
-import { compose } from 'redux';
-import { RouteComponentProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPhotos, getPhotos, getSlide, getNumberOfSlide, getUnderSlidePhotos } from '../../store/selectors/selectors';
 import { actions } from '../../store/Actions';
@@ -81,4 +79,4 @@ export const Photos: React.FC = (props) => {
 	
 }
 
-export const PhotosContainer = compose<React.ComponentType<RouteComponentProps>>(withoutAuthRedirect)(Photos)
+export const PhotosContainer = withoutAuthRedirect(Photos)
