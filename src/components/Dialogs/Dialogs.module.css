@@ -34,6 +34,7 @@
 }
 .MessagesList{
 	width: 70%;
+	height: 100%;
 	background-color: rgba(0, 0, 0, 0.6);
 	padding: 20px;
 	display: flex;
@@ -45,6 +46,7 @@
 	padding: 20px;
 	flex: 11;
 	position: relative;
+	overflow-y: scroll;
 }
 
 .MessagesField p:first-child{	
