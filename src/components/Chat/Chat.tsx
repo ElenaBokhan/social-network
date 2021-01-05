@@ -5,6 +5,8 @@ import avatar from '../../assets/img/avatar.jpg';
 import useSound from 'use-sound';
 //@ts-ignore
 import soundNewMsg from '../../assets/sound/sound.mp3'
+import { useSelector } from 'react-redux';
+import { authUserId } from '../../store/selectors/selectors';
 
 export const Chat: React.FC = () => {
 	const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx');
@@ -27,17 +29,25 @@ export const MessagesList: React.FC<{ws:WebSocket}> = ({ws}) => {
 	const [messages, setMessages] = useState<MessageType[]>([]);	
 	const messagesEndRef: any = useRef(null)
 	const [play] = useSound(soundNewMsg);
+	const authId = useSelector(authUserId);
 
 	const scrollToBottom = () => {
 		messagesEndRef.current.scrollIntoView(false);
-		counter > 1 && play();
+		const lastMessageId = messages?.[messages.length-1]?.userId
+		if( counter > 1 && lastMessageId !== authId) play();
+		// counter > 0 && play();
 		setCounter(counter+1);
-	  }
-	useEffect(scrollToBottom, [messages])
+		console.log("counter: "+counter)
+	}
+	const handleNewMessage = (e: any) => {
+		setMessages((prevMessages) =>[...prevMessages,...JSON.parse(e.data)])
+	}	
 	useEffect(()=>{	
-		ws.addEventListener('message', (e) => {					
-			setMessages((prevMessages) =>[...prevMessages,...JSON.parse(e.data)])})	
-	},[])
+		ws.addEventListener("message", handleNewMessage)	
+		console.log("only 1")
+		return function cleanup(){ ws.removeEventListener("message", (e) => handleNewMessage(e))}
+		},[ws])
+	useEffect(scrollToBottom, [messages])
 	return (
 			<div  className = {chat.MessagesField}>				
 				{ messages.map( (msg, i) =><Message key = {i} message = {msg}/>) }
