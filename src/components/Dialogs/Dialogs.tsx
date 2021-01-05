@@ -3,20 +3,16 @@ import dialog from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
 import SendMessageForm from './SendMessageForm';
 import { MessagesList } from '../MessagesList/MessagesList';
-import { dialogsArrayType, messagesArrayType } from '../../types/types';
+import { withoutAuthRedirect } from '../../hoc/withAuthRedirect';
+import { useSelector } from 'react-redux';
+import { getAvatar, getDialogsData } from '../../store/selectors/selectors';
 
 
-type propsType = {
-	id: number
-	authId: number | null
-	avatar: string
-	dialogs: Array<dialogsArrayType>
-	messages: Array<messagesArrayType>
-	isLoading: boolean
-	sendMessage: (userId: number, msg: string) => void
-}
-export const Dialogs: React.FC<propsType> = (props: propsType) => {
-	const { dialogs, avatar, id } = props;
+export const Dialogs: React.FC = (props: any) => {
+
+	const id = +props.match.params.id;	
+	const avatar = useSelector(getAvatar);
+	const dialogs = useSelector(getDialogsData);
 	const regexp = /[-\d]+(?=T)/gi;
 
 	return (
@@ -38,7 +34,8 @@ export const Dialogs: React.FC<propsType> = (props: propsType) => {
 			</div>
 			<div className = { dialog.MessagesList }>
 				{typeof id === "number" && <MessagesList id = { id }/>}
-				<SendMessageForm {...props}/>
+				<SendMessageForm id = { id }/>
 			</div>
 		</div>)	
 }
+export default withoutAuthRedirect(Dialogs)

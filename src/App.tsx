@@ -8,7 +8,7 @@ import { Header } from './components/Header/Header';
 import { LoginContainer } from './components/Login/LoginContainer';
 import { FriendsContainer } from './components/Friends/FriendsContainer';
 import { ProfileContainer } from './components/Profile/Profile';
-import { DialogsContainer } from './components/Dialogs/DialogsContainer';
+import Dialogs from './components/Dialogs/Dialogs';
 import { Chat } from './components/Chat/Chat';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -32,7 +32,7 @@ class App extends Component<PropsType> {
 						<Route path = "/home" render = {() => <Main />} />
 						<Route path = "/" exact render = {() => <Main />} />
 						<Route path = "/profile" render = {() => <ProfileContainer />} />
-						<Route path = "/dialogs/:id" render = {(props)=> <DialogsContainer {...props}/>}/>
+						<Route path = "/dialogs/:id" render = {(props)=> <Dialogs {...props}/>}/>
 						<Route path = "/chat" render = {() => <Chat />}/>
 						<Route path = "/photos/:view?" render = {(props) => <PhotosContainer {...props}/>} />
 						<Route path = "/friends/:view?" render = {(props) => <FriendsContainer {...props}/>} />

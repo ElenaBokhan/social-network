@@ -94,3 +94,6 @@ export const isLoadingDialog = (state: AppStateType) => {
 export const getMessagesData = (state: AppStateType) => {
 	return state.DialogsReducer.messagesArray;
 }
+export const getDialogsData = (state: AppStateType) => {
+	return state.DialogsReducer.dialogsArray;
+}
