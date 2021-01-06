@@ -8,9 +8,8 @@ import { useSelector } from 'react-redux';
 import { getAvatar, getDialogsData } from '../../store/selectors/selectors';
 
 
-export const Dialogs: React.FC = (props: any) => {
-
-	const id = +props.match.params.id;	
+export const Dialogs: React.FC<{id: number}> = ({id}) => {
+	
 	const avatar = useSelector(getAvatar);
 	const dialogs = useSelector(getDialogsData);
 	const regexp = /[-\d]+(?=T)/gi;
