@@ -46,7 +46,7 @@ export const MessagesList: React.FC<{ws:WebSocket}> = ({ws}) => {
 		ws.addEventListener("message", handleNewMessage)	
 		console.log("only 1")
 		return function cleanup(){ ws.removeEventListener("message", (e) => handleNewMessage(e))}
-		},[ws])
+		},[])
 	useEffect(scrollToBottom, [messages])
 	return (
 			<div  className = {chat.MessagesField}>				
