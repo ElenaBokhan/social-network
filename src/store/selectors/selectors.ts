@@ -42,8 +42,11 @@ export const authUserId = (state: AppStateType) => {
 export const getUserId = (state: AppStateType) => {
 	return state.ProfileReducer.id;
 }
-export const getAuthName = (state: AppStateType) => {
+export const getName = (state: AppStateType) => {
 	return state.ProfileReducer.name;
+}
+export const getAuthName = (state: AppStateType) => {
+	return state.ProfileReducer.authName;
 }
 export const getAuthPhoto = (state: AppStateType) => {
 	return state.ProfileReducer.authPhoto;
@@ -96,4 +99,17 @@ export const getMessagesData = (state: AppStateType) => {
 }
 export const getDialogsData = (state: AppStateType) => {
 	return state.DialogsReducer.dialogsArray;
+}
+//-----------------------------------------------------------------
+export const getAllUserData = (state: AppStateType) => {
+	return state.FriendsReducer.allUsers;
+}
+export const isNotFound = (state: AppStateType) => {
+	return state.FriendsReducer.isNotFound;
+}
+export const getToggleUsersId = (state: AppStateType) => {
+	return state.FriendsReducer.toggleUsersId;
+}
+export const getPage = (state: AppStateType) => {
+	return state.FriendsReducer.page;
 }
