@@ -6,6 +6,7 @@ import { emptyField, validatorsType  } from '../../utils/validatators';
 import { useDispatch, useSelector } from 'react-redux';
 import { authUserId, isLoading } from '../../store/selectors/selectors';
 import { loginUserThunkCreator } from '../../store/AuthReducer';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 
 const Input: React.FC<WrappedFieldProps> = ({input, meta:{error, touched}, ...props}) => {	
@@ -81,6 +82,6 @@ export const Login = () => {
 	}
 	return <AuthReduxForm onSubmit={submit} authId = {authId}/>	
 }
-// export const LoginContainer = withAuthRedirect(Login)
+export default withAuthRedirect(Login);
 
 
