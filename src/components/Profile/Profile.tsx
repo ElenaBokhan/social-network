@@ -13,7 +13,7 @@ import { actions } from '../../store/Actions';
 import { uploadPhotoThunkCreator } from '../../store/ProfileReducer';
 import { startDialog } from '../../store/DialogsReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAvatar, getEditMode, getPhoto, isShowEditForm, getAvatarFriends, isLookingForAJob, isLoading, getStatus, getUserId, getAuthName, getContacts, getAboutMe } from '../../store/selectors/selectors';
+import { getAvatar, getEditMode, getPhoto, isShowEditForm, getAvatarFriends, isLookingForAJob, isLoading, getStatus, getUserId, getName, getContacts, getAboutMe } from '../../store/selectors/selectors';
 
 const { showEditFormAC } = actions;
 
@@ -24,7 +24,7 @@ export const Profile: React.FC = () => {
 	const randomFriends = useSelector(getAvatarFriends);
 	const loading = useSelector(isLoading);
 	const userId = useSelector(getUserId);
-	const name = useSelector(getAuthName);
+	const name = useSelector(getName);
 	const contacts = useSelector(getContacts);
 	const aboutMe = useSelector(getAboutMe);
 	const job = useSelector(isLookingForAJob);
@@ -84,4 +84,4 @@ export const Profile: React.FC = () => {
 		</div>
 	)
 }
-export const ProfileContainer = withoutAuthRedirect(Profile)
+export default withoutAuthRedirect(Profile)
