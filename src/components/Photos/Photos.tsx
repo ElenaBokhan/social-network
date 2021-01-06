@@ -10,9 +10,8 @@ import { actions } from '../../store/Actions';
 
 const {nextSlide, prevSlide, showSlide} = actions;
 
-export const Photos: React.FC = (props) => {
-	//@ts-ignore
-	const viewParams =  props.match.params.view;
+export const Photos: React.FC<{view: string}> = ({ view }) => {
+	
 	const photos = useSelector(getPhotos)
 	const numberSlidePhoto = useSelector(getNumberOfSlide);
 	const allPhotos = useSelector(getAllPhotos)
@@ -22,12 +21,12 @@ export const Photos: React.FC = (props) => {
 
 	return (
 		<div className = {photo.container}>
-			{numberSlidePhoto >=0 && (viewParams === "all" || viewParams === undefined) && <Slide />}
+			{numberSlidePhoto >=0 && (view === "all" || view === undefined) && <Slide />}
 			
 			<nav className = {photo.nav}>
 				<span>Show as: </span>
 				<NavLink 	to = {`/photos/all`} 
-							activeClassName={photo.active} className = { viewParams === undefined ? photo.active : undefined}
+							activeClassName={photo.active} className = { view === undefined ? photo.active : undefined}
 							onClick = {() => dispatch(showSlide(-1)) }>all</NavLink>
 				<NavLink 	to = {`/photos/slide`} 
 							activeClassName={photo.active}
@@ -36,7 +35,7 @@ export const Photos: React.FC = (props) => {
 
 				
 			</nav>
-			{viewParams === "slide" && 	
+			{view === "slide" && 	
 				<section className = {photo.sliderContainer}>
 					<button className = {photo.arrow} onClick = { () => dispatch(prevSlide())} disabled = {numberSlidePhoto===0}>
 						<svg className = {photo.arrowIcon} xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve"  height="30px" version="1.1" viewBox="0 0 9.34 15.06" xmlnsXlink="http://www.w3.org/1999/xlink"><path d="M0 7.26c0,0.53 -0.05,0.75 0.26,1.2 0.09,0.13 0.31,0.33 0.44,0.45l4.57 4.57c0.22,0.22 1.17,1.22 1.39,1.35 0.63,0.4 1.28,0.25 1.79,-0.23 0.04,-0.04 0.02,-0.02 0.06,-0.05 0.56,-0.5 0.83,-0.78 0.83,-1.53 0,-0.41 -0.19,-0.68 -0.41,-0.89 -0.45,-0.45 -4.46,-4.42 -4.57,-4.6 0.11,-0.17 4.11,-4.14 4.55,-4.58 0.36,-0.35 0.43,-0.6 0.43,-1.1 0,-0.57 -0.56,-1.15 -0.92,-1.44 -0.52,-0.4 -1.08,-0.58 -1.71,-0.21 -0.31,0.18 -2.93,2.87 -3.25,3.18l-3.19 3.2c-0.11,0.14 -0.27,0.44 -0.27,0.68z"/></svg>
@@ -52,7 +51,7 @@ export const Photos: React.FC = (props) => {
 																	key = {item}></div>)}
 					</div>
 				</section>}
-			{viewParams === "albom" && photos.map((item, index) => 	<>
+			{view === "albom" && photos.map((item, index) => 	<>
 										<div className = {photo.albomHead} key = { index }>
 																		<img src = {folder} alt="folder" width = "50px" />
 																		<span  className = {photo.albomName}>{item.name}</span>
@@ -65,8 +64,8 @@ export const Photos: React.FC = (props) => {
 																	</div>)}	
 										</div>
 										</>)}
-			{(viewParams === "all" || 
-			 viewParams === undefined) && <div className = {photo.photoWrapper}>
+			{(view === "all" || 
+			 view === undefined) && <div className = {photo.photoWrapper}>
 												{allPhotos.map((item, index)=> (
 													<div 	className = {photo.item}
 															style = {{backgroundImage:`url(${process.env.PUBLIC_URL + item})`}}
@@ -79,4 +78,4 @@ export const Photos: React.FC = (props) => {
 	
 }
 
-export const PhotosContainer = withoutAuthRedirect(Photos)
+export default withoutAuthRedirect(Photos)
