@@ -6,52 +6,42 @@ import { Button } from '../Button/Button';
 import avatar from '../../assets/img/avatar.png';
 import SearchUserForm from './SearchUserForm';
 import preloader from '../common/Preloader/preloader3.gif';
-import { allUsersItemType } from '../../types/types';
+import { withoutAuthRedirect } from '../../hoc/withAuthRedirect';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllUserData, isNotFound, getToggleUsersId, getPage } from '../../store/selectors/selectors';
+import { getUsersThunkCreator, getMoreUsersThunkCreator, followThunkCreator, unfollowThunkCreator, getFriendsThunkCreator, getMoreFriendsThunkCreator } from '../../store/FriendsReducer';
+import { setProfileUserThunkCreator, setStatusThunkCreator } from '../../store/ProfileReducer';
+import { actions } from '../../store/Actions';
 
-type propsType = {
-	viewParams: string
-	authId: number | null
-	allUsers: Array<allUsersItemType>
-	isLoading: boolean
-	isNotFound: boolean
-	toggleUsersId: number | null
-	page: number
-	getUsersThunkCreator: (pageNum?: number) => void																
-	getMoreUsersThunkCreator: (pageNum: number) => void	
-	followThunkCreator: (id: number, page: number) => void
-	unfollowThunkCreator: (id: number, page: number) => void
-	searchUserThunkCreator: (name: string) => void
-	getFriendsThunkCreator: (flag: boolean, pageNum: number) => void
-	getMoreFriendsThunkCreator: (flag: boolean, pageNum: number) => void
-	setProfileUserThunkCreator: (id: number) => void
-	setStatusThunkCreator: (id: number | null) => void
-	setNextPage: () => void
-}
-export const Friends = (props: propsType) => {
-	const { getUsersThunkCreator, page,	getFriendsThunkCreator,	getMoreFriendsThunkCreator, 
-			getMoreUsersThunkCreator, setProfileUserThunkCreator, followThunkCreator,
-			unfollowThunkCreator, setStatusThunkCreator, isNotFound, allUsers,	toggleUsersId, 
-			isLoading, setNextPage,	viewParams } = props;
+const { setNextPage } = actions;
+
+export const Friends: React.FC<{view: string}> = ({ view }) => {
+
+	const allUsers = useSelector(getAllUserData);
+	const isFound = useSelector(isNotFound);
+	const toggleUsersId = useSelector(getToggleUsersId);
+	const page = useSelector(getPage);
+	const dispatch = useDispatch();
 
 	const showMoreUsers = () => {
-		setNextPage();
-		if(viewParams === "onlyfriends"){
-			getMoreFriendsThunkCreator(true, page)
-		}else if(viewParams === "withoutfriends"){
-			getMoreFriendsThunkCreator(false, page)
+		dispatch(setNextPage());
+		if(view === "onlyfriends"){
+			dispatch(getMoreFriendsThunkCreator(true, page));
+		}else if(view === "withoutfriends"){
+			dispatch(getMoreFriendsThunkCreator(false, page));
 		} else {
-			getMoreUsersThunkCreator(page);	
+			dispatch(getMoreUsersThunkCreator(page));	
 		}	
 	}
 	const showUserProfile = (id: number) => {		
-		setProfileUserThunkCreator(id);	
-		setStatusThunkCreator(id)		
+		dispatch(setProfileUserThunkCreator(id));	
+		dispatch(setStatusThunkCreator(id));
 	}
 	const follow = (id: number) => {
-		followThunkCreator(id, page);		
+		dispatch(followThunkCreator(id, page));		
 	}
 	const unfollow = (id: number) => {
-		unfollowThunkCreator(id, page);		
+		dispatch(unfollowThunkCreator(id, page));		
 	}
 	return (
 		<div className = { friends.container }>			
@@ -59,18 +49,18 @@ export const Friends = (props: propsType) => {
 				<span>Show: </span>
 				<NavLink 	to = {`/friends/all`} 
 							activeClassName = { friends.active }
-							onClick = { () => getUsersThunkCreator() }>all</NavLink>
+							onClick = { () => dispatch(getUsersThunkCreator()) }>all</NavLink>
 				<NavLink 	to = {`/friends/onlyfriends`} 
 							activeClassName = { friends.active }
-							onClick = { () => getFriendsThunkCreator(true, page) }>only friends</NavLink>
+							onClick = { () => dispatch(getFriendsThunkCreator(true, page)) }>only friends</NavLink>
 				<NavLink 	to = {`/friends/withoutfriends`} 
 							activeClassName = { friends.active }
-							onClick = { () => getFriendsThunkCreator(false, page) }>without friends</NavLink>
+							onClick = { () => dispatch(getFriendsThunkCreator(false, page)) }>without friends</NavLink>
 			</nav>
 			<div className={friends.search}>
-				<SearchUserForm {...props}/>
+				<SearchUserForm />
 			</div>
-			{isNotFound && <div  className = { friends.notFound }>
+			{isFound && <div  className = { friends.notFound }>
 								<img src = { notFoundAvatar } alt="notFound" height = "200px"/>
 								Unfortunately the user with this name was not found
 							</div>}
@@ -89,15 +79,16 @@ export const Friends = (props: propsType) => {
 													<p className = { friends.status }>{ item.status }</p>
 													<Button name = { !item.followed ? "add friend" : "unfriend" }
 															onclick = { () => item.followed ? unfollow(item.id) : follow(item.id)}
-															isLoading = { toggleUsersId === item.id ? isLoading : null }
+															isLoading = { toggleUsersId === item.id ? isFound : null }
 															disabled = { toggleUsersId === item.id }/>
 												</div>
 										)}
 			</div>
 			<button onClick = { showMoreUsers } 
 					className = { friends.showMoreButton }>
-					{ isLoading ? <img src = { preloader } height = "7px" alt = "preloader"/> : "show more"}
+					{ isFound ? <img src = { preloader } height = "7px" alt = "preloader"/> : "show more"}
 			</button>
 		</div>)
 	
 }
+export default withoutAuthRedirect(Friends)

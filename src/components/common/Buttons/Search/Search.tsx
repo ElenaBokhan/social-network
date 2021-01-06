@@ -2,7 +2,7 @@ import React from 'react';
 import search from './Search.module.css';
 
 type propsType = {
-	onclick: () => void	
+	onclick?: () => void	
 }
 export const Search: React.FC<propsType> = ({ onclick }) => {
 	return 	<button onClick = { onclick } className = { search.search }>
