@@ -13,8 +13,13 @@ const SendToChatForm: React.FC<{ws:WebSocket}> = ({ws}) => {
 						setSubmitting(false);
 					}}
 				>
-					{({ isSubmitting }) => (
-					<Form className = { dialog.sendMessageForm }>
+					{({ isSubmitting, handleSubmit }) => (
+					<Form className = { dialog.sendMessageForm }
+						  onKeyDown={(e) => {
+							if (e.key === 'Enter') {
+								handleSubmit();	
+								e.preventDefault();						
+							}}}>
 						<Field	component = "textarea" 
 								name = "text"
 								type = "text"

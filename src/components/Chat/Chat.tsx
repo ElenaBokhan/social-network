@@ -35,16 +35,13 @@ export const MessagesList: React.FC<{ws:WebSocket}> = ({ws}) => {
 		messagesEndRef.current.scrollIntoView(false);
 		const lastMessageId = messages?.[messages.length-1]?.userId
 		if( counter > 1 && lastMessageId !== authId) play();
-		// counter > 0 && play();
-		setCounter(counter+1);
-		console.log("counter: "+counter)
+		setCounter(counter+1);		
 	}
 	const handleNewMessage = (e: any) => {
 		setMessages((prevMessages) =>[...prevMessages,...JSON.parse(e.data)])
 	}	
 	useEffect(()=>{	
-		ws.addEventListener("message", handleNewMessage)	
-		console.log("only 1")
+		ws.addEventListener("message", handleNewMessage)		
 		return function cleanup(){ ws.removeEventListener("message", (e) => handleNewMessage(e))}
 		},[])
 	useEffect(scrollToBottom, [messages])

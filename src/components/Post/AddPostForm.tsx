@@ -15,13 +15,19 @@ const AddPostForm = () => {
 	return	<Formik
 					initialValues={{ text: ''}}				
 					onSubmit={(values: {text:string}, { setSubmitting, resetForm }) => {
-						values.text && dispatch(addPost(values.text));
+						values.text && dispatch(addPost(values.text));						
 						setSubmitting(false);					
 						resetForm();					
 					}}
 				>
-					{({ isSubmitting }) => (
-					<Form className = { postStyle.addPost }>
+					{({ isSubmitting, handleSubmit }) => (
+					<Form className = { postStyle.addPost }
+						  onKeyDown={(e) => {
+							if (e.key === 'Enter') {
+								handleSubmit();	
+								e.preventDefault();						
+							}}}
+						  >
 						<div className = {postStyle.avatarSmall} style = {{backgroundImage: `url(${smallPhoto || process.env.PUBLIC_URL+avatar})`}}></div>
 						<Field 	component = "textarea" 
 								name = "text"
