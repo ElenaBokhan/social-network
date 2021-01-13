@@ -7,12 +7,14 @@ type propsType = {
 	isLoading?: boolean | null
 	name: string
 	children?: React.ReactNode
+	type?: "button" | "submit" | "reset" | undefined
 }
-export const Button: React.FC<propsType> = ({ onclick, disabled, isLoading, name, children }) => {
+export const Button: React.FC<propsType> = ({ onclick, disabled, type, isLoading, name, children }) => {
 	
 	return <button 	onClick = {onclick} 
 					className = {buttonStyle.button}
-					disabled = {disabled}>
+					disabled = {disabled}
+					type = {type}>
 				{isLoading ? <img src = {preloader} height = "7px" alt="preloader"/>  : name}
 				{children}
 			</button>

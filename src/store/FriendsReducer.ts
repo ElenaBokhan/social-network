@@ -50,7 +50,7 @@ export const FriendsReducer = (state = initialState, action: FriendsActionsType)
 }
 type FriendsActionsType = ReturnType<ActionsType<typeof actions>>
 
-export const getUsersThunkCreator = (pageNum: number): ThunkAction<void, AppStateType, unknown, FriendsActionsType> => async dispatch => {
+export const getUsersThunkCreator = (pageNum: number = 1): ThunkAction<void, AppStateType, unknown, FriendsActionsType> => async dispatch => {
 	const response = await usersAPI.getAllUsers(pageNum);
 	if(response){
 		dispatch(actions.setUsers(response.items));

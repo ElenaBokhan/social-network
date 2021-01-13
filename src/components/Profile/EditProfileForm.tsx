@@ -1,66 +1,78 @@
 import React from 'react';
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import editForm from './EditProfileForm.module.css';
 import { Button } from '../Button/Button';
-import { maxLength200 } from '../../utils/validatators';
-import { Input, Textarea } from '../common/formFields/formFields';
-import { propsProfileType } from './Profile';
+import { Formik, Form, Field } from 'formik';
+// import { maxLength200 } from '../../utils/validatators';
+import { useDispatch, useSelector } from 'react-redux';
+import { actions } from '../../store/Actions';
+import { isLoading, getAboutMe, getContacts, getAuthName, getUserId } from '../../store/selectors/selectors';
+import { updateProfileDataThunkCreator } from '../../store/ProfileReducer';
 
-type IProps = propsProfileType;
+const { showEditFormAC } = actions;
 
-let EditForm: React.FC<InjectedFormProps<statusFormValuesType, IProps> & IProps> = props => {
-	
-	const { handleSubmit } = props;
-	return 	<div className = {editForm.container} onClick = {props.showEditForm}>
-					<div className = {editForm.editBlock} onClick = {(event) => event.stopPropagation()}>
-						<h1 className = {editForm.title}>Update Your Profile</h1>
-						<form  onSubmit={handleSubmit} className = {editForm.editProfileForm}>
-							<p className = {editForm.titleField}>Your name:</p>
-							<Field className = {editForm.input} component = {Input} current = {props.name} type="text" name="fullName"/>
-							<p className = {editForm.titleField}>Facebook:</p>
-							<Field className = {editForm.input} component = {Input} current = {props.contacts.facebook} type="text" name="facebook"/>
-							<p className = {editForm.titleField}>Instagram:</p>
-							<Field className = {editForm.input} component = {Input} current = {props.contacts.instagram} type="text" name="instagram"/>
-							<p className = {editForm.titleField}>Vkontakte:</p>
-							<Field className = {editForm.input} component = {Input} current = {props.contacts.vk} type="text" name="vk"/>
-							<Field component = "input" type="checkbox" name="lookingForAJob" className = {editForm.checkbox}/>
-							<span className = {editForm.titleField}>looking for a job</span>							
-							<p className = {editForm.titleAboutMe}>About me:</p>
-							<Field className = {editForm.textarea} component = {Textarea} validate = {[maxLength200]} current = {props.aboutMe} type="text" name="aboutMe"/>
-							<Button name = "Edit" isLoading = {props.isLoading} />
-							<Button name = "Cansel" onclick = {props.showEditForm} />
-						</form>
-					</div>
-				</div>	
-}
-const EditReduxForm = reduxForm<statusFormValuesType, IProps>({ form: "updateUserProfile"})(EditForm)
+const EditProfileForm: React.FC = () => {
+	const loading = useSelector(isLoading);
+	const aboutMe = useSelector(getAboutMe);	
+	const contacts = useSelector(getContacts);	
+	const name = useSelector(getAuthName);
+	const userId = useSelector(getUserId);	
 
-type statusFormValuesType = {
-	fullName: string
-	facebook: string
-	instagram: string
-	vk: string
-	lookingForAJob: boolean
-	aboutMe: string
-}
-export default class EditProfileForm extends React.Component<propsProfileType> {
-	submit = (values: statusFormValuesType) => {		
-		const {fullName, facebook, instagram, vk, lookingForAJob, aboutMe} = values;
-		const dataValid = {
-			id:this.props.userId,
-			fullName: fullName || this.props.name,
-			facebook: facebook || this.props.contacts.facebook,
-			instagram: instagram || this.props.contacts.instagram,
-			vk: vk || this.props.contacts.vk,
-			lookingForAJob: lookingForAJob,
-			aboutMe: aboutMe || this.props.aboutMe
-		}
-		this.props.updateProfileDataThunkCreator(dataValid)
+	const dispatch = useDispatch();
+
+	type statusFormValuesType = {
+		fullName: string | null
+		facebook: string | null
+		instagram: string | null
+		vk: string | null
+		lookingForAJob: boolean
+		aboutMe: string | null
 	}
-	render() {
-		return <EditReduxForm onSubmit={this.submit} {...this.props}/>
-	}
-}
-
-
-
+	return	<div className = {editForm.container} onClick = { () => dispatch(showEditFormAC())}>
+ 				<div className = {editForm.editBlock} onClick = {(event) => event.stopPropagation()}>
+ 					<h1 className = {editForm.title}>Update Your Profile</h1>
+					<Formik
+					initialValues={{ fullName: name, 
+									 facebook: contacts.facebook,
+									 instagram: contacts.instagram,			
+									 vk: contacts.vk,				
+									 lookingForAJob: true,				
+									 aboutMe: aboutMe				
+									 }}				
+					onSubmit={(values:statusFormValuesType, { setSubmitting }) => {
+						
+						const dataValid = {
+							id:userId,
+							fullName: values.fullName,
+							facebook: values.facebook,
+							instagram: values.instagram,
+							vk: values.vk,
+							lookingForAJob: values.lookingForAJob,
+							aboutMe: values.aboutMe
+						}
+						dispatch(updateProfileDataThunkCreator(dataValid));
+						setSubmitting(false);						
+					}}
+				>
+					{({ isSubmitting }) => (
+					<Form className = {editForm.editProfileForm}>
+						<p className = {editForm.titleField}>Your name:</p>
+ 						<Field className = {editForm.input} component = "input" type="text" name="fullName"/>
+ 						<p className = {editForm.titleField}>Facebook:</p>
+ 						<Field className = {editForm.input} component = "input" type="text" name="facebook"/>
+						<p className = {editForm.titleField}>Instagram:</p>
+						<Field className = {editForm.input} component = "input" type="text" name="instagram"/>
+						<p className = {editForm.titleField}>Vkontakte:</p>
+						<Field className = {editForm.input} component = "input" type="text" name="vk"/>
+						<Field component = "input" type="checkbox" name="lookingForAJob" className = {editForm.checkbox}/>
+						<span className = {editForm.titleField}>looking for a job</span>							
+						<p className = {editForm.titleAboutMe}>About me:</p>
+						<Field className = {editForm.textarea} component = "textarea" type="text" name="aboutMe"/>
+						<Button name = "Edit" type="submit" disabled={isSubmitting} isLoading = {loading} />
+						<Button name = "Cansel" onclick = {() => dispatch(showEditFormAC())}  />
+					</Form>
+					)}
+					</Formik>
+				</div>
+ 			</div>			
+}  
+export default EditProfileForm;

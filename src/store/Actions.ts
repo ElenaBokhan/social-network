@@ -9,7 +9,7 @@ export const actions = {
 	setUserPhoto: (data: photosType) => ({type: "SET-USER-PHOTO", data} as const),
 	setAuthInfo: (name: string, photo: string | null) => ({type: "SET-AUTH-INFO", name, photo} as const),
 	removeUserStatus: () => ({type: "REMOVE-STATUS"} as const),
-	showEditForm: () => ({type: "SHOW-EDIT-FORM"} as const),
+	showEditFormAC: () => ({type: "SHOW-EDIT-FORM"} as const),
 
     //-- Auth actions ---
 

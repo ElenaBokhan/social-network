@@ -164,7 +164,7 @@ export const updateProfileDataThunkCreator = (data: updateDataType): ThunkAction
 	const response = await profileAPI.updateUserProfile(dataObj);
 	if(response.resultCode===0){
 		dispatch(setProfileDataThunkCreator(dataObj.userId));		
-		dispatch(actions.showEditForm());	
+		dispatch(actions.showEditFormAC());	
 	}
 	dispatch(actions.isLoading(false));
 }

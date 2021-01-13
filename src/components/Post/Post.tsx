@@ -1,32 +1,30 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthName, getAvatar, getPostData, getSmallPhoto } from '../../store/selectors/selectors';
+import { actions } from '../../store/Actions';
 import React from 'react';
 import postStyle from './Post.module.css';
 import { Bucket } from '../common/Buttons/Bucket/Bucket';
-import AddPostForm from './AddPostForm';
-import { postType } from '../../types/types';
+import AddPostForm from './AddPostForm';;
 
-export type propsPostType = {
-	name: string | null
-	avatar: string
-	posts: Array<postType>
-	isActiveTextarea: boolean
-	smallPhoto: string | null
-	addStar: (index: number) => void
-	removeStar: (index: number) => void
-	addPost: (text: string) => void
-	removePost: (index: number) => void
-	increaseTextarea: (flag: boolean) => void
-}
-export const Post = (props: propsPostType) => {
+const { addStar, removeStar, removePost } = actions;
+
+export const Post = () => {
+	const name = useSelector(getAuthName);
+	const avatar = useSelector(getAvatar);
+	const posts = useSelector(getPostData);
+	const smallPhoto = useSelector(getSmallPhoto);
+	const dispatch = useDispatch();
+
 	const changeStar = (indexPost: number, isCliked: boolean) =>{
-		isCliked ? props.removeStar(indexPost) : props.addStar(indexPost)
+		isCliked ? dispatch(removeStar(indexPost)) : dispatch(addStar(indexPost))
 	}	
 	return 	<>			
-			<AddPostForm {...props}/>
-			{props.posts.map( (item, index) => {
+			<AddPostForm />
+			{posts.map( (item, index) => {
 				return  <section className = {postStyle.post} key = {index}>
-							<div className = {postStyle.avatarSmall} style = {{backgroundImage: `url(${props.smallPhoto || process.env.PUBLIC_URL+props.avatar})`}}></div>
+							<div className = {postStyle.avatarSmall} style = {{backgroundImage: `url(${smallPhoto || process.env.PUBLIC_URL+avatar})`}}></div>
 							<div className = {postStyle.postInfo}>
-								<p className = {postStyle.namePost}>{props.name}</p>
+								<p className = {postStyle.namePost}>{name}</p>
 								<p className = {postStyle.date}>{item.date}</p>
 								<p className = {postStyle.text}>{item.text}</p>
 								<hr/>
@@ -37,7 +35,7 @@ export const Post = (props: propsPostType) => {
 							</div>
 								<div className = {postStyle.editBlock}>
 									{/* <Edit /> */}
-									<Bucket onclick = {() => props.removePost(index)}/>
+									<Bucket onclick = {() => dispatch(removePost(index))}/>
 								</div>
 						</section>
 	})}

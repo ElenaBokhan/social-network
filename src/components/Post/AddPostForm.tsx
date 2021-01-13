@@ -1,40 +1,40 @@
 import React from 'react';
 import postStyle from './Post.module.css';
-import { Field, InjectedFormProps, reduxForm, reset } from 'redux-form';
 import { Button } from '../Button/Button';
-import { propsPostType } from './Post';
-type IProps = propsPostType
-let PostForm: React.FC<InjectedFormProps<formValuesType, IProps> & IProps> = props => {
-  const { handleSubmit } = props
-  return <form onSubmit = { handleSubmit } className = { postStyle.addPost }>
-			<div className = {postStyle.avatarSmall} style = {{backgroundImage: `url(${props.smallPhoto || process.env.PUBLIC_URL+props.avatar})`}}></div>
-			<Field	component = "textarea" 
-					name = "text"
-					type = "text"
-					className = {postStyle.input} 
-					style = {{height: props.isActiveTextarea ? "100px": "inherit"}} 
-					placeholder = "What's the News?"
-					onClick = {() => props.increaseTextarea(true)}
-					onBlur = {() => props.increaseTextarea(false)}/>
-			<Button name = "Add post"/>
-		</form>
-}
-const afterSubmit = (result: any, dispatch: any) =>
-	dispatch(reset("addPost"));
+import { useDispatch, useSelector } from 'react-redux';
+import { getIsActiveTextarea, getSmallPhoto, getAvatar } from '../../store/selectors/selectors';
+import { actions } from '../../store/Actions';
+import { Formik, Form, Field } from 'formik';
 
-const PostReduxForm = reduxForm<formValuesType, IProps>({ 
-  form: "addPost",
-  onSubmitSuccess: afterSubmit,
-})(PostForm)
-type formValuesType = {
-	text: string | null
-}
-class AddPostForm extends React.Component<propsPostType> {
-	submit = (values: formValuesType) => {
-		values.text && this.props.addPost(values.text);
-	}
-	render() {
-		return <PostReduxForm onSubmit={this.submit} {...this.props} />
-	}
-  }
-  export default AddPostForm;
+const { increaseTextarea, addPost } = actions;
+const AddPostForm = () => {
+	const isActiveTextarea = useSelector(getIsActiveTextarea);
+	const smallPhoto = useSelector(getSmallPhoto);
+	const avatar = useSelector(getAvatar);	
+	const dispatch = useDispatch();
+	return	<Formik
+					initialValues={{ text: ''}}				
+					onSubmit={(values: {text:string}, { setSubmitting, resetForm }) => {
+						values.text && dispatch(addPost(values.text));
+						setSubmitting(false);					
+						resetForm();					
+					}}
+				>
+					{({ isSubmitting }) => (
+					<Form className = { postStyle.addPost }>
+						<div className = {postStyle.avatarSmall} style = {{backgroundImage: `url(${smallPhoto || process.env.PUBLIC_URL+avatar})`}}></div>
+						<Field 	component = "textarea" 
+								name = "text"
+								type = "text"
+								className = {postStyle.input} 
+								style = {{height: isActiveTextarea ? "100px": "inherit"}} 
+								placeholder = "What's the News?"
+								onClick = {() => dispatch(increaseTextarea(true))}
+								onBlur = {() => dispatch(increaseTextarea(false))}
+						/>
+						<Button name = "Add post" type="submit" disabled={isSubmitting}/>
+					</Form>
+					)}
+				</Formik>		
+}  
+export default AddPostForm;

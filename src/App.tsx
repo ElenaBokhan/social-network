@@ -3,12 +3,13 @@ import { Route, HashRouter } from 'react-router-dom';
 import './App.css';
 import Main from './components/Main/Main';
 import Back from './components/Back/Back';
-import { PhotosContainer } from './components/Photos/PhotosContainer';
-import { HeaderContainer } from './components/Header/HeaderContainer';
-import { LoginContainer } from './components/Login/LoginContainer';
-import { FriendsContainer } from './components/Friends/FriendsContainer';
-import { ProfileContainer } from './components/Profile/ProfileContainer';
-import { DialogsContainer } from './components/Dialogs/DialogsContainer';
+import Photos from './components/Photos/Photos';
+import { Header } from './components/Header/Header';
+import Login from './components/Login/Login';
+import Friends from './components/Friends/Friends';
+import Profile from './components/Profile/Profile';
+import Dialogs from './components/Dialogs/Dialogs';
+import { Chat } from './components/Chat/Chat';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { initThunkCreator } from './store/AppReducer';
@@ -27,16 +28,15 @@ class App extends Component<PropsType> {
 		return !this.props.initStatus 
 				? 	<BackLoad /> 
 				:	<HashRouter>
-						<HeaderContainer />
+						<Header />
 						<Route path = "/home" render = {() => <Main />} />
 						<Route path = "/" exact render = {() => <Main />} />
-						<Route path = "/profile" render = {() => <ProfileContainer />} />
-						<Route path = "/dialogs/:id" render = {(props)=> <DialogsContainer {...props}/>}/>
-						<Route path = "/photos" exact render = {(props) => <PhotosContainer {...props}/>} />
-						<Route path = "/photos/:view" render = {(props) => <PhotosContainer {...props}/>} />
-						<Route path = "/friends" render = {(props) => <FriendsContainer {...props}/>} />
-						<Route path = "/friends/:view" render = {(props) => <FriendsContainer {...props}/>} />
-						<Route path = "/auth" render = {() => <LoginContainer />} />
+						<Route path = "/profile" render = {() => <Profile />} />
+						<Route path = "/dialogs/:id" render = {(props)=> <Dialogs id = {+props.match.params.id}/>}/>
+						<Route path = "/chat" render = {() => <Chat />}/>
+						<Route path = "/photos/:view?" render = {(props) => <Photos view = {props.match.params.view}/>} />
+						<Route path = "/friends/:view?" render = {(props) => <Friends view = {props.match.params.view}/>} />
+						<Route path = "/auth" render = {() => <Login />} />
 						<Back />
 					</HashRouter>			
 	}

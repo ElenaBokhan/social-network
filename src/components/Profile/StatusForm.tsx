@@ -1,58 +1,34 @@
 import React from 'react';
 import profile from './Profile.module.css';
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { Formik, Form, Field } from 'formik';
 import { Button } from '../Button/Button';
-import { contactsType, photosType, updateDataType } from '../../types/types';
+import { useDispatch } from 'react-redux';
+import { updateStatusThunkCreator } from '../../store/ProfileReducer';
 
-
-const StForm: React.FC<InjectedFormProps<statusFormValuesType>> = ({ handleSubmit }) => {
-   return <form onSubmit = { handleSubmit } style = {{ display: "flex" }}>			
-			<Field	className = {profile.statusInput}
-					component = "input"
-					name = "status"
-					type = "text"
-					placeholder = "Is your status update?" 
-					autoFocus/>
-			<Button name = "Edit"/>
-		</form>
-}
-
-const StReduxForm = reduxForm<statusFormValuesType>({ 
-  form: "editStatus",
-})(StForm)
-
-type statusFormValuesType = {
-	status: string
-}
-type propsType = {
-	editMode: boolean
-	avatar: string
-	photo: photosType,	
-	randomFriends: Array<string>
-	authId: number | null
-	isLoading: boolean
-	userId: number | null
-	name: string | null
-	contacts: contactsType	
-	aboutMe: string | null
-	job: boolean
-	status: string | null
-	isShowEditForm: boolean
-	updateProfileDataThunkCreator: (data: updateDataType) => void
-	uploadPhotoThunkCreator: (data: File) => void
-	updateStatusThunkCreator: (status: string) => void
-	showEditForm: () => void
-	startDialog: (userId: number | null) => void
-	editTagStatus: () => void
-}
- const StatusForm  = (props: propsType) => {
-	const submit = (values: statusFormValuesType) => {
-		props.updateStatusThunkCreator(values.status)		
-		props.editTagStatus()
-	}
-	
-		return <StReduxForm onSubmit = { submit } />		
-}
-export default StatusForm
+const StatusForm: React.FC<{ editTagStatus: () => void }> = ({ editTagStatus }) => {	
+	const dispatch = useDispatch();
+	return	<Formik
+					initialValues={{ status: ''}}				
+					onSubmit={(values: {status:string}, { setSubmitting }) => {
+						dispatch(updateStatusThunkCreator(values.status));		
+						editTagStatus();
+						setSubmitting(false);
+					}}
+				>
+					{({ isSubmitting }) => (
+					<Form style = {{ display: "flex" }}>
+						<Field 	component = "input" 
+								name = "status"
+								type = "text"
+								className = {profile.statusInput} 								 
+								placeholder = "Is your status update?"
+								autoFocus
+						/>
+						<Button name = "Edit" type="submit" disabled={isSubmitting}/>
+					</Form>
+					)}
+				</Formik>		
+}  
+export default StatusForm;
 
 
