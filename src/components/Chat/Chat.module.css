@@ -15,9 +15,11 @@
 }
 .friendsList{
 	width: 30%;
-	height: 100%;
-	overflow: hidden;
-	
+	height: 50px;
+	display: flex;	
+	border-bottom: 2px solid rgb(255, 200, 0);	
+	align-items: center;
+	justify-content: space-between;
 }
 .friendsList p{
 	font-family: Intro;
@@ -25,12 +27,11 @@
 	font-size: 15px;
 	color: white;
 	text-transform: uppercase;
-	padding: 15px 10px;
-	border-bottom: 2px solid rgb(255, 200, 0);
+	padding: 15px 10px;	
+	width: 70%;
 }
-.dialogWpapper{
-	height: 100%;
-	overflow-y: scroll;
+.friendsList svg{	
+	width: 20%;
 }
 .MessagesList{
 	width: 70%;
@@ -153,4 +154,6 @@
 	resize:none;
 	outline:none
 }
-
+.soundIcon{
+	fill: rgb(255, 200, 0);
+}
