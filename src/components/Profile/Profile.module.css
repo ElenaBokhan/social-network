@@ -231,3 +231,34 @@
 	color: rgb(255, 200, 0);
 	/* cursor: pointer; */
 }
+@media(max-width: 576px ){
+	.container{
+		width: 100%;
+		margin-top: 110px;
+		padding: 30px;		
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;		
+		position: absolute;
+		left: 115%;		
+	}
+	.avatarBlock{
+		width: 100%;		
+	}
+	.avatarFriend:last-child{
+		display: none;
+	}
+	.avatarBlock h3{
+		flex-basis: 100%;
+	}
+	.info{
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.6);
+		padding: 20px;
+		display: inline-block;
+		position: relative;
+	}
+	.info h3{
+		margin: 20px 0 10px;
+	}
+}

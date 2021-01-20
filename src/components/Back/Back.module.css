@@ -100,3 +100,57 @@ to {
 	opacity:1;
 	fill: rgb(255, 200, 0);	
 }
+
+@media(max-width: 576px){
+	.one{
+		width: 40%;
+		height: 60%;
+		animation: moveOne 2s ;
+	}	
+	.two{
+		width: 55%;
+		height: 100%;
+		animation: moveTwo 2s ;
+	}	
+	.three{
+		width: 40%;
+		height: 40%;
+		animation: moveThree 2s ;	
+	}
+	.rect{
+		background-color: rgb(255, 200, 0);
+		position: absolute;	
+		transform:skewX(-45deg);
+		animation-fill-mode:forwards;	
+	}
+	@keyframes moveOne {
+		from {
+			left: -60%;
+			bottom: -60%; 
+		}
+		to { 
+			left: -20%;
+			top:35%;
+		}  
+	  }
+	@keyframes moveTwo {
+	from {
+		right: -120%;
+		top: -40%; 
+	}
+	to { 
+		right: -100%;
+		bottom: 30%;
+	}  
+	}
+	@keyframes moveThree {
+		from {
+			right: -50%;
+			top: -60%; 
+		}
+		to { 
+			right: 20%;
+			top:0;
+		}
+	}
+}

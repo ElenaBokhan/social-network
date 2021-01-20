@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import headStyles from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ export const Header: React.FC = () => {
 	const name = useSelector(getAuthName);
 	const smallPhoto = useSelector(getAuthPhoto);
 	const dispatch = useDispatch();
+	const [showMobileMenu, setShowMobileMenu] = useState(true);
 
 	const showAuthUserData = () => {
 		dispatch(setProfileDataThunkCreator(authId));
@@ -23,7 +24,8 @@ export const Header: React.FC = () => {
 	}
 	return 	<div className = {headStyles.header}>
 					<div className = {headStyles.menu}>
-						<nav>
+						<svg onClick = {()=> setShowMobileMenu(!showMobileMenu)} className = {headStyles.menuIcon} xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" width="25px" version="1.1" viewBox="0 0 632.66 595.99" xmlnsXlink="http://www.w3.org/1999/xlink"><path d="M-0 0l632.66 0 0 134.2 -632.66 0 0 -134.2zm0 461.79l632.66 0 0 134.2 -632.66 0 0 -134.2zm0 -230.89l632.66 0 0 134.2 -632.66 0 0 -134.2z"/></svg>
+						<nav className = { headStyles.navbar} style =   { showMobileMenu ? { visibility:  "visible" } : { visibility:  "hidden" }}> 
 							<NavLink to = "/home" 	className = {headStyles.menuItem} 
 													activeClassName={headStyles.active}>Home</NavLink>
 							<NavLink to = "/profile" 	className = {headStyles.menuItem} 

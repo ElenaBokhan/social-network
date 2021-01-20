@@ -124,3 +124,100 @@
 	background-image: url(../../assets/photos/4.jpg);
 	background-size: contain;
 }
+@media(max-width: 576px){
+	.mainDarkBack{
+		width: 100%;		
+	}
+	.oneB{
+		width: 10px;
+		height: 200px;
+		animation: borderOne 1.5s ease;
+	}
+	.twoB{
+		width: 90%;
+		height: 10px;
+		animation: borderTwo 800ms ease;
+	}
+	.threeB{
+		width: 10px;
+		height: 200px;
+		animation: borderThree 1.5s ease;
+	}
+	.fourB{
+		width: 90%;
+		height: 10px;
+		animation: borderFour 800ms ease;
+	}
+	.borderAnimate{	
+		position: absolute;
+		background-color: white;	
+		animation-fill-mode:forwards;	
+	}
+	@keyframes borderOne {
+		from {
+			left: 10px;
+			top: -200px; 
+		}
+		to { 
+			left: 10px;
+			top: 0; 
+		}
+	}
+	@keyframes borderTwo {
+		from {
+			right: -90%;
+			bottom: 100px; 
+		}
+		to { 
+			right: 20px;
+			bottom: 100px;  
+		}
+	}
+	@keyframes borderThree {
+		from {
+			right: 10px;
+			top: -200px; 
+		}
+		to { 
+			right: 10px;
+			top: 0; 
+		}
+	}
+	@keyframes borderFour {
+		from {
+			left:-90%;
+			top: 0; 
+		}
+		to { 
+			left: 20px;
+			top: 0; 
+		}
+	}
+	.friendsWrapper{
+		
+		width: 80%;
+		margin: auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.friend{
+		width: 70px;
+		height: 70px;
+		border-radius: 50%;
+	}
+	.nameSocial{
+		font-family: Intro;
+		font-weight: 900;
+		color: white;
+		text-transform: uppercase;
+		font-size: 80px;
+	}
+	.nameNetwork{
+		font-family: Intro;
+		font-weight: 400;
+		color: rgb(255, 200, 0);
+		text-transform: uppercase;
+		font-size: 55px;
+	}
+}
