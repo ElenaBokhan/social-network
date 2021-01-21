@@ -24,6 +24,7 @@
 	color: rgb(255, 200, 0);
 	margin: 0 0 30px;
 	font-weight: 400;
+	line-height: 35px;
 }
 .input, .textarea{	
 	background-color: rgba(0, 0, 0, 0.6);
@@ -58,4 +59,15 @@
 	flex-basis: 100%;
 	margin: 0 0 20px;
 	height: 80px;
+}
+@media(max-width: 576px){
+	.container{
+		width: 100%;	
+		padding: 30px 0;
+		left: 0;		
+	}
+	.editBlock{
+		width: 90%;	
+		padding: 40px 20px;			
+	}
 }

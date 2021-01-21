@@ -22,7 +22,8 @@ const AddPostForm = () => {
 				>
 					{({ isSubmitting, handleSubmit }) => (
 					<Form className = { postStyle.addPost }
-						  onKeyDown={(e) => {
+					style = {{alignItems: isActiveTextarea ? "flex-start" : "center"}} 
+							onKeyDown={(e) => {
 							if (e.key === 'Enter') {
 								handleSubmit();	
 								e.preventDefault();						
