@@ -32,11 +32,11 @@ class App extends Component<PropsType> {
 						<Route path = "/home" render = {() => <Main />} />
 						<Route path = "/" exact render = {() => <Main />} />
 						<Route path = "/profile" render = {() => <Profile />} />
-						{/* <Route path = "/dialogs/:id" render = {(props)=> <Dialogs id = {+props.match.params.id}/>}/>
+						<Route path = "/dialogs/:id" render = {(props)=> <Dialogs id = {+props.match.params.id}/>}/>
 						<Route path = "/chat" render = {() => <Chat />}/>
 						<Route path = "/photos/:view?" render = {(props) => <Photos view = {props.match.params.view}/>} />
 						<Route path = "/friends/:view?" render = {(props) => <Friends view = {props.match.params.view}/>} />
-						<Route path = "/auth" render = {() => <Login />} /> */}
+						<Route path = "/auth" render = {() => <Login />} />
 						<Back />
 					</HashRouter>			
 	}
