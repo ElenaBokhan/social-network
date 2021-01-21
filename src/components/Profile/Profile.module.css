@@ -246,12 +246,6 @@
 	.avatar{
 		margin: 20px 0;
 	}
-	/* .avatarFriend:last-child{
-		display: none;
-	}
-	.avatarBlock h3{
-		flex-basis: 100%;
-	} */
 	.info{
 		width: 100%;
 		background-color: rgba(0, 0, 0, 0.6);

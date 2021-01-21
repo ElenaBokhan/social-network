@@ -83,11 +83,12 @@ export const Friends: React.FC<{view: string}> = ({ view }) => {
 															disabled = { toggleUsersId === item.id }/>
 												</div>
 										)}
+				<button onClick = { showMoreUsers } 
+						className = { friends.showMoreButton }>
+						{ isFound ? <img src = { preloader } height = "7px" alt = "preloader"/> : "show more"}
+				</button>
 			</div>
-			<button onClick = { showMoreUsers } 
-					className = { friends.showMoreButton }>
-					{ isFound ? <img src = { preloader } height = "7px" alt = "preloader"/> : "show more"}
-			</button>
+			
 		</div>)
 	
 }

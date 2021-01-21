@@ -102,3 +102,32 @@
 	border: 1px solid white;
 	margin: 20px 0 ;
 }
+@media(max-width: 576px){
+	.container{
+		width: 100%;
+		left:0;
+		margin: 110px auto 0;		
+	}
+	.photoWrapper{		
+		grid-template-columns: 1fr 1fr;
+		grid-column-gap: 15px;
+		grid-row-gap: 15px;
+		padding: 0 0 15px;
+		width: 100%;
+	}
+	.slidePhoto{
+		min-height: 300px;
+		max-height: 500px;
+		height: auto;
+		width: 80%;
+		/* border: 5px solid white; */
+		background-size: cover;		
+	}
+	.sliderContainer{	
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		padding:0;
+	}
+}

@@ -157,3 +157,30 @@
 .soundIcon{
 	fill: rgb(255, 200, 0);
 }
+@media(max-width: 576px ){
+	.container{
+		width: 100%;
+		left: 0;
+   		margin-left: 0;
+	}
+	.friendsList{
+		width: 100%;
+		height: auto;
+	}
+	.MessagesList{
+		width: 100%;
+		height: 93%;
+		background-color: rgba(0, 0, 0, 0.6);
+		padding: 20px 0;
+		display: flex;
+		flex-direction: column;	
+	}
+	.MessagesField{		
+		flex: 1 0;		
+	}
+	.sendMessageForm{
+		flex-basis: 100%;		
+		margin: 20px 0 0;	
+		flex: 0 0;
+	}
+}
