@@ -34,3 +34,10 @@
 .button:hover .sendIcon{
 	fill: rgb(0, 0, 0);
 }
+@media(max-width: 576px){
+	.button{
+		display: flex;
+		background-color: transparent;
+		padding: 7px 5px;
+	}
+}

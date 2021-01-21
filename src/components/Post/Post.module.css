@@ -47,7 +47,7 @@
 }
 .post{
 	flex-basis: 100%;
-	padding: 10px 20px ;
+	padding: 20px ;
 	background-color: rgba(0, 0, 0, 0.6);
 	margin: 0 0 20px;
 	display: flex;
@@ -55,12 +55,12 @@
 }
 .editBlock{
 	position: absolute;
-	top: 10px;
+	top: 20px;
 	right: 20px;
 }
 .postInfo{
 	width: 90%;
-	padding: 20px;
+	padding: 10px 20px;
 }
 .namePost{
 	text-transform: uppercase;
@@ -73,4 +73,19 @@
 }
 .starScore{
 	vertical-align: super;
+}
+@media(max-width: 576px){
+	.avatarSmall{
+		flex: 0 0 50px;
+		height: 50px;
+		border-radius: 50%;
+		background-size: contain;	
+	}
+	.input{
+		width: 50%;
+		padding: 0 20px;
+	}
+	.addPost{		
+		align-items: center;
+	}
 }

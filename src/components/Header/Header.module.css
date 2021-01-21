@@ -55,7 +55,7 @@
 	font-weight: 400;
 }
 .avatar{
-	width: 55px;
+	flex: 0 0 55px;
 	height: 55px;
 	border-radius: 50%;	
 	background-size: cover;

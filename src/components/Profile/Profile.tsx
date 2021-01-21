@@ -55,11 +55,11 @@ export const Profile: React.FC = () => {
 										<Button name = {"write message"} onclick = { ()=> dispatch(startDialog(userId as number)) }/>
 									</NavLink>
 								</div>}
-					<h3  className = {profile.titleFriends}>Friends</h3>
-					{ randomFriends.map((item, index) => <div 	style = {{ backgroundImage: `url(${process.env.PUBLIC_URL+item})` }}
-																className = {profile.avatarFriend}
-																key = { index }>																	
-														 </div>)}
+				<h3  className = {profile.titleFriends}>Friends</h3>
+				{ randomFriends.map((item, index) => <div 	style = {{ backgroundImage: `url(${process.env.PUBLIC_URL+item})` }}
+															className = {profile.avatarFriend}
+															key = { index }>																	
+														</div>)}
 			</section>
 			<section className = {profile.info}>
 				<p className = {profile.name}>{ name }</p>
@@ -77,7 +77,7 @@ export const Profile: React.FC = () => {
 					<label htmlFor ="radio" >looking for a job</label>
 				<hr />
 				<h3>About me:</h3>
-				<p>{ aboutMe }</p>
+				<p className = {profile.aboutMe}>{ aboutMe }</p>
 				{ editMode && <div onClick = { () => dispatch(showEditFormAC()) } className = {profile.editButton}>Edit data</div>}
 			</section>			
 			<Post />
